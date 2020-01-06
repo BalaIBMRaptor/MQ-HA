@@ -33,9 +33,10 @@ openssl pkcs12 \
        -password pass:${PASSWORD}
 
 # Add the certificate to a trust store in JKS format, for Java clients to use when connecting
-keytool -import \
-	-alias server-cert \
-	-file ${CERT} \
-	-keystore client-trust.jks \
-	-storepass ${PASSWORD} \
+keytool -importkeystore -srckeystore ${PKCS} \
+        -srcstoretype PKCS12 \
+        -destkeystore client-trust.jks \
+        -deststoretype JKS \
+	-srcstorepass ${PASSWORD} 
+	-deststorepass ${PASSWORD}
 	-noprompt
