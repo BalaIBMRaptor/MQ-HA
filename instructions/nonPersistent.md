@@ -7,7 +7,7 @@ The Cloud Pak for Integration has been deployed and the access credentials are a
 
 ## Instructions
 This section is separated into four parts:
-* [Setup TLS Certificates for MQ Deployment](#setup-tls-certificates-for-mq-deployment
+* [Setup TLS Certificates for MQ Deployment](#setup-tls-certificates-for-mq-deployment)
 * [Deploy IBM MQ within Cloud Pak for Integration](#deploy-ibm-mq-within-cloud-pak-for-integration)
 * [Basic configuration for messaging traffic](#basic-configuration-for-messaging-traffic)
 * [Configure access to MQ outside the cluster](#configure-access-to-mq-outside-the-cluster)
