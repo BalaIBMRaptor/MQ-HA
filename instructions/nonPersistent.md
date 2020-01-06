@@ -9,6 +9,7 @@ The Cloud Pak for Integration has been deployed and the access credentials are a
 This section is separated into four parts:
 * [Deploy IBM MQ within Cloud Pak for Integration](#deploy-ibm-mq-within-cloud-pak-for-integration)
 * [Basic configuration for messaging traffic](#basic-configuration-for-messaging-traffic)
+* [Configure access to MQ outside the cluster](#configure-access-to-mq-outside-the-cluster)
 
 ### Deploy IBM MQ within Cloud Pak for Integration 
 1. Open a web browser and navigate to the CP4I console:  
@@ -62,13 +63,59 @@ An empty IBM MQ is setup within the Cloud Pak for Integration, and therefore MQ 
   ![Select Queue Manager](img/selectqm.png)
 1. IBM MQ V7 introduced the concept of Channel Authentication which is enabled by default, this will be disabled. Select *Communication* and in the *CHLAUTH record* field change the value to *Disabled*. Click *Save* to persist the changes, and *Close* to dismiss the popup:
   ![Disable channel auth](img/disablechannelauth.png)
-1. Default channels are created by IBM MQ when the Queue Manager is created. In general these should NOT be used, unless it is for demonstration. As such these have been hiden, to view these click on the cog associated with the *Channels* widget and select *Show* under *System objects*:    
-  ![Show channels](img/configshowchannels.png)
-1. Scroll down to the *SYSTEM.DEF.SVRCONN* entry, select the row and click *Properties*:  
-  ![Show channels](img/selectsvrconn.png)
+1. MQ uses channels to provide remote access to a queue manager, when the queue manager is created system default channels are defined but users should create their own. Select the *create* button associated with the Channels widget:  
+  ![Create channel](img/createchannel.png)
+1. Fill in the following information:
+     * Channel name: *MQNONPERSISTENTSVR*
+     * Channel Type: *Server-connection*  
+  ![Create Channel](img/createsvrconn.png)
+  Select *Create*.  
+  The channel name which will be exposed by OpenShift needs to be unquie across the entire cluster. Therefore we have included the helm deployment name within the channel.
+1. Select the newly created channel and click *Properties*:  
+  ![Create Queue](img/channelproperties.png)  
 1. Select the *MCA* section and type *mqm* within the *MCA user ID* field:  
-  ![Add MCA User](img/addmqm.png)
-  Click *Save* and *Close*
-1.   
+  ![Add MCA User](img/addmqm.png)  
+1. Select the *SSL* section and fill in the following:
+     * SSL cipher spec: *ECDHE_RSA_AES_128_CBC_SHA256*
+     * SSL authentication: *Optional*  
+  Click *Save* and *Close*  
+  ![Add MCA User](img/channelssl.png)  
+1. A queue will be created that allows a sample application to PUT and GET a test message. Within the Queue widget click on *Create*:   
+  ![Create Queue](img/createqueue.png)  
+1. Enter *In* as the Queue name and click *Create*:   
+  ![Create Queue](img/createinqueue.png)  
+
+### Configure access to MQ outside the cluster
+By default OpenShift does NOT expose any deployed containers outside of the cluster. To enable this [OpenShift Routes](https://docs.openshift.com/container-platform/4.2/networking/routes/secured-routes.html) need to be configured. OpenShift provides a GUI, API and command line interface to configure, to minimize the pre-requisites we have demonstrated using the GUI. 
+1. Navigate to the OpenShift Console by selecting the menu at the top left of the screen and selecting *OpenShift Console*:   
+  ![OpenShift Console](img/openshift.png)  
+1. You will require to log in with the OpenShift credentials which are likely to be different from the Cloud Pak for Integration credentials. If you are unsure please as the OpenShift Administrator for this information.  
+1. Select *Networking --> Routes**:    
+  ![Open Routes](img/routes.png)   
+1. Select *Create Route*:  
+  ![Create Routes](img/createroute.png)  
+1. To avoid any typos we have included the Route YAML below so it can be copied into. Click on *Edit YAML*, and paste in the below:
+  ```
+  apiVersion: route.openshift.io/v1
+  kind: Route
+  metadata:
+    name: mq-traffic-nonpersistent-ibm-mq-qm 
+    namespace: mq
+  spec:
+    host: mqnonpersistentsvr.chl.mq.ibm.com
+    to:
+      kind: Service
+      name: mq-nonpersistent-ibm-mq
+    port:
+      targetPort: 1414
+    tls:
+      termination: passthrough
+  ```   
+  Click *Create*:   
+  ![Paste YAML](img/createrouteyaml.png)
+  The above assumes that the channel name created is MQNONPERSISTENTSVR, if this is not the case please consult [SNI mapping rules](https://www.ibm.com/support/pages/ibm-websphere-mq-how-does-mq-provide-multiple-certificates-certlabl-capability) for further information. The entire process is also documented [here](https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.1.0/com.ibm.mq.mcpak.doc/cc_conn_qm_openshift.htm).
+
+### Configure access to MQ outside the cluster
+
 
 ## Container Image Locations
