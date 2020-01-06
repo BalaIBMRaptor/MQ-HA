@@ -186,7 +186,7 @@ By default OpenShift does NOT expose any deployed containers outside of the clus
     host: mqnonpersistentsvr.chl.mq.ibm.com
     to:
       kind: Service
-      name: mq-nonpersistent-ibm-mq
+      name: mq-non-persistent-ibm-mq
     port:
       targetPort: 1414
     tls:
