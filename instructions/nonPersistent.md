@@ -116,7 +116,7 @@ Commonly the first time you attempt to access the CP4I console a warning will ap
 ```
 - name: default
   secret:
-    secretName: mqcert
+    secretName: mqcerts
     items:
       - tls.key
       - tls.crt
