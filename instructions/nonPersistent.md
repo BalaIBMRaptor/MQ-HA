@@ -112,6 +112,16 @@ Commonly the first time you attempt to access the CP4I console a warning will ap
 ![Select Next](img/configurestep3.png)    
 1. In the *Persistence* section, deselect the *Enable persistence* check box:  
 ![Select Next](img/configurestep4.png)    
+1. Scroll down to the PKI section and copy in the following:     
+```
+- name: default
+  secret:
+    secretName: mqcert
+    items:
+      - tls.key
+      - tls.crt
+```
+![Select Next](img/configurepki.png)
 1. Start the installation by clicking the *Install* button at the bottom right. The install will be started, and you will be presented with:  
 ![Select Next](img/installstarted.png)
 1. Click *Home*, this will navigate you back to Cloud Pak for Integration console, select the *View instances* tab 
