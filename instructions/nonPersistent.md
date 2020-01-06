@@ -142,6 +142,8 @@ An empty IBM MQ is setup within the Cloud Pak for Integration, and therefore MQ 
   ![View Channels](img/addchannels.png)
 1. As this will be an insecure setup of IBM MQ, security will be disabled. A seperat write-up will discuss how to provide a secure environment. Click the Queue Manager *mqnonpersistent* and select the *Properties* section:  
   ![Select Queue Manager](img/selectqm.png)
+1. Select *Extended* and remove any text from *Connection authentication* field:    
+  ![Remove Connection Authorization](img/removeconnauth.png)
 1. IBM MQ V7 introduced the concept of Channel Authentication which is enabled by default, this will be disabled. Select *Communication* and in the *CHLAUTH record* field change the value to *Disabled*. Click *Save* to persist the changes, and *Close* to dismiss the popup:
   ![Disable channel auth](img/disablechannelauth.png)
 1. MQ uses channels to provide remote access to a queue manager, when the queue manager is created system default channels are defined but users should create their own. Select the *create* button associated with the Channels widget:  
@@ -165,7 +167,11 @@ An empty IBM MQ is setup within the Cloud Pak for Integration, and therefore MQ 
   ![Create Queue](img/createqueue.png)  
 1. Enter *In* as the Queue name and click *Create*:   
   ![Create Queue](img/createinqueue.png)  
-
+1. Finally MQ Security will be refreshed, click the Queue Manager *mqnonpersistent* and select the *... --> Refresh security...*:  
+  ![Refresh Security](img/refreshsecurity.png)  
+1. Select *Connection authetication*:  
+  ![Refresh Security](img/connauthrefresh.png)
+  
 ### Configure access to MQ outside the cluster
 By default OpenShift does NOT expose any deployed containers outside of the cluster. To enable this [OpenShift Routes](https://docs.openshift.com/container-platform/4.2/networking/routes/secured-routes.html) need to be configured. OpenShift provides a GUI, API and command line interface to configure, to minimize the pre-requisites we have demonstrated using the GUI. 
 1. Navigate to the OpenShift Console by selecting the menu at the top left of the screen and selecting *OpenShift Console*:   
