@@ -203,6 +203,7 @@ By default OpenShift does NOT expose any deployed containers outside of the clus
   The above assumes that the channel name created is MQNONPERSISTENTSVR, if this is not the case please consult [SNI mapping rules](https://www.ibm.com/support/pages/ibm-websphere-mq-how-does-mq-provide-multiple-certificates-certlabl-capability) for further information. The entire process is also documented [here](https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.1.0/com.ibm.mq.mcpak.doc/cc_conn_qm_openshift.htm).
 
 ### Configure access to MQ outside the cluster
-
+To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Explore, JMS Application or the MQ samples. As a demonstration the following uses the MQ samples:
+1. Install MQ with the samples
 
 ## Container Image Locations
