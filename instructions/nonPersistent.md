@@ -204,6 +204,13 @@ By default OpenShift does NOT expose any deployed containers outside of the clus
 
 ### Configure access to MQ outside the cluster
 To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Explore, JMS Application or the MQ samples. As a demonstration the following uses the MQ samples:
-1. Install MQ with the samples
+
+Pre-requisites 
+* Install MQ with the samples
+
+1. We will use the High Availability MQ sample programs:
+   * amqsphac: puts a message every 2 seconds to a queue
+   * amqsghac: continuously gets messages from a queue
+   These are described in more detail [here](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.1.0/com.ibm.mq.dev.doc/q024200_.htm). 
 
 ## Container Image Locations
