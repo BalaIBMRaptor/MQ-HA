@@ -1,0 +1,28 @@
+{
+  "channel":
+  [
+    {
+      "general":
+      {
+        "description": "MQ Non Persistent channel details"
+      },
+      "name": "MQNONPERSISTENTSVR",
+      "clientConnection":
+      {
+        "connection":
+        [
+          {
+            "host": "<OPENSHIFT ENDPOINT>",
+            "port": 443
+          }
+        ],
+        "queueManager": "mqnonpersistent"
+      },
+      "transmissionSecurity":
+      {
+        "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+      },
+	  "type": "clientConnection"
+    }
+  ]
+}
