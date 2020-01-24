@@ -211,6 +211,47 @@ Pre-requisites
 1. We will use the High Availability MQ sample programs:
    * amqsphac: puts a message every 2 seconds to a queue
    * amqsghac: continuously gets messages from a queue
-   These are described in more detail [here](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.1.0/com.ibm.mq.dev.doc/q024200_.htm). 
+   These are described in more detail [here](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.1.0/com.ibm.mq.dev.doc/q024200_.htm).    
+1. IBM MQ uses a client channel definition table (CCDT) to configure the connection information. This is a JSON format and to accelerate the user a sample has been included below. This is also available [here](https://github.ibm.com/CALLUMJ/MQonCP4I/blob/master/resources/ccdt/nonpersistent.json). The only customization required is to change the <OPENSHIFT ENDPOINT> to your hostname:  
+```
+{
+  "channel":
+  [
+    {
+      "general":
+      {
+        "description": "MQ Non Persistent channel details"
+      },
+      "name": "MQNONPERSISTENTSVR",
+      "clientConnection":
+      {
+        "connection":
+        [
+          {
+            "host": "<OPENSHIFT ENDPOINT>",
+            "port": 443
+          }
+        ],
+        "queueManager": "mqnonpersistent"
+      },
+      "transmissionSecurity":
+      {
+        "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+      },
+	  "type": "clientConnection"
+    }
+  ]
+}
+
+```
+
+  Create this file on your system and complete the customization required.
+1. The MQ samples are configured to use the CCDT by specifying the MQCCDTURL environment. Depending on your platform and the location of the file you will need to customize but on our windows setup this was:
+```
+SET MQCCDTURL=file:///C:/temp/ccdtnonpresistent.json
+```
+1. The sample application also needs access to the TLS certificate that the MQ server will present. If you have used our default certificates specified in this document then you can simply download the [key files from here](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/resources/tls).
+1. SET MQSSLKEYR=C:\temp\ContainerLabs\NonPersistent\key
+1. 
 
 ## Container Image Locations
