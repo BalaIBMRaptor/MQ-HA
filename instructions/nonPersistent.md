@@ -183,24 +183,24 @@ By default OpenShift does NOT expose any deployed containers outside of the clus
 1. Select *Create Route*:  
   ![Create Routes](img/createroute.png)  
 1. To avoid any typos we have included the Route YAML below so it can be copied into. Click on *Edit YAML*, and paste in the below:
-  ```
-  apiVersion: route.openshift.io/v1
-  kind: Route
-  metadata:
-    name: mq-traffic-nonpersistent-ibm-mq-qm 
-    namespace: mq
-  spec:
-    host: mqnonpersistentsvr.chl.mq.ibm.com
-    to:
-      kind: Service
-      name: mq-non-persistent-ibm-mq
-    port:
-      targetPort: 1414
-    tls:
-      termination: passthrough
-  ```   
-  Click *Create*:   
-  ![Paste YAML](img/createrouteyaml.png)
+   ```
+   apiVersion: route.openshift.io/v1
+   kind: Route
+   metadata:
+     name: mq-traffic-nonpersistent-ibm-mq-qm 
+     namespace: mq
+   spec:
+     host: mqnonpersistentsvr.chl.mq.ibm.com
+     to:
+       kind: Service
+       name: mq-non-persistent-ibm-mq
+     port:
+       targetPort: 1414
+     tls:
+       termination: passthrough
+   ```     
+1. Click *Create*:   
+  ![Paste YAML](img/createrouteyaml.png)   
   The above assumes that the channel name created is MQNONPERSISTENTSVR, if this is not the case please consult [SNI mapping rules](https://www.ibm.com/support/pages/ibm-websphere-mq-how-does-mq-provide-multiple-certificates-certlabl-capability) for further information. The entire process is also documented [here](https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.1.0/com.ibm.mq.mcpak.doc/cc_conn_qm_openshift.htm).
 
 ### Testing the setup
