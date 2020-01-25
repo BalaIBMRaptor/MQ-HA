@@ -80,8 +80,8 @@ When IBM MQ is deployed it exposes ports for the Web Console and messaging traff
    4g3U9Ludv/MqLNDX5g==
    -----END CERTIFICATE-----
    ```     
-  ![Configure Secret](img/createkeyvalue2.png)
-  Click Save
+   ![Configure Secret](img/createkeyvalue2.png)
+1. Click Save
 
 ### Deploy IBM MQ within Cloud Pak for Integration 
 1. Open a web browser and navigate to the CP4I console:  
