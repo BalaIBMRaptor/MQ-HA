@@ -261,7 +261,7 @@ To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Ex
    ```
    amqsphac In mqnonpersistent
    ```
-  This should output the following:
+   This should output the following:
    ```
    C:\Users\CallumJackson>amqsphac In mqnonpersistent
    Sample AMQSPHAC start
@@ -281,7 +281,7 @@ To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Ex
    ```
    amqsghac In mqnonpersistent
    ```
-  This should output the following:
+   This should output the following:
    ```
    C:\Users\CallumJackson>amqsghac In mqnonpersistent
    Sample AMQSGHAC start
