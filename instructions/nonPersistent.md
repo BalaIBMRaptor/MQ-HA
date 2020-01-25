@@ -109,7 +109,7 @@ Commonly the first time you attempt to access the CP4I console a warning will ap
 1. Scroll down to the *Single sign-on* section. Once deployed the MQ Console will be accessed using the user credentials that you used to access the Integration Console. To assure this works the username used to login *MUST* be specified within the *Web admin users* section. In our case the user is *Admin1*. The Single sign-on process runs a kubernetes job to configure the environment, this requires a container image. In our case this needs updating to *image-registry.openshift-image-registry.svc:5000/mq/ibm-mq-oidc-registration*:  
 ![Select Next](img/configsso.png)    
   For further information on why this customization is required please consult [Container Image Locations](#container-image-locations)
-1. In the *TLS* section, select the *Generate Certificate* and enter any hostname in the *Cluster hostname* field (this is a required field but will not be used as we are generating a new certificate):  
+1. In the *TLS* section, deselect the *Generate Certificate* and enter any hostname in the *Cluster hostname* field (this is a required field but will not be used as we are generating a new certificate):  
 ![Select Next](img/configurestep3.png)    
 1. In the *Persistence* section, deselect the *Enable persistence* check box:  
 ![Select Next](img/configurestep4.png)    
