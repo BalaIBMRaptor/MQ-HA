@@ -276,7 +276,7 @@ To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Ex
    message <Message 8>
    message <Message 9>
    ```
-  This show the sample application has successfully connected to Queue Manager and PUT messages.
+   This show the sample application has successfully connected to Queue Manager and PUT messages.
 1. To verify the messages can be retrieved run the following:    
    ```
    amqsghac In mqnonpersistent
