@@ -292,8 +292,16 @@ To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Ex
    message <Message 7>
    message <Message 8>
    message <Message 9>
-   ```
-
-
+   ```    
+1. As the Queue Manager is highly available we can also test this capability. Start the amqsphac and amqsghac in two seperate windows so they are running at the same time:     
+  ![Two Screens](img/twoscreens.png)   
+1. Return to the OpenShift console and navigate to *Workloads --> Pods*, and filter on *demo*:       
+  ![View Pods](img/viewpods.png)     
+1. The MQ HA demo pods will be shown, there should be two. One will be shows as *Ready*, this is the active instance. Select the menu options to the right and select *Delete Pod*:    
+  ![Delete Pod](img/deletepod.png)     
+1. Return to the two command prompt and view the switch over occuring:      
+  ![Switch over](img/switchover.png)     
+  
+  
 ## Container Image Locations
 With the Cloud Pak for Integration there are two method for obtaining the MQ certified container. Using the entitled registry, or using the installed certified containers at installation time. The instructions above use the installed certified containers at installation time to avoid the need to setup and configure the entitled registry. For details on the IBMers process for the entitled registry consult the [following](https://github.ibm.com/UnifiedKubeMarketplace/KubeMarketplace/issues/45).
