@@ -206,15 +206,16 @@ By default OpenShift does NOT expose any deployed containers outside of the clus
 ### Testing the setup
 To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Explore, JMS Application or the MQ samples. As a demonstration the following uses the MQ samples:
 
-Pre-requisites 
+#### Pre-requisites 
 * Install MQ with the samples
 
+#### Step by Step instructions 
 1. We will use the High Availability MQ sample programs:
-   * amqsphac: puts a message every 2 seconds to a queue
-   * amqsghac: continuously gets messages from a queue
+   * *amqsphac*: puts a message every 2 seconds to a queue
+   * *amqsghac*: continuously gets messages from a queue
    These are described in more detail [here](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.1.0/com.ibm.mq.dev.doc/q024200_.htm).    
 1. IBM MQ uses a client channel definition table (CCDT) to configure the connection information. This is a JSON format and to accelerate the user a sample has been included below. This is also available [here](https://github.ibm.com/CALLUMJ/MQonCP4I/blob/master/resources/ccdt/nonpersistent.json). The only customization required is to change the <OPENSHIFT ENDPOINT> to your hostname:  
-```
+   ```
 {
   "channel":
   [
@@ -244,24 +245,24 @@ Pre-requisites
   ]
 }
 
-```
+   ```
 
   Create this file on your system and complete the customization required.
 1. The MQ samples are configured to use the CCDT by specifying the MQCCDTURL environment. Depending on your platform and the location of the file you will need to customize but on our windows setup this was:
-```
+   ```
 SET MQCCDTURL=file:///C:/temp/ccdtnonpresistent.json
-```
+   ```
 1. The sample application also needs access to the TLS certificate that the MQ server will present. If you have used our default certificates specified in this document then you can simply download the [key files from here](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/resources/tls).
 1. Similar to the CCDT file the TLS certificates are configured using an environment variable:   
-```
+   ```
   SET MQSSLKEYR=C:\temp\ContainerLabs\NonPersistent\key
-```
+   ```
 1. Start the sample PUT application by running:   
-```
+   ```
   amqsphac In mqnonpersistent
-```
+   ```
   This should output the following:
-```
+   ```
 C:\Users\CallumJackson>amqsphac In mqnonpersistent
 Sample AMQSPHAC start
 target queue is In
@@ -274,14 +275,14 @@ message <Message 6>
 message <Message 7>
 message <Message 8>
 message <Message 9>
-```
+   ```
   This show the sample application has successfully connected to Queue Manager and PUT messages.
 1. To verify the messages can be retrieved run the following:    
-```
+   ```
   amqsghac In mqnonpersistent
-```
+   ```
   This should output the following:
-```
+   ```
 C:\Users\CallumJackson>amqsghac In mqnonpersistent
 Sample AMQSGHAC start
 message <Message 1>
@@ -293,7 +294,7 @@ message <Message 6>
 message <Message 7>
 message <Message 8>
 message <Message 9>
-```
+   ```
 
 ## Container Image Locations
 With the Cloud Pak for Integration there are two method for obtaining the MQ certified container. Using the entitled registry, or using the installed certified containers at installation time. The instructions above use the installed certified containers at installation time to avoid the need to setup and configure the entitled registry. For details on the IBMers process for the entitled registry consult the [following](https://github.ibm.com/UnifiedKubeMarketplace/KubeMarketplace/issues/45).
