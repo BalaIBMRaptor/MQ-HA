@@ -1,0 +1,28 @@
+{
+  "channel":
+  [
+    {
+      "general":
+      {
+        "description": "MQ HA channel details"
+      },
+      "name": "MQHADEMO",
+      "clientConnection":
+      {
+        "connection":
+        [
+          {
+            "host": "mq-demo-ha-ibm-mq-web-mq.apps.aphrodite.icp4i.com",
+            "port": 443
+          }
+        ],
+        "queueManager": "mqdemoha"
+      },
+      "transmissionSecurity":
+      {
+        "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+      },
+	  "type": "clientConnection"
+    }
+  ]
+}
