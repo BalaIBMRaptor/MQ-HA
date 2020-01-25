@@ -213,7 +213,7 @@ To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Ex
    * *amqsphac*: puts a message every 2 seconds to a queue
    * *amqsghac*: continuously gets messages from a queue   
    These are described in more detail [here](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.1.0/com.ibm.mq.dev.doc/q024200_.htm).    
-1. IBM MQ uses a client channel definition table (CCDT) to configure the connection information. This is a JSON format and to accelerate the user a sample has been included below. This is also available [here](https://github.ibm.com/CALLUMJ/MQonCP4I/blob/master/resources/ccdt/mqhaccdt.json). The only customization required is to change the <OPENSHIFT ENDPOINT> to your hostname:  
+1. IBM MQ uses a client channel definition table (CCDT) to configure the connection information. This is a JSON format and to accelerate the user a sample has been included below. This is also available [here](https://github.ibm.com/CALLUMJ/MQonCP4I/blob/master/resources/ccdt/mqhaccdt.json). The only customization required is to change the <OPENSHIFT ENDPOINT> to your hostname:   
    ```
    {
      "channel":
@@ -244,9 +244,8 @@ To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Ex
      ]
    }
 
-   ```
-
-  Create this file on your system and complete the customization required.
+   ```   
+   Create this file on your system and complete the customization required.   
 1. The MQ samples are configured to use the CCDT by specifying the MQCCDTURL environment. Depending on your platform and the location of the file you will need to customize but on our windows setup this was:
    ```
    SET MQCCDTURL=file:///C:/temp/mqhaccdt.json
