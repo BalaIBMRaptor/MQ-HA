@@ -6,11 +6,12 @@ Health warning - any configuration of MQ completed will be lost when the contain
 The Cloud Pak for Integration has been deployed and the access credentials are available. 
 
 ## Instructions
-This section is separated into four parts:
+This section is separated into five parts:
 * [Setup TLS Certificates for MQ Deployment](#setup-tls-certificates-for-mq-deployment)
 * [Deploy IBM MQ within Cloud Pak for Integration](#deploy-ibm-mq-within-cloud-pak-for-integration)
 * [Basic configuration for messaging traffic](#basic-configuration-for-messaging-traffic)
 * [Configure access to MQ outside the cluster](#configure-access-to-mq-outside-the-cluster)
+* [Testing the setup](#testing-the-setup)
 
 ### Setup TLS Certificates for MQ Deployment
 When IBM MQ is deployed it exposes ports for the Web Console and messaging traffic. These should be secure using TLS. To allow this a Kubernetes secrete should be created.
@@ -202,7 +203,7 @@ By default OpenShift does NOT expose any deployed containers outside of the clus
   ![Paste YAML](img/createrouteyaml.png)
   The above assumes that the channel name created is MQNONPERSISTENTSVR, if this is not the case please consult [SNI mapping rules](https://www.ibm.com/support/pages/ibm-websphere-mq-how-does-mq-provide-multiple-certificates-certlabl-capability) for further information. The entire process is also documented [here](https://www.ibm.com/support/knowledgecenter/SSFKSJ_9.1.0/com.ibm.mq.mcpak.doc/cc_conn_qm_openshift.htm).
 
-### Configure access to MQ outside the cluster
+### Testing the setup
 To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Explore, JMS Application or the MQ samples. As a demonstration the following uses the MQ samples:
 
 Pre-requisites 
@@ -251,7 +252,48 @@ Pre-requisites
 SET MQCCDTURL=file:///C:/temp/ccdtnonpresistent.json
 ```
 1. The sample application also needs access to the TLS certificate that the MQ server will present. If you have used our default certificates specified in this document then you can simply download the [key files from here](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/resources/tls).
-1. SET MQSSLKEYR=C:\temp\ContainerLabs\NonPersistent\key
-1. 
+1. Similar to the CCDT file the TLS certificates are configured using an environment variable:   
+```
+  SET MQSSLKEYR=C:\temp\ContainerLabs\NonPersistent\key
+```
+1. Start the sample PUT application by running:   
+```
+  amqsphac In mqnonpersistent
+```
+  This should output the following:
+```
+C:\Users\CallumJackson>amqsphac In mqnonpersistent
+Sample AMQSPHAC start
+target queue is In
+message <Message 1>
+message <Message 2>
+message <Message 3>
+message <Message 4>
+message <Message 5>
+message <Message 6>
+message <Message 7>
+message <Message 8>
+message <Message 9>
+```
+  This show the sample application has successfully connected to Queue Manager and PUT messages.
+1. To verify the messages can be retrieved run the following:    
+```
+  amqsghac In mqnonpersistent
+```
+  This should output the following:
+```
+C:\Users\CallumJackson>amqsghac In mqnonpersistent
+Sample AMQSGHAC start
+message <Message 1>
+message <Message 2>
+message <Message 3>
+message <Message 4>
+message <Message 5>
+message <Message 6>
+message <Message 7>
+message <Message 8>
+message <Message 9>
+```
 
 ## Container Image Locations
+With the Cloud Pak for Integration there are two method for obtaining the MQ certified container. Using the entitled registry, or using the installed certified containers at installation time. The instructions above use the installed certified containers at installation time to avoid the need to setup and configure the entitled registry. For details on the IBMers process for the entitled registry consult the [following](https://github.ibm.com/UnifiedKubeMarketplace/KubeMarketplace/issues/45).
