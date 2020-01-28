@@ -1,9 +1,9 @@
 # Loading MQSC configuration using a configMap
 
-Ideally the IBM MQ Advanced Helm chart would allow you to specify a configMap that includes a MQSC file. 
-Currently this is not possible however with a simple modification this is possible.      
 
-This approach is not ideal but if clients insist on configMaps instead of a layered container image this is the current approach that avoids having to rebuild the certified container image and losing support.
+
+The preferred approach to adding custom MQSC to the certified container is documented [here](https://github.com/ibm-messaging/mq-container/blob/master/docs/usage.md#customizing-the-queue-manager-configuration).    
+If clients insist that this is not feasible then it is technically possible to enable by using configMaps with customization of the helm chart.
 
 ## Downloading the helm charts
 The IBM MQ Advanced helm charts are available [here](https://github.com/IBM/charts/blob/master/repo/entitled) and these instructions were created using [v5.0.0](https://github.com/IBM/charts/blob/master/repo/entitled/ibm-mqadvanced-server-integration-prod-5.0.0.tgz).     
@@ -30,7 +30,7 @@ All the changes are within templates/stateful-set.yaml and an example is provide
        DEFINE CHANNEL('ORG.APP.SVRCONN') CHLTYPE(SVRCONN) MCAUSER('mqm') REPLACE
        DEFINE QLOCAL('MyApp.IN') REPLACE
    ```
-   The above creates a configMap called *mqscconfigmap* with the MQSC included within example.mqsc section. 
+   The above creates a configMap called *mqscconfigmap* with the MQSC included within the example.mqsc section. 
    In the case of your environment this would be customized based on your requirements. 
    Please note that you need to create the ConfigMap within the correct namespace, in our case this was *MQ*.      
    ![Create Config Map](img/configMap/createConfigMap2.png)     
