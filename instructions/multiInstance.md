@@ -257,11 +257,11 @@ To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Ex
    ```
 1. Start the sample PUT application by running:   
    ```
-   amqsphac In mqnonpersistent
+   amqsphac In mqdemoha 
    ```
    This should output the following:
    ```
-   C:\Users\CallumJackson>amqsphac In mqnonpersistent
+   C:\Users\CallumJackson>amqsphac In mqdemoha
    Sample AMQSPHAC start
    target queue is In
    message <Message 1>
@@ -277,11 +277,11 @@ To demonstrate access to MQ a number of tools can be used such as RFHUtil, MQ Ex
    This show the sample application has successfully connected to Queue Manager and PUT messages.
 1. To verify the messages can be retrieved run the following:    
    ```
-   amqsghac In mqnonpersistent
+   amqsghac In mqdemoha
    ```
    This should output the following:
    ```
-   C:\Users\CallumJackson>amqsghac In mqnonpersistent
+   C:\Users\CallumJackson>amqsghac In mqdemoha
    Sample AMQSGHAC start
    message <Message 1>
    message <Message 2>
