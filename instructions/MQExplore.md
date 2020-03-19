@@ -21,7 +21,7 @@ The following is seperated into two sections:
 1. You should see three routes:     
    * mq-demo-ha-ibm-mq-qm: this is not be used - automatically created
    * mq-demo-ha-ibm-mq-web: - this is used to access the web console - automatically created
-   * mq-traffic-ha-demo-ibm-mq-qm: - this will be used for communication to the MQ Explorer - you manually created this one
+   * mq-traffic-ha-demo-ibm-mq-qm: - this will be used for communication to the MQ Explorer - you manually created this one      
    *IMPORTANT: Although it appears completely unintuitive copy the hostname from the mq-demo-ha-ibm-mq-web entry as we will need this for the MQ Explore configuration. For example in my case this was: 	mq-demo-ha-ibm-mq-web-mq.apps.web-mq-5.purple-chesterfield.com*
 
 ### Configuring the MQ Explorer
@@ -36,7 +36,7 @@ The following is seperated into two sections:
    Click Next. 
 1. Click Next on the Security Exit details page
 1. Click Next on the user identification page
-1. You will need to configure a MQ Explorer with the correct security certificates. To simplify this process I've already created the Key Store which is available (here)[https://github.ibm.com/CALLUMJ/MQonCP4I/blob/master/resources/tls/MQExplorer.jks]. Download this file and reference within the configuration, and check the *Enable SSL key repositories* option.     
+1. You will need to configure a MQ Explorer with the correct security certificates. To simplify this process I've already created the Key Store which is available [here](https://github.ibm.com/CALLUMJ/MQonCP4I/blob/master/resources/tls/MQExplorer.jks). Download this file and reference within the configuration, and check the *Enable SSL key repositories* option.     
   ![Define the TLS Key Store](img/configTLSKeyStore.png)      
 1. Enter *password* for the TLS Key Store
 1. Click Next 
