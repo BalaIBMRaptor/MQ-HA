@@ -42,5 +42,6 @@ The following is seperated into two sections:
 1. Click Next 
 1. Check the *Enable SSL option* and select *ECDHE_RSA_AES_128_CBC_SHA256* from the SSL cipher spec pull down.     
    ![Define the TLS Key Store](img/configCipherSpecMQE.png)    
-   
 1. Click *Finish*
+1. The Queue Manager will be added and shown in the navigator:     
+   ![Queue Manager Available](img/QueueManagerInNavigator.png)    
