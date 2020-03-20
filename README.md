@@ -7,6 +7,7 @@ This repository demonstrates how to get started with IBM MQ on the Cloud Pak for
 * [Connecting MQ Explorer to a deployed Queue Manager](instructions/MQExplore.md)
 
 ## Advanced bolt-ons
+* [ADVANCED - Building a OpenShift Pipeline that automatically configures MQ LDAP configuration](instructions/MQBuildWithLDAPEnabled.md)
 * [ADVANCED - Loading MQSC configuration using a configMap](instructions/configMap.md)
-* Configuring LDAP - coming soon
+
 
