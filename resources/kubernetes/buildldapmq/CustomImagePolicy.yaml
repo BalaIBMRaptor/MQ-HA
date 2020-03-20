@@ -1,0 +1,10 @@
+apiVersion: securityenforcement.admission.cloud.ibm.com/v1beta1
+kind: ClusterImagePolicy
+metadata:
+  name: mqldap
+spec:
+   repositories:
+    - name: image-registry.openshift-image-registry.svc:5000/mq/mqldap
+      policy:
+        va: 
+          enabled: false
