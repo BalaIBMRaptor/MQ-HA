@@ -1,10 +1,6 @@
 # Starting IBM MQ within a container
 
-- [ ] Introduction
-- [ ] Install Pre-requisistes (not required for Think Lab)
-- [ ] Complete deployment and startup of IBM MQ
-
-* * *
+This part of the lab will show how straight forward it is to start IBM MQ in a matter of minutes.
 
 ## Pre-requisites - Install Docker (pre-completed within supplied image)
 --------------
