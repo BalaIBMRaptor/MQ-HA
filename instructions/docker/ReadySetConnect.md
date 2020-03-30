@@ -3,13 +3,11 @@
 This part of the lab will show how straight forward it is to start IBM MQ in a matter of minutes.
 
 ## Pre-requisites - Install Docker (pre-completed within supplied image)
---------------
 
 If you already have Docker version 17.06 (or later), continue to the [next section](#Get-the-MQ-in-Docker-image). To find Docker for your platform, go to [Docker Community Edition](https://hub.docker.com/search/?type=edition&offering=community) and install. For example, if you're installing on Ubuntu, instructions are [here](https://docs.docker.com/install/linux/docker-ce/ubuntu/). If your Docker version is called docker or docker-engine, you need to uninstall these before installing the latest docker-ce version. Once you've installed Docker, come back to continue with the tutorial.    
 
 
 ## Get the MQ in Docker image
---------------
 
 Containers are run from images and images are built from a specification listed in a Dockerfile. We will use a pre-built IBM MQ server image from Docker Hub so we can just run our container and end up with a working MQ installation and a pre-configured queue manager. 
 
@@ -35,7 +33,6 @@ Containers are run from images and images are built from a specification listed 
    ```
 
 ## Run the container from the image
---------------------------------
 
 Now that the MQ server image is in your local Docker repository, you can run the container to stand up MQ in Ubuntu.
 
@@ -75,7 +72,6 @@ Congratulations! You've just created your first simple queue manager. It's calle
 To access it, you'll be connecting over TCP/IP, which is why you needed to expose the port 1414.
 
 ## Verify the IBM MQ deployment
---------------------------------
 To verify the IBM MQ deployment we will exec into the running container and run a couple of commands to make sure everything is healthy.     
 
 1. Copy your own container id (from the previous step) and use it to get command line access inside the container, for example:     
@@ -126,7 +122,6 @@ To verify the IBM MQ deployment we will exec into the running container and run 
    ```
 
 ## Summary
-----------
 You have downloaded the pre-built Docker image and ran the container to get MQ running on Ubuntu. MQ objects and permissions that the client demo application needs to connect to a queue manager and put and get messages to and from the queue, are created automatically. Docker and MQ are using your host computer resources and connectivity. Inside the container, the MQ installation on Ubuntu has the following objects and permissions set:
 
 *   Queue manager QM1
