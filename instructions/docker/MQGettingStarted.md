@@ -6,3 +6,4 @@ This is a set of tutorials to get started with IBM MQ on your own laptop using D
 1. [Using the Web Console](WebConsole101.md)
 1. [Basic IBM MQ Administration](Admin101.md)
 1. [Building an application](DevelopSimpleJavaApp.md)
+1. [Completing the quiz](quiz.md)
