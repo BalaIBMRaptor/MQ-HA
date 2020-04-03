@@ -37,8 +37,8 @@ Point to point with JMS and IBM MQ
 
 JMS stands for Java Message Service. JMS is a standard that defines how you can access enterprise messaging systems from Java programs. JMS API is implemented by messaging service providers like IBM MQ to allow JMS client applications to access the provider’s messaging service.
 
-Say you want to send data from your application to a single queue.  
-In this tutorial, you’ll put a message that holds your data to a queue and the consuming application will get it from the queue.  
+Say you want to send data from your application to a single queue.
+In this tutorial, you’ll put a message that holds your data to a queue and the consuming application will get it from the queue.
 You’ll be using the JMS API to connect to your messaging provider which in this case is IBM MQ.
 
 Your application has to be able to do these things:
@@ -57,9 +57,9 @@ We assume that these MQ objects are set up on the MQ server that you are connect
 *   Channel DEV.APP.SVRCONN
 *   Port 1414
 
-Adjust accordingly if you are using your own objects, or go to [Ready, Set, Connect](/messaging/ready-set-connect) to get started.  
-If you’ve worked through Ready, Set, Connect, your queue manager should already be configured correctly.  
-If not, you need to set up authorisation on the queue manager to accept connection from the application through a named channel and the application has to be authorised to put and get messages to and from the queue.  
+Adjust accordingly if you are using your own objects, or go to [Ready, Set, Connect](/messaging/ready-set-connect) to get started.
+If you’ve worked through Ready, Set, Connect, your queue manager should already be configured correctly.
+If not, you need to set up authorisation on the queue manager to accept connection from the application through a named channel and the application has to be authorised to put and get messages to and from the queue.
 If you already have a JMS application but want some help with performance or debugging, [try this tutorial](http://developer.ibm.com/messaging/learn-mq/mq-tutorials/slow-lost-messages-high-cpu-improve-your-mq-app/).
 
 Set up your environment
@@ -81,49 +81,49 @@ Create a directory to save the files needed for the sample, for example in your 
 From the MQClient folder, first download the pre-reqs by using wget OR curl:
 
 *   Get the latest version of the IBM MQ com.ibm.mq.allclient.jar:
-    
+
     [Copy]
-    
+
         wget https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
-    
+
     [Copy]
-    
+
         curl -o com.ibm.mq.allclient-9.1.4.0.jar https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
-    
+
 *   Get the latest JMS API jms.jar:
-    
+
     [Copy]
-    
+
         wget https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
-    
+
     [Copy]
-    
+
         curl -o javax.jms-api-2.0.1.jar https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
-    
+
 *   If you don’t already have a Java JDK version 8, you can download it from [here](https://developer.ibm.com/javasdk/downloads/sdk8/). Select the right download for your platform and install.
-    
+
     On Linux, depending on which package you downloaded you need to run it to install. For example, if you downloaded ibm-java-sdk-8.0-5.10-x86\_64-archive.bin, run:
-    
+
     [Copy]
-    
+
         ./ibm-java-sdk-8.0-5.10-x86_64-archive.bin
-    
-    For Windows you need to download the Eclipse package that contains the JDK.  
+
+    For Windows you need to download the Eclipse package that contains the JDK.
     Ensure that the JDK is on the system path:
-    
+
     On Linux:
-    
+
     [Copy]
-    
+
         PATH=~/ibm-java-x86_64-80/bin:$PATH
-    
+
 
 Point-to-point sample walkthrough
 ---------------------------------
 
 Lets get the sample from GitHub, save it on your local machine and look through some of the key JMS constructs and where you can add the host, port, channel and queue details so your sample can connect to the queue manager.
 
-In your MQClient directory, create the following directory structure:  
+In your MQClient directory, create the following directory structure:
 com/ibm/mq/samples/jms
 
 On Linux:
@@ -195,7 +195,7 @@ Use the connection factory to create the context and use the context to create t
     // Create JMS objects
     context = cf.createContext();
     destination = context.createQueue("queue:///" + QUEUE_NAME);
-    
+
     //Set up the message
     long uniqueNumber = System.currentTimeMillis() % 1000;
     TextMessage message = context.createTextMessage("Your lucky number today is " + uniqueNumber);
@@ -313,8 +313,8 @@ Received message:
 Your lucky number today is 95
 SUCCESS
 
-Congratulations! You wrote, edited and compiled your first JMS application, sent a message to an IBM MQ queue and got it from the queue. You also set up your environment with everything you need to develop with JMS and IBM MQ.  
-You have a basic understanding of what you’re aiming to hit on the MQ server side with the objects in your JMS application and how JMS helps you achieve that.  
+Congratulations! You wrote, edited and compiled your first JMS application, sent a message to an IBM MQ queue and got it from the queue. You also set up your environment with everything you need to develop with JMS and IBM MQ.
+You have a basic understanding of what you’re aiming to hit on the MQ server side with the objects in your JMS application and how JMS helps you achieve that.
 If you want to make sure your JMS application is going to perform reliably and well, [have a look at this tutorial](http://developer.ibm.com/messaging/learn-mq/mq-tutorials/slow-lost-messages-high-cpu-improve-your-mq-app/).
 
 Learn more about JMS
@@ -325,7 +325,7 @@ Click to see the JMS summary with diagrams
 
 This tutorial is based on JMS 2.0 or simplified JMS API. Earlier versions can still be used to support backward compatibility. Check out the JMS 2.0 specification [here](http://download.oracle.com/otndocs/jcp/jms-2_0-fr-eval-spec/index.html).
 
-JMS takes messaging objects that are common to different messaging providers and defines them in a way that can be reused regardless of the JMS messaging provider.  
+JMS takes messaging objects that are common to different messaging providers and defines them in a way that can be reused regardless of the JMS messaging provider.
 It also provides facilities for encapsulating concepts that are specific to each provider, in a way that can minimise how much a developer needs to know about how each messaging provider works.
 
 IBM MQ implements JMS and provides a set of classes that your application can use. You need to have access to these classes as well as the JMS API.
@@ -334,35 +334,35 @@ IBM MQ implements JMS and provides a set of classes that your application can us
 
 Figure 1. Overview of components: MQ server, MQ JMS client, MQ and JMS classes.
 
-JMS supports two messaging styles, point to point and publish/subscribe.  
-Components of a JMS application are JMS client, messages, JMS provider and administered objects.  
+JMS supports two messaging styles, point to point and publish/subscribe.
+Components of a JMS application are JMS client, messages, JMS provider and administered objects.
 JMS Administered objects are connection factory and destination.
 
-The objects or interfaces that JMS 2.0 provides are the main building blocks for your JMS application:  
-Message – BytesMessage, MapMessage, ObjectMessage, StreamMessage, TextMessage.  
-Queue – administered object that encapsulates the identity of a message destination for point to point messaging.  
-Topic – administered object that encapsulates the identity of a message destination for publish subscribe messaging.  
+The objects or interfaces that JMS 2.0 provides are the main building blocks for your JMS application:
+Message – BytesMessage, MapMessage, ObjectMessage, StreamMessage, TextMessage.
+Queue – administered object that encapsulates the identity of a message destination for point to point messaging.
+Topic – administered object that encapsulates the identity of a message destination for publish subscribe messaging.
 Destination – the common supertype of Queue and Topic objects.
 
-Connection factory – administered object used by a client to create a connection.  
-JMS context – active connection to a JMS Provider and a single threaded context for sending and receiving messages.  
-JMS producer – object created by a JMS Context that is used for sending messages to a queue or topic.  
+Connection factory – administered object used by a client to create a connection.
+JMS context – active connection to a JMS Provider and a single threaded context for sending and receiving messages.
+JMS producer – object created by a JMS Context that is used for sending messages to a queue or topic.
 JMS consumer – object created by a JMS Context that is used for receiving messages sent to a queue or topic.
 
 ![The diagram shows the relationships between JMS objects and JMS administered objects. The connection factory administered object creates JMS Context object. The JMS Context object creates JMS Consumer, Producer and Message objects. JMS Producer and JMS Consumer both use the Destination administered objects to send and receive messages.](/static/site-id/18/images/svg/jms_diagram_2.svg)
 
 Figure 2. Overview of the simplified JMS API objects.
 
-On your client application side, the JMS API provides ways to access messaging provider (MQ) objects.  
-In production environments, your JMS administered objects would access information about the objects on the provider (MQ server) side, from a JNDI store that is separate from the client and the messaging server. Your application would not use each MQ parameter directly as this means it would be tightly coupled to the queue manager, channel and the queue.  
-Each time something changed with any of those, you would have to make changes to your application too.  
+On your client application side, the JMS API provides ways to access messaging provider (MQ) objects.
+In production environments, your JMS administered objects would access information about the objects on the provider (MQ server) side, from a JNDI store that is separate from the client and the messaging server. Your application would not use each MQ parameter directly as this means it would be tightly coupled to the queue manager, channel and the queue.
+Each time something changed with any of those, you would have to make changes to your application too.
 The MQ administrator usually manages a store where connection factory and destination name-object pairs are bound, see [Figure 3](#figure-3).
 
 ![The diagram shows how the JNDI stores are bound by the admin tool and contain connection factory and destination stores. the JMS client looks up the connection factory and destination objects in JNDI. The JMS client also as a logical connection to the JMS Provider.](/static/site-id/18/images/svg/jms_diagram_3.svg)
 
 Figure 3. How a JMS client looks up connection factory and destination objects in a JNDI store.
 
-Rather than including the information about the queue, queue manager, host and channel in your application directly, you would program the connection factory and destination to look up this information through JNDI.  
+Rather than including the information about the queue, queue manager, host and channel in your application directly, you would program the connection factory and destination to look up this information through JNDI.
 JMS encourages you to decouple your application from the messaging provider to minimise change and improve maintainability. You also want to decouple your application logic from your messaging provider so that the application is easily portable between providers.
 
 Although JMS is really helping you in the long run by abstracting certain details away from your application, this can make JMS more difficult to understand. In this tutorial, we’ve set up the application to be tightly coupled to the queue manager and queue because this is the easiest way to understand what is happening.
