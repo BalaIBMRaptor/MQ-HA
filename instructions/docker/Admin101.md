@@ -15,7 +15,7 @@ You have already complete the [Starting IBM MQ within a container lab](https://g
 ## Understanding the basics of problem determination
 This section will understand highlight the basics of IBM MQ problem determination, we will deliberately cause an error to demonstrate the various capabilities that exist to resolve the problem. 
 
-### Causing an error
+### Resolving an error using the Web Console and mqrc command
 In the previous lab we created a queue called *DEV.MY.QUEUE* and set the maximum depth to be 3 messages. 
 In this section we will demostrate what happens when you attempt to exceed the limit.    
 1. We will complete this testing using the command line. Open a new terminal window:    
@@ -86,11 +86,45 @@ In this section we will demostrate what happens when you attempt to exceed the l
 1. In addition if you return to the web console and viewed the Queue Manager you will see the maximum depth has been reached and highlighted:     
    ![Max Depth](img/maxdepthconsole.png)       
 
+1. Both of the above mechanisms provide a straight forward way to determine the underlying issue. 
+In our case we will address this by reading the message, simulating an application coming back on line.        
+   ```
+   /opt/mqm/samp/bin/amqsget DEV.MY.QUEUE QM1
+   ```
+   You should see the following output:      
+   ```
+   bash-4.4$ /opt/mqm/samp/bin/amqsget DEV.MY.QUEUE QM1
+   Sample AMQSGET0 start
+   message <Test message 1>
+   message <Test message 2>
+   message <Test message 3>
+   ```
+   If you now re-attempt the amqsput command this will now work.
+ 
 
+### Resolving an error using the error log
+IBM MQ has a feature rich authentication and authorization capability. In our lab we have not exposed many of these controls but behind the scenes it is still completing these checks. In this section we will change the default user to one that does not have authority to the queues and understand how we can troubleshoot this issue. 
 
-### Mapping from return code to human readable
-### Viewing IBM MQ error logs
+1. The sample programs can be configured to specify a username for the connection by setting an environment variable called: ```MQSAMP_USER_ID```. We will use this to cause an error when we attempt to PUT a message. 
+Set the variable using the following command:         
+   ```
+   export MQSAMP_USER_ID=nouser
+   ```
+   Now lets try and PUT a message to the queue:      
+   ```
+   bash-4.4$ echo "Test message 1" | ./amqsput DEV.MY.QUEUE QM1
+   Sample AMQSPUT0 start
+   Enter password: MQCONNX ended with reason code 2035
+   ```
+   We can see that this failed with a return code of 2035. We can use the mqrc command to view what this command means:       
+   ```
+   bash-4.4$ mqrc 2035
 
+      2035  0x000007f3  MQRC_NOT_AUTHORIZED
+   ```
+   At this stage we can understand that we were not Authorized, but this may be inadequate information to resolve the issue. 
+   It is standard practice to provide limited troubleshooting information in the case of a security error as we do not want to assist hackers.
+1. Error logs   
 ## Using the command line to administer IBM MQ
 
 ## Understanding the different types of Queues
