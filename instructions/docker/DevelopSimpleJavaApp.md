@@ -74,9 +74,7 @@ To develop and run MQ JMS client applications you need access to:
 
 Create a directory to save the files needed for the sample, for example in your home directory:
 
-    ```
     mkdir MQClient
-    ```
 
 From the MQClient folder, first download the pre-reqs by using wget OR curl:
 
@@ -85,7 +83,7 @@ From the MQClient folder, first download the pre-reqs by using wget OR curl:
     ```
     wget https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
     ```
-    
+
     ```
     curl -o com.ibm.mq.allclient-9.1.4.0.jar https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
     ```
@@ -95,11 +93,11 @@ From the MQClient folder, first download the pre-reqs by using wget OR curl:
     ```
     wget https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
     ```
-    
+
     ```
     curl -o javax.jms-api-2.0.1.jar https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
     ```
-    
+
 *   If you don’t already have a Java JDK version 8, you can download it from [here](https://developer.ibm.com/javasdk/downloads/sdk8/). Select the right download for your platform and install.
 
     On Linux, depending on which package you downloaded you need to run it to install. For example, if you downloaded ibm-java-sdk-8.0-5.10-x86\_64-archive.bin, run:
@@ -107,7 +105,7 @@ From the MQClient folder, first download the pre-reqs by using wget OR curl:
     ```
     ./ibm-java-sdk-8.0-5.10-x86_64-archive.bin
     ```
-    
+
     Ensure that the JDK is on the system path:
 
     On Linux:
@@ -126,23 +124,18 @@ com/ibm/mq/samples/jms
 
 On Linux:
 
-    ```
+
     mkdir -p com/ibm/mq/samples/jms
-    ```
+
 
 From the MQClient/com/ibm/mq/samples/jms directory, issue ONE of the commands to grab the JmsPutGet.java sample from GitHub.
 
-    ```
     wget https://raw.githubusercontent.com/ibm-messaging/mq-dev-samples/master/gettingStarted/jms/JmsPutGet.java
-    ```
     
-    ```
     curl -o JmsPutGet.java https://raw.githubusercontent.com/ibm-messaging/mq-dev-samples/master/gettingStarted/jms/JmsPutGet.java
-    ```
-
+    
 Edit the JMSPutGet.java file. Replace the host, port and app password variables to match your queue manager configuration.
 
-    ```
     // Create variables for the connection to MQ
     private static final String HOST = "_YOUR_HOSTNAME_"; // Host name or IP address
     private static final int PORT = 1414; // Listener port for your queue manager
@@ -151,27 +144,21 @@ Edit the JMSPutGet.java file. Replace the host, port and app password variables 
     private static final String APP_USER = "app"; // User name that application uses to connect to MQ
     private static final String APP_PASSWORD = "_APP_PASSWORD_"; // Password that the application uses to connect to MQ
     private static final String QUEUE_NAME = "DEV.QUEUE.1"; // Queue that the application uses to put and get messages to and from
-    ```
-
+    
 Create the connection factory programatically by using WMQConstants parameters. WMQConstants refers to MQ specific property names and values that can be set through the client. IBM MQ classes for JMS contain a set of extensions to the JMS API, called [IBM JMS extensions](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.dev.doc/q032180_.htm). Your application can use these extensions to create connection factories and destinations dynamically, at runtime, and set MQ specific object properties.
 
-    ```
     // Create a connection factory
     JmsFactoryFactory ff = JmsFactoryFactory.getInstance(WMQConstants.WMQ_PROVIDER);
     JmsConnectionFactory cf = ff.createConnectionFactory();
-    ```
-
+    
 You need to include declarations for the ibm.com connection factory classes and the WMQ Constants classes that all extend JMS classes:
 
-    ```
     import com.ibm.msg.client.jms.JmsConnectionFactory;
     import com.ibm.msg.client.jms.JmsFactoryFactory;
     import com.ibm.msg.client.wmq.WMQConstants;
-    ```
-
+    
 You are creating JMS objects that will map to MQ objects. The following MQ Constants properties are used by the connection factory to create a connection when the application is run:
 
-    ```
     // Set the properties
     cf.setStringProperty(WMQConstants.WMQ_HOST_NAME, HOST);
     cf.setIntProperty(WMQConstants.WMQ_PORT, PORT);
@@ -182,13 +169,11 @@ You are creating JMS objects that will map to MQ objects. The following MQ Const
     cf.setBooleanProperty(WMQConstants.USER_AUTHENTICATION_MQCSP, true);
     cf.setStringProperty(WMQConstants.USERID, APP_USER);
     cf.setStringProperty(WMQConstants.PASSWORD, APP_PASSWORD);
-    ```
-
+    
 In production, you would use a JNDI store to look this information up. We’ve mentioned the objects that are set up on the MQ server side. The WMQConstants properties for host name and port map obviously to the MQ server objects. An additional property for the connection factory object is connection mode. We’ll be connecting in client mode. Applications can connect to the queue manager in client or bindings modes. Bindings mode for JMS uses Java Native Interface (JNI) when both the MQ server and client are running in the same environment. Client mode uses the TCP /IP protocol when MQ server and client are running on different environments.
 
 Use the connection factory to create the context and use the context to create the destination. Without the JNDI store to look up the destination, pass in the actual queue name that you’re aiming for on the MQ server.
 
-    ```
     // Create JMS objects
     context = cf.createContext();
     destination = context.createQueue("queue:///" + QUEUE_NAME);
@@ -196,49 +181,37 @@ Use the connection factory to create the context and use the context to create t
     //Set up the message
     long uniqueNumber = System.currentTimeMillis() % 1000;
     TextMessage message = context.createTextMessage("Your lucky number today is " + uniqueNumber);
-    ```
-
+    
 Include the declarations for the JMS context, destination and the JMS text message:
 
-    ```
     import javax.jms.Destination;
     import javax.jms.JMSContext;
     import javax.jms.TextMessage;
-    ```
-
+    
 Use the context to create the producer. The producer sends the message using the destination to put the message to the right queue:
 
-    ```
     producer = context.createProducer();
     producer.send(destination, message);
     System.out.println("Sent message:\n" + message);
-    ```
+    
 Include the declaration for the JMS producer:
 
-    ```
     import javax.jms.JMSProducer;
-    ```
 
 Use the context to create the consumer. The consumer uses the destination to receive the message from the right queue.
 
-    ```
     consumer = context.createConsumer(destination); // autoclosable
     String receivedMessage = consumer.receiveBody(String.class, 15000); // in ms or 15 seconds
-    ```
 
 Include the declaration for the JMS consumer:
 
-    ```
     import javax.jms.JMSConsumer;
-    ```
 
 The sample also has a couple of class utility methods for printing exceptions.
 
 Go ahead and include the declaration for the JMS exceptions:
 
-    ```
     import javax.jms.JMSException;
-    ```
 
 You should now be able to compile your application and run it.
 
@@ -253,66 +226,56 @@ Use javac to compile your application.
 
 On Linux:
 
-    ```
     javac -cp ./com.ibm.mq.allclient-9.1.4.0.jar:./javax.jms-api-2.0.1.jar com/ibm/mq/samples/jms/JmsPutGet.java
-    ```
 
 To confirm that the sample is compiled:
 
 
 On Linux, run the ls command:
 
-    ```
     ls -l com/ibm/mq/samples/jms/
-    ```
 
 You should now see a .class file accompanying the .java file.
 
 On Linux:
-    
-    ```
+
     -rw-r--r-- 1 root root 3788 Feb 22 18:34 JmsPutGet.class
     -rw-r--r-- 1 root root 5099 Feb 22 18:22 JmsPutGet.java
-    ```
 
 Run your application:
 
 On Linux:
 
-    ```
     java -cp ./com.ibm.mq.allclient-9.1.4.0.jar:./javax.jms-api-2.0.1.jar:. com.ibm.mq.samples.jms.JmsPutGet
-    ```
 
 You should see output like this:
 
-```
-Sent message:
+    Sent message:
 
-  JMSMessage class: jms\_text
-  JMSType:          null
-  JMSDeliveryMode:  2
-  JMSDeliveryDelay: 0
-  JMSDeliveryTime:  1519399851110
-  JMSExpiration:    0
-  JMSPriority:      4
-  JMSMessageID:     ID:414d5120514d312020202020202020208731905a21a55202
-  JMSTimestamp:     1519399851110
-  JMSCorrelationID: null
-  JMSDestination:   queue:///DEV.QUEUE.1
-  JMSReplyTo:       null
-  JMSRedelivered:   false
-    JMSXAppID: JmsPutGet (JMS)
-    JMSXDeliveryCount: 0
-    JMSXUserID: app
-    JMS\_IBM\_PutApplType: 28
-    JMS\_IBM\_PutDate: 20180223
-    JMS\_IBM\_PutTime: 15305112
-Your lucky number today is 95
+    JMSMessage class: jms\_text
+    JMSType:          null
+    JMSDeliveryMode:  2
+    JMSDeliveryDelay: 0
+    JMSDeliveryTime:  1519399851110
+    JMSExpiration:    0
+    JMSPriority:      4
+    JMSMessageID:     ID:414d5120514d312020202020202020208731905a21a55202
+    JMSTimestamp:     1519399851110
+    JMSCorrelationID: null
+    JMSDestination:   queue:///DEV.QUEUE.1
+    JMSReplyTo:       null
+    JMSRedelivered:   false
+        JMSXAppID: JmsPutGet (JMS)
+        JMSXDeliveryCount: 0
+        JMSXUserID: app
+        JMS\_IBM\_PutApplType: 28
+        JMS\_IBM\_PutDate: 20180223
+        JMS\_IBM\_PutTime: 15305112
+    Your lucky number today is 95
 
-Received message:
-Your lucky number today is 95
-SUCCESS
-```
+    Received message:
+    Your lucky number today is 95
+    SUCCESS
 
 Congratulations! You wrote, edited and compiled your first JMS application, sent a message to an IBM MQ queue and got it from the queue. You also set up your environment with everything you need to develop with JMS and IBM MQ.
 You have a basic understanding of what you’re aiming to hit on the MQ server side with the objects in your JMS application and how JMS helps you achieve that.
