@@ -74,25 +74,28 @@ To develop and run MQ JMS client applications you need access to:
 
 Create a directory to save the files needed for the sample, for example in your home directory:
 
-[Copy] (javascript:;)
-
+    ```
     mkdir MQClient
+    ```
 
 From the MQClient folder, first download the pre-reqs by using wget OR curl:
 
 *   Get the latest version of the IBM MQ com.ibm.mq.allclient.jar:
 
     ```
-        wget https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
+    wget https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
     ```
+    
     ```
-        curl -o com.ibm.mq.allclient-9.1.4.0.jar https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
+    curl -o com.ibm.mq.allclient-9.1.4.0.jar https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
     ```
+
 *   Get the latest JMS API jms.jar:
 
     ```
     wget https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
     ```
+    
     ```
     curl -o javax.jms-api-2.0.1.jar https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
     ```
@@ -132,9 +135,11 @@ From the MQClient/com/ibm/mq/samples/jms directory, issue ONE of the commands to
     ```
     wget https://raw.githubusercontent.com/ibm-messaging/mq-dev-samples/master/gettingStarted/jms/JmsPutGet.java
     ```
+    
     ```
     curl -o JmsPutGet.java https://raw.githubusercontent.com/ibm-messaging/mq-dev-samples/master/gettingStarted/jms/JmsPutGet.java
     ```
+
 Edit the JMSPutGet.java file. Replace the host, port and app password variables to match your queue manager configuration.
 
     ```
@@ -147,6 +152,7 @@ Edit the JMSPutGet.java file. Replace the host, port and app password variables 
     private static final String APP_PASSWORD = "_APP_PASSWORD_"; // Password that the application uses to connect to MQ
     private static final String QUEUE_NAME = "DEV.QUEUE.1"; // Queue that the application uses to put and get messages to and from
     ```
+
 Create the connection factory programatically by using WMQConstants parameters. WMQConstants refers to MQ specific property names and values that can be set through the client. IBM MQ classes for JMS contain a set of extensions to the JMS API, called [IBM JMS extensions](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.dev.doc/q032180_.htm). Your application can use these extensions to create connection factories and destinations dynamically, at runtime, and set MQ specific object properties.
 
     ```
