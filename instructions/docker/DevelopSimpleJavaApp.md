@@ -284,19 +284,12 @@ If you want to make sure your JMS application is going to perform reliably and w
 Learn more about JMS
 --------------------
 
-Click to see the JMS summary with diagrams
-------------------------------------------
-
 This tutorial is based on JMS 2.0 or simplified JMS API. Earlier versions can still be used to support backward compatibility. Check out the JMS 2.0 specification [here](http://download.oracle.com/otndocs/jcp/jms-2_0-fr-eval-spec/index.html).
 
 JMS takes messaging objects that are common to different messaging providers and defines them in a way that can be reused regardless of the JMS messaging provider.
 It also provides facilities for encapsulating concepts that are specific to each provider, in a way that can minimise how much a developer needs to know about how each messaging provider works.
 
 IBM MQ implements JMS and provides a set of classes that your application can use. You need to have access to these classes as well as the JMS API.
-
-![Diagram shows three columns with four boxes, from left, first box represents the JMS Provider or IBM MQ server with the queue manager, host name, port, channel and queue; the second box represents the JMS application with JMS context, connection factory, destination, message producer and consumer, in the third column the third box represents the IBM MQ allclient jar wit MQ classes for JMS and IBM JMS classes and the lower fourth box that is also in column three represents the JMS jar with the JMS API.](/static/site-id/18/images/svg/jms_diagram_1.svg)
-
-Figure 1. Overview of components: MQ server, MQ JMS client, MQ and JMS classes.
 
 JMS supports two messaging styles, point to point and publish/subscribe.
 Components of a JMS application are JMS client, messages, JMS provider and administered objects.
@@ -313,28 +306,14 @@ JMS context – active connection to a JMS Provider and a single threaded contex
 JMS producer – object created by a JMS Context that is used for sending messages to a queue or topic.
 JMS consumer – object created by a JMS Context that is used for receiving messages sent to a queue or topic.
 
-![The diagram shows the relationships between JMS objects and JMS administered objects. The connection factory administered object creates JMS Context object. The JMS Context object creates JMS Consumer, Producer and Message objects. JMS Producer and JMS Consumer both use the Destination administered objects to send and receive messages.](/static/site-id/18/images/svg/jms_diagram_2.svg)
-
-Figure 2. Overview of the simplified JMS API objects.
-
 On your client application side, the JMS API provides ways to access messaging provider (MQ) objects.
 In production environments, your JMS administered objects would access information about the objects on the provider (MQ server) side, from a JNDI store that is separate from the client and the messaging server. Your application would not use each MQ parameter directly as this means it would be tightly coupled to the queue manager, channel and the queue.
 Each time something changed with any of those, you would have to make changes to your application too.
-The MQ administrator usually manages a store where connection factory and destination name-object pairs are bound, see [Figure 3](#figure-3).
-
-![The diagram shows how the JNDI stores are bound by the admin tool and contain connection factory and destination stores. the JMS client looks up the connection factory and destination objects in JNDI. The JMS client also as a logical connection to the JMS Provider.](/static/site-id/18/images/svg/jms_diagram_3.svg)
-
-Figure 3. How a JMS client looks up connection factory and destination objects in a JNDI store.
+The MQ administrator usually manages a store where connection factory and destination name-object pairs are bound.
 
 Rather than including the information about the queue, queue manager, host and channel in your application directly, you would program the connection factory and destination to look up this information through JNDI.
 JMS encourages you to decouple your application from the messaging provider to minimise change and improve maintainability. You also want to decouple your application logic from your messaging provider so that the application is easily portable between providers.
 
 Although JMS is really helping you in the long run by abstracting certain details away from your application, this can make JMS more difficult to understand. In this tutorial, we’ve set up the application to be tightly coupled to the queue manager and queue because this is the easiest way to understand what is happening.
 
-![Diagram shows three boxes; one represents the IBM MQ server, one represents the development environment with the client application and the third expands the client application box to show how the JMS components are used and how they interact with MQ server objects.The connecting arrows show how different components interact.](/static/site-id/18/images/svg/jms_diagram_4.svg)
-
-Figure 4. Overview of the working structure of a simple MQ JMS point-to-point application
-
 Your application uses the connection factory to create the connection to the queue manager and the destination defines the queue object that you need to use to send messages to the actual MQ queue.
-
-You’re ready to explore more tutorials that will expand your understanding of JMS and MQ.
