@@ -26,10 +26,9 @@ Containers are run from images and images are built from a specification listed 
    You should see output like this:
    ```
    REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+   ibmcom/mq           latest              382f6ba8110a        3 days ago          896MB
    mqbadge             latest              e8d1ec438a2b        2 months ago        945MB
-   <none>              <none>              8443345693a7        2 months ago        116MB
-   ibmcom/mq           latest              268baf40303f        3 months ago        927MB
-   openjdk             8-alpine            a3562aa0b991        10 months ago       105MB
+   openjdk             8-alpine            a3562aa0b991        10 months ago       105M
    ```
 
 ## Run the container from the image
@@ -82,7 +81,7 @@ To verify the IBM MQ deployment we will exec into the running container and run 
    You should see output like this:        
 
    ```
-   (mq:9.1.2.0)mqm@<your container id>:/#
+   bash-4.4$
    ```      
 
 1. You can display the MQ Installation and Data paths by running the ‘display MQ version’ command in your command line interface:      
@@ -92,20 +91,21 @@ To verify the IBM MQ deployment we will exec into the running container and run 
    You should see output like this:      
    ```
    Name:        IBM MQ
-   Version:     9.1.4.0
-   Level:       p914-L191127.DE
+   Version:     9.1.5.0
+   Level:       p915-ifix-L200325.DE
    BuildType:   IKAP - (Production)
    Platform:    IBM MQ for Linux (x86-64 platform)
    Mode:        64-bit
    O/S:         Linux 4.15.0-74-generic
    O/S Details: Red Hat Enterprise Linux 8.1 (Ootpa)
    InstName:    Installation1
-   InstDesc:    
-   Primary:     Yes
+   InstDesc:    IBM MQ V9.1.5.0 (Unzipped)
+   Primary:     N/A
    InstPath:    /opt/mqm
-   DataPath:    /var/mqm
-   MaxCmdLevel: 914
+   DataPath:    /mnt/mqm/data
+   MaxCmdLevel: 915
    LicenseType: Developer
+
    ```
    
 1. Display your running queue managers:
