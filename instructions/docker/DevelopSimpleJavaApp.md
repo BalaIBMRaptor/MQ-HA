@@ -74,7 +74,7 @@ To develop and run MQ JMS client applications you need access to:
 
 Create a directory to save the files needed for the sample, for example in your home directory:
 
-[Copy]
+[Copy](javascript:;)
 
     mkdir MQClient
 
@@ -82,21 +82,21 @@ From the MQClient folder, first download the pre-reqs by using wget OR curl:
 
 *   Get the latest version of the IBM MQ com.ibm.mq.allclient.jar:
 
-    [Copy]
+    [Copy](javascript:;)
 
         wget https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
 
-    [Copy]
+    [Copy](javascript:;)
 
         curl -o com.ibm.mq.allclient-9.1.4.0.jar https://repo1.maven.org/maven2/com/ibm/mq/com.ibm.mq.allclient/9.1.4.0/com.ibm.mq.allclient-9.1.4.0.jar
 
 *   Get the latest JMS API jms.jar:
 
-    [Copy]
+    [Copy](javascript:;)
 
         wget https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
 
-    [Copy]
+    [Copy](javascript:;)
 
         curl -o javax.jms-api-2.0.1.jar https://repo1.maven.org/maven2/javax/jms/javax.jms-api/2.0.1/javax.jms-api-2.0.1.jar
 
@@ -104,7 +104,7 @@ From the MQClient folder, first download the pre-reqs by using wget OR curl:
 
     On Linux, depending on which package you downloaded you need to run it to install. For example, if you downloaded ibm-java-sdk-8.0-5.10-x86\_64-archive.bin, run:
 
-    [Copy]
+    [Copy](javascript:;)
 
         ./ibm-java-sdk-8.0-5.10-x86_64-archive.bin
 
@@ -113,7 +113,7 @@ From the MQClient folder, first download the pre-reqs by using wget OR curl:
 
     On Linux:
 
-    [Copy]
+    [Copy](javascript:;)
 
         PATH=~/ibm-java-x86_64-80/bin:$PATH
 
@@ -128,23 +128,23 @@ com/ibm/mq/samples/jms
 
 On Linux:
 
-[Copy]
+[Copy](javascript:;)
 
     mkdir -p com/ibm/mq/samples/jms
 
 From the MQClient/com/ibm/mq/samples/jms directory, issue ONE of the commands to grab the JmsPutGet.java sample from GitHub.
 
-[Copy]
+[Copy](javascript:;)
 
     wget https://raw.githubusercontent.com/ibm-messaging/mq-dev-samples/master/gettingStarted/jms/JmsPutGet.java
 
-[Copy]
+[Copy](javascript:;)
 
     curl -o JmsPutGet.java https://raw.githubusercontent.com/ibm-messaging/mq-dev-samples/master/gettingStarted/jms/JmsPutGet.java
 
 Edit the JMSPutGet.java file. Replace the host, port and app password variables to match your queue manager configuration.
 
-[Copy]
+[Copy](javascript:;)
 
     // Create variables for the connection to MQ
     private static final String HOST = "_YOUR_HOSTNAME_"; // Host name or IP address
@@ -157,7 +157,7 @@ Edit the JMSPutGet.java file. Replace the host, port and app password variables 
 
 Create the connection factory programatically by using WMQConstants parameters. WMQConstants refers to MQ specific property names and values that can be set through the client. IBM MQ classes for JMS contain a set of extensions to the JMS API, called [IBM JMS extensions](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.dev.doc/q032180_.htm). Your application can use these extensions to create connection factories and destinations dynamically, at runtime, and set MQ specific object properties.
 
-[Copy]
+[Copy](javascript:;)
 
     // Create a connection factory
     JmsFactoryFactory ff = JmsFactoryFactory.getInstance(WMQConstants.WMQ_PROVIDER);
@@ -165,7 +165,7 @@ Create the connection factory programatically by using WMQConstants parameters. 
 
 You need to include declarations for the ibm.com connection factory classes and the WMQ Constants classes that all extend JMS classes:
 
-[Copy]
+[Copy](javascript:;)
 
     import com.ibm.msg.client.jms.JmsConnectionFactory;
     import com.ibm.msg.client.jms.JmsFactoryFactory;
@@ -173,7 +173,7 @@ You need to include declarations for the ibm.com connection factory classes and 
 
 You are creating JMS objects that will map to MQ objects. The following MQ Constants properties are used by the connection factory to create a connection when the application is run:
 
-[Copy]
+[Copy](javascript:;)
 
     // Set the properties
     cf.setStringProperty(WMQConstants.WMQ_HOST_NAME, HOST);
@@ -190,7 +190,7 @@ In production, you would use a JNDI store to look this information up. We’ve m
 
 Use the connection factory to create the context and use the context to create the destination. Without the JNDI store to look up the destination, pass in the actual queue name that you’re aiming for on the MQ server.
 
-[Copy]
+[Copy](javascript:;)
 
     // Create JMS objects
     context = cf.createContext();
@@ -202,7 +202,7 @@ Use the connection factory to create the context and use the context to create t
 
 Include the declarations for the JMS context, destination and the JMS text message:
 
-[Copy]
+[Copy](javascript:;)
 
     import javax.jms.Destination;
     import javax.jms.JMSContext;
@@ -210,7 +210,7 @@ Include the declarations for the JMS context, destination and the JMS text messa
 
 Use the context to create the producer. The producer sends the message using the destination to put the message to the right queue:
 
-[Copy]
+[Copy](javascript:;)
 
     producer = context.createProducer();
     producer.send(destination, message);
@@ -218,20 +218,20 @@ Use the context to create the producer. The producer sends the message using the
 
 Include the declaration for the JMS producer:
 
-[Copy]
+[Copy](javascript:;)
 
     import javax.jms.JMSProducer;
 
 Use the context to create the consumer. The consumer uses the destination to receive the message from the right queue.
 
-[Copy]
+[Copy](javascript:;)
 
     consumer = context.createConsumer(destination); // autoclosable
     String receivedMessage = consumer.receiveBody(String.class, 15000); // in ms or 15 seconds
 
 Include the declaration for the JMS consumer:
 
-[Copy]
+[Copy](javascript:;)
 
     import javax.jms.JMSConsumer;
 
@@ -239,7 +239,7 @@ The sample also has a couple of class utility methods for printing exceptions.
 
 Go ahead and include the declaration for the JMS exceptions:
 
-[Copy]
+[Copy](javascript:;)
 
     import javax.jms.JMSException;
 
@@ -256,7 +256,7 @@ Use javac to compile your application.
 
 On Linux:
 
-[Copy]
+[Copy](javascript:;)
 
     javac -cp ./com.ibm.mq.allclient-9.1.4.0.jar:./javax.jms-api-2.0.1.jar com/ibm/mq/samples/jms/JmsPutGet.java
 
@@ -265,7 +265,7 @@ To confirm that the sample is compiled:
 
 On Linux, run the ls command:
 
-[Copy]
+[Copy](javascript:;)
 
     ls -l com/ibm/mq/samples/jms/
 
@@ -280,7 +280,7 @@ Run your application:
 
 On Linux:
 
-[Copy]
+[Copy](javascript:;)
 
     java -cp ./com.ibm.mq.allclient-9.1.4.0.jar:./javax.jms-api-2.0.1.jar:. com.ibm.mq.samples.jms.JmsPutGet
 
