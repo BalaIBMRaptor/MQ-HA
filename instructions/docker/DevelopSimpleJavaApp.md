@@ -157,38 +157,38 @@ If you are using the VM provided it should already be configured correctly.
     TextMessage message = context.createTextMessage("Your lucky number today is " + uniqueNumber);
     ```
     
-Include the declarations for the JMS context, destination and the JMS text message:
+    Include the declarations for the JMS context, destination and the JMS text message:    
     ````
     import javax.jms.Destination;
     import javax.jms.JMSContext;
     import javax.jms.TextMessage;
-    ````
-    Lines 104-106 use the context to create the producer. The producer sends the message using the destination to put the message to the right queue:
+    ````      
+    Lines 104-106 use the context to create the producer. The producer sends the message using the destination to put the message to the right queue:        
     ````
     producer = context.createProducer();
     producer.send(destination, message);
     System.out.println("Sent message:\n" + message);
-    ````    
-    Include the declaration for the JMS producer:
+    ````          
+    Include the declaration for the JMS producer:        
 
     ````
     import javax.jms.JMSProducer;
-    ````
+    ````        
     
-    Lines 108-109 use the context to create the consumer. The consumer uses the destination to receive the message from the right queue.
+    Lines 108-109 use the context to create the consumer. The consumer uses the destination to receive the message from the right queue.         
     ````
     consumer = context.createConsumer(destination); // autoclosable
     String receivedMessage = consumer.receiveBody(String.class, 15000); // in ms or 15 seconds
-    ````
+    ````      
     
-    Include the declaration for the JMS consumer:
+    Include the declaration for the JMS consumer:       
     ````
     import javax.jms.JMSConsumer;
-    ````
-    The sample also has a couple of class utility methods for printing exceptions.
+    ````      
+    The sample also has a couple of class utility methods for printing exceptions.   
 
     Go ahead and include the declaration for the JMS exceptions:
-
+     
     import javax.jms.JMSException;
 
     You should now be able to compile your application and run it.
