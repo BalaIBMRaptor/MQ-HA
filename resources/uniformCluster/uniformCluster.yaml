@@ -1,0 +1,67 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: uniform-cluster-mqsc-0
+  namespace: default
+data:
+  uniformcluster.mqsc: |-
+    *##########################################################################
+    * Compulsory section for full repository
+    *##########################################################################
+    ALTER QMGR REPOS(UNICLUS)
+    define channel('UNICLUS_mqdeploy0') chltype(clusrcvr) trptype(tcp) conname('mq-deploy-ibm-mq-0.default.svc.cluster.local(1414)') cluster('UNICLUS') replace
+    define channel('UNICLUS_mqdeploy1') chltype(CLUSSDR) trptype(tcp) conname('mq-deploy-ibm-mq-1.default.svc.cluster.local(1414)') cluster('UNICLUS') replace
+    *
+    *##########################################################################
+    * Configuration for all queue managers
+    *##########################################################################
+    define QL(APPQ) maxdepth(99999999) replace
+    define QL(APPQ2) maxdepth(99999999) replace
+    define channel(CLIENTCHL) chltype(svrconn) trptype(tcp) mcauser('mqm') replace
+    ALTER QMGR CHLAUTH(DISABLED)
+    ALTER AUTHINFO('SYSTEM.DEFAULT.AUTHINFO.IDPWOS') AUTHTYPE(IDPWOS) ADOPTCTX(YES) CHCKCLNT(OPTIONAL) CHCKLOCL(OPTIONAL) AUTHENMD(OS)
+    REFRESH SECURITY TYPE(CONNAUTH)
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: uniform-cluster-mqsc-1
+  namespace: default
+data:
+  uniformcluster.mqsc: |-
+    *##########################################################################
+    * Compulsory section for full repository
+    *##########################################################################
+    ALTER QMGR REPOS(UNICLUS)
+    define channel('UNICLUS_mqdeploy1') chltype(clusrcvr) trptype(tcp) conname('mq-deploy-ibm-mq-1.default.svc.cluster.local(1414)') cluster('UNICLUS') replace
+    define channel('UNICLUS_mqdeploy0') chltype(CLUSSDR) trptype(tcp) conname('mq-deploy-ibm-mq-0.default.svc.cluster.local(1414)') cluster('UNICLUS') replace
+    *
+    *##########################################################################
+    * Configuration for all queue managers
+    *##########################################################################
+    define QL(APPQ) maxdepth(99999999) replace
+    define QL(APPQ2) maxdepth(99999999) replace
+    define channel(CLIENTCHL) chltype(svrconn) trptype(tcp) mcauser('mqm') replace
+    ALTER QMGR CHLAUTH(DISABLED)
+    ALTER AUTHINFO('SYSTEM.DEFAULT.AUTHINFO.IDPWOS') AUTHTYPE(IDPWOS) ADOPTCTX(YES) CHCKCLNT(OPTIONAL) CHCKLOCL(OPTIONAL) AUTHENMD(OS)
+    REFRESH SECURITY TYPE(CONNAUTH)
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: uniform-cluster-ini-0
+  namespace: default
+data:
+  uniformcluster.ini: |-
+    TuningParameters:
+       UniformClusterName=UNICLUS
+---
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: uniform-cluster-ini-1
+  namespace: default
+data:
+  uniformcluster.ini: |-
+    TuningParameters:
+       UniformClusterName=UNICLUS
