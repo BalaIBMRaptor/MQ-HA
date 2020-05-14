@@ -22,7 +22,7 @@ spec:
   host: clientchl1.chl.mq.ibm.com
   to:
     kind: Service
-    name: mq-deploy-ibm-mq-1a
+    name: mq-deploy-ibm-mq-1
   port:
     targetPort: 1414
   tls:
