@@ -9,8 +9,8 @@ data:
     * Compulsory section for full repository
     *##########################################################################
     ALTER QMGR REPOS(UNICLUS)
-    define channel('UNICLUS_mqdeploy0') chltype(clusrcvr) trptype(tcp) conname('mq-deploy-ibm-mq-0.default.svc.cluster.local(1414)') cluster('UNICLUS') replace
-    define channel('UNICLUS_mqdeploy1') chltype(CLUSSDR) trptype(tcp) conname('mq-deploy-ibm-mq-1.default.svc.cluster.local(1414)') cluster('UNICLUS') replace
+    define channel('UNICLUS_mqdeploy0') chltype(clusrcvr) trptype(tcp) conname('mq-deploy-ibm-mq-0.uniform-mq.svc.cluster.local(1414)') cluster('UNICLUS') replace
+    define channel('UNICLUS_mqdeploy1') chltype(CLUSSDR) trptype(tcp) conname('mq-deploy-ibm-mq-1.uniform-mq.svc.cluster.local(1414)') cluster('UNICLUS') replace
     *
     *##########################################################################
     * Configuration for all queue managers
@@ -33,8 +33,8 @@ data:
     * Compulsory section for full repository
     *##########################################################################
     ALTER QMGR REPOS(UNICLUS)
-    define channel('UNICLUS_mqdeploy1') chltype(clusrcvr) trptype(tcp) conname('mq-deploy-ibm-mq-1.default.svc.cluster.local(1414)') cluster('UNICLUS') replace
-    define channel('UNICLUS_mqdeploy0') chltype(CLUSSDR) trptype(tcp) conname('mq-deploy-ibm-mq-0.default.svc.cluster.local(1414)') cluster('UNICLUS') replace
+    define channel('UNICLUS_mqdeploy1') chltype(clusrcvr) trptype(tcp) conname('mq-deploy-ibm-mq-1.uniform-mq.svc.cluster.local(1414)') cluster('UNICLUS') replace
+    define channel('UNICLUS_mqdeploy0') chltype(CLUSSDR) trptype(tcp) conname('mq-deploy-ibm-mq-0.uniform-mq.svc.cluster.local(1414)') cluster('UNICLUS') replace
     *
     *##########################################################################
     * Configuration for all queue managers
