@@ -1,0 +1,30 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mq-traffic-uniform-cluster-0
+  namespace: uniform-mq
+spec:
+  host: clientchl0.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: mq-deploy-ibm-mq-0
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mq-traffic-uniform-cluster-1
+  namespace: uniform-mq
+spec:
+  host: clientchl1.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: mq-deploy-ibm-mq-1a
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
+
