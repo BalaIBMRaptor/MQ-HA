@@ -17,7 +17,7 @@ data:
     *##########################################################################
     define QL(APPQ) maxdepth(99999999) replace
     define QL(APPQ2) maxdepth(99999999) replace
-    define channel(CLIENTCHL) chltype(svrconn) trptype(tcp) mcauser('mqm') replace
+    define channel(CLIENTCHL0) chltype(svrconn) trptype(tcp) mcauser('mqm') replace
     ALTER QMGR CHLAUTH(DISABLED)
     ALTER AUTHINFO('SYSTEM.DEFAULT.AUTHINFO.IDPWOS') AUTHTYPE(IDPWOS) ADOPTCTX(YES) CHCKCLNT(OPTIONAL) CHCKLOCL(OPTIONAL) AUTHENMD(OS)
     REFRESH SECURITY TYPE(CONNAUTH)
@@ -41,7 +41,7 @@ data:
     *##########################################################################
     define QL(APPQ) maxdepth(99999999) replace
     define QL(APPQ2) maxdepth(99999999) replace
-    define channel(CLIENTCHL) chltype(svrconn) trptype(tcp) mcauser('mqm') replace
+    define channel(CLIENTCHL1) chltype(svrconn) trptype(tcp) mcauser('mqm') replace
     ALTER QMGR CHLAUTH(DISABLED)
     ALTER AUTHINFO('SYSTEM.DEFAULT.AUTHINFO.IDPWOS') AUTHTYPE(IDPWOS) ADOPTCTX(YES) CHCKCLNT(OPTIONAL) CHCKLOCL(OPTIONAL) AUTHENMD(OS)
     REFRESH SECURITY TYPE(CONNAUTH)
