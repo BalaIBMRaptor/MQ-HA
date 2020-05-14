@@ -9,6 +9,7 @@ This repository demonstrates how to get started with IBM MQ on the Cloud Pak for
 ## Advanced bolt-ons
 * [ADVANCED - Building a OpenShift Pipeline that automatically configures MQ LDAP configuration](instructions/MQBuildWithLDAPEnabled.md)
 * [ADVANCED - Loading MQSC configuration using a configMap](instructions/configMap.md)
+* [ADVANCED - Building a Uniform Cluster using CP4I 2020.1](instructions/uniformCluster/instructions.md)
 
 ## Learning the basics of IBM MQ using your own laptop
 * [Learning the basics of IBM MQ using your own laptop](instructions/docker/MQGettingStarted.md)
