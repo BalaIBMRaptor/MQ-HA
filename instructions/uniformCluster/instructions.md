@@ -97,7 +97,8 @@ This requires a Kubernetes secret to be created. You will need an Entitlement ke
 
 
 ### Providing external access
-
+Download https://github.ibm.com/CALLUMJ/MQonCP4I/raw/master/resources/uniformCluster/routes.yaml and run:      
+   ```oc create -f routes.yaml```
 
 ### Verifying the uniform cluster works
 
