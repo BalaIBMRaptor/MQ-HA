@@ -1,0 +1,91 @@
+{
+    "channel": 
+    [
+        {
+            "name": "CLIENTCHL0",
+            "clientConnection": 
+            {
+                "connection": 
+                [
+                    {
+                        "host": "9.11.221.16",
+                        "port": 443
+                    }
+                ],
+                "queueManager": "ANY_QM"
+            },
+            "connectionManagement":
+            {
+              "clientWeight": 1,
+              "affinity": "none"
+            },
+            "transmissionSecurity":
+            {
+              "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+            },
+            "type": "clientConnection"
+        },
+        {
+            "name": "CLIENTCHL1",
+            "clientConnection": 
+            {
+                "connection": 
+                [
+                    {
+                        "host": "9.11.221.16",
+                        "port": 443
+                    }
+                ],
+                "queueManager": "ANY_QM"
+            },
+            "connectionManagement":
+            {
+              "clientWeight": 1,
+              "affinity": "none"
+            },
+            "transmissionSecurity":
+            {
+              "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+            },
+            "type": "clientConnection"
+        },
+        {
+            "name": "CLIENTCHL0",
+            "clientConnection": 
+            {
+                "connection": 
+                [
+                    {
+                        "host": "9.11.221.16",
+                        "port": 443
+                    }
+                ],
+                "queueManager": "mqdeploy0"
+            },
+            "transmissionSecurity":
+            {
+              "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+            },
+            "type": "clientConnection"
+        },
+        {
+            "name": "CLIENTCHL1",
+            "clientConnection": 
+            {
+                "connection": 
+                [
+                    {
+                        "host": "9.11.221.16",
+                        "port": 443
+                    }
+                ],
+                "queueManager": "mqdeploy1"
+            },
+            "transmissionSecurity":
+            {
+              "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+            },
+            "type": "clientConnection"
+        }
+   ]
+}
