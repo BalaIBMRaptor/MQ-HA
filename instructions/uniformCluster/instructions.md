@@ -97,10 +97,66 @@ This requires a Kubernetes secret to be created. You will need an Entitlement ke
 
 
 ### Providing external access
-Download https://github.ibm.com/CALLUMJ/MQonCP4I/raw/master/resources/uniformCluster/routes.yaml and run:      
+1. To provide remote access to the uniform cluster OpenShift Routes need to be configured for each of the MQ instances. To avoid typos I've created a YAML file that should work as is: Download https://github.ibm.com/CALLUMJ/MQonCP4I/raw/master/resources/uniformCluster/routes.yaml and run:      
    ```oc create -f routes.yaml```
 
 ### Verifying the uniform cluster works
+1. To test the setup we will use a MQ sample called *amqsghac*. This will make a connection to a Queue Manager (which can be moved) and we will monitor the number of connections on each of the Queue Managers. All the material is stored [here](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/resources/uniformCluster/tests), download the content of the directory to a machine that includes the MQ samples. On my system this was stored in */home/callum/tests*
+1. There are a couple of environment related changes that are required:    
+   * showConns.sh: 
+      ```
+      #!/bin/bash
 
+      clear
+      green='\033[0;32m'
+      lgreen='\033[1;32m'
+      nc='\033[0m'
 
+      export MQCCDTURL='/home/callum/uniformCluster/tests/CCDT2.JSON'
+      export MQSSLKEYR='/home/callum/uniformCluster/tests/key'
+      ```
+      The paths for MQCCDTURL and MQSSLKEYR need to be updated. In my case I am now using */home/callum/tests* so this changed to:
+      ```
+      #!/bin/bash
 
+      clear
+      green='\033[0;32m'
+      lgreen='\033[1;32m'
+      nc='\033[0m'
+
+      export MQCCDTURL='/home/callum/tests/CCDT2.JSON'
+      export MQSSLKEYR='/home/callum/tests/key'
+      ```
+   * rClient.sh:
+      ```
+      #!/bin/bash
+
+      export MQCCDTURL='/home/callum/uniformCluster/tests/CCDT2.JSON'
+      export MQSSLKEYR='/home/callum/uniformCluster/tests/key'
+      ```
+      The paths for MQCCDTURL and MQSSLKEYR need to be updated. In my case I am now using */home/callum/tests* so this changed to:
+      ```
+      #!/bin/bash
+
+      export MQCCDTURL='/home/callum/tests/CCDT2.JSON'
+      export MQSSLKEYR='/home/callum/tests/key'
+      ```
+   * CCDT2.JSON:
+     This file reference the OpenShift Route hostname/IP address, currently it is defined as:
+     ```"host": "9.11.221.16"```
+     This needs to be customized for your environment, and four changes will be required.
+ 1. Now the changes have been completed, open three new terminal windows.
+ 1. In the first run ```./showConns.sh mqdeploy0``` if you receive the following error:
+    ```./showConns.sh: line 19: runmqsc: command not found```   
+    It means the MQ environment is not correctly set within the terminal and you need to run:     
+    ```. /opt/mqm/bin/setmqenv``` 
+    and resubmit the command. Initially you should see:
+    ```mqdeploy0 / amqsghac -- 0```
+1. Repeat the process in the second terminal but specify:
+   ```./showConns.sh mqdeploy1```
+1. In the final terminal window we will start the client applications that will connect to the Queue Managers, run:
+   ```./rClient.sh 10 ```    
+   To start 10 connections, initially you will see the system being unbalanced:      
+   ![Unbalanced](img/unbalanced.png)  
+   And then very quickly rebalanced:      
+   ![Balanced](img/balanced.png)  
