@@ -1,0 +1,28 @@
+{
+  "channel":
+  [
+    {
+      "general":
+      {
+        "description": "MQ Non Persistent channel details"
+      },
+      "name": "QMLDAP_SVRCONN",
+      "clientConnection":
+      {
+        "connection":
+        [
+          {
+            "host": "mq-ldap-ibm-mq-qm-mq.apps.web-mq-5.purple-chesterfield.com",
+            "port": 443
+          }
+        ],
+        "queueManager": "mqldap"
+      },
+      "transmissionSecurity":
+      {
+        "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+      },
+	  "type": "clientConnection"
+    }
+  ]
+}

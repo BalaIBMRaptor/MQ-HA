@@ -1,0 +1,43 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: mqace
+  namespace: mq
+  labels:
+    name: docker-build
+spec:
+  source:
+    dockerfile: |-
+      FROM cp.icr.io/cp/icp4i/mq/ibm-mqadvanced-server-integration:9.1.5.0-r1-amd64
+      RUN echo $'DEFINE QLOCAL('AccidentIn') \n\
+      DEFINE QLOCAL('AccidentOut') \n\
+      DEFINE QLOCAL('BumperIn') \n\
+      DEFINE QLOCAL('BumperOut') \n\
+      DEFINE QLOCAL('CrumpledIn') \n\
+      DEFINE QLOCAL('CrumpledOut') \n\
+      DEFINE CHANNEL(ACE_SVRCONN) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCIPH("ECDHE_RSA_AES_128_CBC_SHA256") SSLCAUTH(OPTIONAL)  \n\
+      SET CHLAUTH(ACE_SVRCONN) TYPE(BLOCKUSER) ACTION(REPLACE) USERLIST("nobody") \n\
+      DEFINE AUTHINFO(USE.LDAP) AUTHTYPE(IDPWLDAP) CONNAME("ldap-service.ldap(389)") LDAPUSER("cn=admin,dc=ibm,dc=com") LDAPPWD("admin") SECCOMM(NO)       USRFIELD("uid") SHORTUSR("uid") BASEDNU("ou=people,dc=ibm,dc=com") AUTHORMD(SEARCHGRP) BASEDNG("ou=groups,dc=ibm,dc=com") GRPFIELD("cn") CLASSGRP("groupOfUniqueNames") FINDGRP("uniqueMember")\n\
+      ALTER QMGR CONNAUTH(''USE.LDAP'')\n\
+      REFRESH SECURITY\n\
+      SET AUTHREC OBJTYPE(QMGR) GROUP("apps") AUTHADD(ALL)\n\
+      SET AUTHREC PROFILE("AccidentIn") OBJTYPE(QUEUE) GROUP("apps") AUTHADD(ALL)\n\
+      SET AUTHREC PROFILE("AccidentOut") OBJTYPE(QUEUE) GROUP("apps") AUTHADD(ALL)\n\
+      SET AUTHREC PROFILE("BumperIn") OBJTYPE(QUEUE) GROUP("apps") AUTHADD(ALL)\n\
+      SET AUTHREC PROFILE("BumperOut") OBJTYPE(QUEUE) GROUP("apps") AUTHADD(ALL)\n\
+      SET AUTHREC PROFILE("CrumpledIn") OBJTYPE(QUEUE) GROUP("apps") AUTHADD(ALL)\n\
+      SET AUTHREC PROFILE("CrumpledOut") OBJTYPE(QUEUE) GROUP("apps") AUTHADD(ALL)\n\
+      REFRESH SECURITY' > /etc/mqm/aceldap.mqsc
+      RUN cat /etc/mqm/aceldap.mqsc
+  strategy:
+    type: Docker
+    dockerStrategy:
+      from:
+        kind: "DockerImage"
+        name: "cp.icr.io/cp/icp4i/mq/ibm-mqadvanced-server-integration:9.1.4.0-r1-amd64"
+      pullSecret:
+        name: entitled-registry
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'mqace:latest-amd64'

@@ -1,0 +1,15 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: mq-traffic-mq-ace-ibm-mq-qm
+  namespace: mq
+spec:
+  host: ace5f-svrconn.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: mq-ace-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
+  wildcardPolicy: None
