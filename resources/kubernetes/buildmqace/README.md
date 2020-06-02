@@ -24,8 +24,7 @@ All the configuration required can be found [here](https://github.ibm.com/CALLUM
 2. Run ```installbuild.sh```
 
 ### Deploying a MQ Queue Manager using the Helm command
-1. Download the latest MQ CP4I Helm Chart: ```git clone -b ga-6.0.X git@github.ibm.com:mq-cloudpak/ibm-mqadvanced-server-integration-prod.git
-```
+1. Download the latest MQ CP4I Helm Chart: ```git clone -b ga-6.0.X git@github.ibm.com:mq-cloudpak/ibm-mqadvanced-server-integration-prod.git```
 1. Change directory to ``cd ibm-mqadvanced-server-integration-prod/stable``
 1. Run the following command: 
 ```helm install repair ibm-mqadvanced-server-integration-prod --namespace mq --set license=accept --set pki.keys[0].name=default,pki.keys[0].secret.secretName=mqcert,pki.keys[0].secret.items[0]=tls.key,pki.keys[0].secret.items[1]=tls.crt --set image.repository="image-registry.openshift-image-registry.svc:5000/mq/mqace" --set image.tag="latest" --set log.debug=false --set tls.generate=false --set tls.hostname=somewhere --set selectedCluster.label=local-cluster --set selectedCluster.value=local-cluster --set selectedCluster.ip="" --set selectedCluster.namespace=local-cluster --set odTracingConfig.enabled=false```
