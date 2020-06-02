@@ -24,63 +24,64 @@ All the configuration required can be found [here](https://github.ibm.com/CALLUM
 2. Run ```installbuild.sh```
 
 ### Deploying a MQ Queue Manager using the Helm command
-1. Download the latest MQ CP4I Helm Chart: ```git clone -b ga-6.0.X git@github.ibm.com:mq-cloudpak/ibm-mqadvanced-server-integration-prod.git```
-1. Change directory to ``cd ibm-mqadvanced-server-integration-prod/stable``
-1. Run the following command: 
-```helm install repair ibm-mqadvanced-server-integration-prod --namespace mq --set license=accept --set pki.keys[0].name=default,pki.keys[0].secret.secretName=mqcert,pki.keys[0].secret.items[0]=tls.key,pki.keys[0].secret.items[1]=tls.crt --set image.repository="image-registry.openshift-image-registry.svc:5000/mq/mqace" --set image.tag="latest" --set log.debug=false --set tls.generate=false --set tls.hostname=somewhere --set selectedCluster.label=local-cluster --set selectedCluster.value=local-cluster --set selectedCluster.ip="" --set selectedCluster.namespace=local-cluster --set odTracingConfig.enabled=false```
+1. Download the latest MQ CP4I Helm Chart:     
+   ```git clone -b ga-6.0.X git@github.ibm.com:mq-cloudpak/ibm-mqadvanced-server-integration-prod.git```
+1. Change directory to      
+   ``cd ibm-mqadvanced-server-integration-prod/stable``
+1. Run the following command:     
+   ```helm install repair ibm-mqadvanced-server-integration-prod --namespace mq --set license=accept --set pki.keys[0].name=default,pki.keys[0].secret.secretName=mqcert,pki.keys[0].secret.items[0]=tls.key,pki.keys[0].secret.items[1]=tls.crt --set image.repository="image-registry.openshift-image-registry.svc:5000/mq/mqace" --set image.tag="latest" --set log.debug=false --set tls.generate=false --set tls.hostname=somewhere --set selectedCluster.label=local-cluster --set selectedCluster.value=local-cluster --set selectedCluster.ip="" --set selectedCluster.namespace=local-cluster --set odTracingConfig.enabled=false```
 
 ### Testing the solution
 To verify the setup for ACE I've used the MQ sample to verify the deployment, 
 these instructions assume you have the MQ samples installed:
-1. Open a command prompt and set the following (for Windows): 
-```
-SET MQCCDTURL=file:///C:/temp/ccdtACE.json
-SET MQSSLKEYR=C:\temp\key
-SET MQSAMP_USER_ID=mqapp
-```
-1. Change directories to c:\temp and create a new file called ccdtACE.json:     
-```
-cd c:\temp
-notepad ccdtACE.json
-```
-1. Copy the following into the new file and customize the hostname:    
-```
-{
-  "channel":
-  [
-    {
-      "general":
-      {
-        "description": "MQ ACE channel details"
-      },
-      "name": "ACE_SVRCONN",
-      "clientConnection":
-      {
-        "connection":
-        [
-          {
-            "host": "repair-ibm-mq-web-mq.dan-agile-demo-1-ec111ed5d7db435e1c5eeeb4400d693f-0000.eu-gb.containers.appdomain.cloud",
-            "port": 443
-          }
-        ],
-        "queueManager": "repair"
-      },
-      "transmissionSecurity":
-      {
-        "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
-      },
-	  "type": "clientConnection"
-    }
-  ]
-}
-
-```
+1. Open a command prompt and set the following (for Windows):      
+   ```
+   SET MQCCDTURL=file:///C:/temp/ccdtACE.json
+   SET MQSSLKEYR=C:\temp\key
+   SET MQSAMP_USER_ID=mqapp
+   ```
+1. Change directories to c:\temp and create a new file called ccdtACE.json:         
+   ```
+   cd c:\temp
+   notepad ccdtACE.json
+   ```
+1. Copy the following into the new file and customize the hostname:       
+   ```
+   {
+     "channel":
+     [
+       {
+         "general":
+         {
+           "description": "MQ ACE channel details"
+         },
+         "name": "ACE_SVRCONN",
+         "clientConnection":
+         {
+           "connection":
+           [
+             {
+               "host": "repair-ibm-mq-web-mq.dan-agile-demo-1-ec111ed5d7db435e1c5eeeb4400d693f-0000.eu-gb.containers.appdomain.cloud",
+               "port": 443
+             }
+           ],
+           "queueManager": "repair"
+         },
+         "transmissionSecurity":
+         {
+           "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+         },
+   	  "type": "clientConnection"
+       }
+     ]
+   }
+   ```
 1. Download the key* files from [here](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/resources/tls) and save to c:\temp
-1. Start the sample PUT application by running:   
+1. Start the sample PUT application by running:     
    ```
    amqsputc AccidentIn repair
    ```
-   This should output the following (the password is *mqapp*:
+   This should output the following (the password is *mqapp*):    
    ```
    C:\temp>amqsputc AccidentIn repair
    Sample AMQSPUT0 start
