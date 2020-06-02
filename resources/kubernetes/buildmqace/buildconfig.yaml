@@ -36,7 +36,7 @@ spec:
         kind: "DockerImage"
         name: "cp.icr.io/cp/icp4i/mq/ibm-mqadvanced-server-integration:9.1.4.0-r1-amd64"
       pullSecret:
-        name: entitled-registry
+        name: ibm-entitlement-key
   output:
     to:
       kind: ImageStreamTag
