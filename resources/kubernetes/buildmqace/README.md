@@ -3,8 +3,6 @@ This lab will guide you through how to create a MQ container layer into the prov
 This layer will include configuration for LDAP and we will use the MQ samples to verify the setup.
 
 ## Pre-requisites
-1. An LDAP server is required for this LDAP and I've created another GitHub repository for the setup of the LDAP environment. 
-This uses OpenLDAP and is almost completely automated, please consult [here](https://github.ibm.com/CALLUMJ/OpenLDAP) for details.
 1. You have installed the OpenShift command line and logged into the target OpenShift environment. If you are unaware of how to do this please consult [here](https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html)
 1. You have already created a namespace within OpenShift called *mq* and configured for a MQ deployment
 1. There is already an entitled registry secret called ibm-entitled-key
@@ -16,7 +14,7 @@ These instructions will be seperated into three sections:
 1. Deploying a MQ Queue Manager using the helm command
 1. Testing the solution
 
-### Building the MQ pipeline that generates a LDAP enabled MQ image with messaging resources for ACE
+### Building the MQ pipeline that generates an MQ image with messaging resources for ACE
 All the configuration required can be found [here](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/resources/kubernetes/buildldapmq) download locally.
 1. To install simply download the repository.     
 2. Change directory to <github download>/MQonCP4I/resources/kubernetes/buildmqace
@@ -38,7 +36,6 @@ these instructions assume you have the MQ samples installed:
    ```
    SET MQCCDTURL=file:///C:/temp/ccdtACE.json
    SET MQSSLKEYR=C:\temp\key
-   SET MQSAMP_USER_ID=mqapp
    ```
 1. Change directories to c:\temp and create a new file called ccdtACE.json:         
    ```
@@ -81,13 +78,12 @@ these instructions assume you have the MQ samples installed:
    ```
    amqsputc AccidentIn repair
    ```
-   This should output the following (the password is *mqapp*):    
+   This should output the following:    
    ```
    C:\temp>amqsputc AccidentIn repair
    Sample AMQSPUT0 start
-   Enter password: *****
    target queue is Q1
-   Hello World - LDAP Working
+   Hello World
 
    Sample AMQSPUT0 end
    ```
@@ -95,8 +91,7 @@ these instructions assume you have the MQ samples installed:
    ```
    C:\temp>amqsgetc AccidentIn repair
    Sample AMQSGET0 start
-   Enter password: *****
-   message <Hello World - LDAP Working>
+   message <Hello World>
    no more messages
    Sample AMQSGET0 end
    ```
