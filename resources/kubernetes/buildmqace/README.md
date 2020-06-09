@@ -1,6 +1,6 @@
-# Building an MQ Build in OpenShift with LDAP automatically configured and config for ACE demonstration
+# Building an MQ Build in OpenShift for ACE demonstration
 This lab will guide you through how to create a MQ container layer into the provided CP4I MQ Certified Container. 
-This layer will include configuration for LDAP and we will use the MQ samples to verify the setup.
+
 
 ## Pre-requisites
 1. You have installed the OpenShift command line and logged into the target OpenShift environment. If you are unaware of how to do this please consult [here](https://docs.openshift.com/container-platform/4.2/cli_reference/openshift_cli/getting-started-cli.html)
