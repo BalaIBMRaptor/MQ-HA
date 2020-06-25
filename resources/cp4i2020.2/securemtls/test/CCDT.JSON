@@ -1,0 +1,25 @@
+{
+    "channel": 
+    [
+        {
+            "name": "MTLSQMCHL",
+            "clientConnection": 
+            {
+                "connection": 
+                [
+                    {
+                        "host": "mtlsqm-ibm-mq-web-mq.apps.callumj.icp4i.com",
+                        "port": 443
+                    }
+                ],
+                "queueManager": "mtlsqm"
+            },
+            "transmissionSecurity":
+            {
+              "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256",
+              "certificateLabel": "1"
+            },
+            "type": "clientConnection"
+        }
+   ]
+}

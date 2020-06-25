@@ -1,0 +1,59 @@
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mqcert
+  namespace: $TARGET_NAMESPACE
+data:
+  tls.key: $QM_KEY
+  tls.crt: $QM_CERT
+  app.crt: $APP_CERT
+type: Opaque
+---
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: mtlsqm
+spec:
+  version: 9.1.5.0-r2
+  license:
+    accept: true
+    license: L-RJON-BN7PN3
+    use: "NonProduction"
+  pki:
+    keys:
+    - name: default
+      secret:
+        secretName: mqcert
+        items:
+          - tls.key
+          - tls.crt
+    trust:
+    - name: app
+      secret:
+        secretName: mqcert
+        items:
+          - app.crt
+  template:
+    pod:
+      containers:
+       - name: qmgr
+         env:
+         - name: MQS_PERMIT_UNKNOWN_ID
+           value: "true"
+  web:
+    enabled: true
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mq-mtls-traffic-operator-test
+  namespace: $TARGET_NAMESPACE
+spec:
+  host: mtlsqmchl.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: mtlsqm-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
