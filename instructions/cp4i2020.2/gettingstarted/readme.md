@@ -52,19 +52,54 @@ The Cloud Pak for Integration is deployed using operators and to make these avai
 
 
 # Installing the Cloud Pak for Integration 
-I've decided to install the entire Cloud Pak for Integration instead of focusing on a cut-down version for IBM MQ.
-Different approaches exist, but this appears the most likely. I've decided to install in a particular namespace to provide isolation.
+IBM Cloud Pak for Integration can be installed via a umbrella operator called the *Cloud Pak for Integration* however there is a known
+issue at the moment documented [here](https://www.ibm.com/support/pages/node/6233896). 
+I have therefore installed only the components required for CP4I and MQ.
 
 1. Within the OpenShift Web Console select Home --> Projects, and click on *Create Project*:      
    ![Select CP4I](img/createproject.png)     
 1. Fill in *cp4i* as the project name, and click *Create*:       
    ![Select CP4I](img/createcp4iproject.png)
-1. Navigate to Operators --> Operator Hub, search for *Cloud Pak* and select IBM Cloud Pak for Integration:      
+1. The images for CP4I are located From a terminal window where you have configured the OpenShift command line utility *oc*, run the following command:     
+   ```
+   oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1NzkyNzYwNTcsImp0aSI6ImRhM2FhYTI1NTUwNTRkYjQ4NmFlNjI1MzNjZjYzNzdhIn0.ovszX6frMf8J9bUdQ_iorF-vdh0TP5y-SsRWDpXqfg0 --docker-email=callumj@uk.ibm.com -n cp4i
+   ```
+1. Navigate to Operators --> Operator Hub, search for *Cloud Pak*, select *IBM Cloud Pak for Integration Platform Navigator*, and click subscribe:      
    ![Select CP4I](img/installcp4i.png)      
 1. Click *Install*
 1. Select the *A specific namespace on the cluster* and change the namespace to *cp4i*:      
    ![Select CP4I](img/installcp4ioperator.png)    
-1. The installation of the operator will take several minutes and while this is occuring the status may appear to be stuck in *UpgradePending*:      
-   ![Select CP4I](img/upgradepending.png)    
+1. This will install three operators within the cp4i namespace and once these are installed (a couple of minutes) it should look like the following:       
+   ![Select CP4I](img/cp4iinstalledoperators.png)    
+1. The IBM MQ operator now needs to be installed, navigator to  Operators --> Operator Hub, search for *IBM MQ*:    
+   ![Select CP4I](img/mqoperatorsearch.png)       
+1. Click *Install*     
+1. Select the *A specific namespace on the cluster*, change the namespace to *cp4i*, and click subscribe:      
+   ![Install MQ Operator](img/installmqoperator.png)      
+1. An instance of the Platform Navigator needs to be deployed using the Platform Navigator operator, select *IBM Clould Pak for Integration Platform Navigator*:       
+   ![Select IBM Clould Pak for Integration Platform Navigator](img/selectplatformoperator.png)      
+1. Select the *Platform Navigator* tab and click on *Create PlatformNavigator*:      
+   ![Create IBM Clould Pak for Integration Platform Navigator](img/createplatformnavigator.png)     
+1. In the YAML editor change the *accept: false* to *true* and click *Create*:   
+   ![Create IBM Clould Pak for Integration Platform Navigator](img/acceptlicensecp4i.png)     
+1. The platform navigator will then we deployed and the status changes to *Condition: Ready* once it is available (this can take 15 minutes or so as IBM Common Services needs to be installed). At this stage you can click into the entry, open the Platform Navigator UI by clicking on the link:       
+   ![View the IBM Clould Pak for Integration Platform Navigator](img/viewplatformurl.png)   
+1. This will open the Platform Navigator and request you to enter a username and password, the default admin password can be found by running the following: ```oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 -d```:     
+   ![Login to the IBM Clould Pak for Integration Platform Navigator](img/loginincp4i.png)      
 
 
+# Deploying IBM MQ for internal consumers
+1. Within the Cloud Pak for Integration Platform Navigator click on Runtimes and Instances, and select Create Instance:     
+   ![Create instance](img/createinstance.png)      
+1. Select the MQ Queue Manager tile:    
+   ![Create MQ instance](img/createMQ.png)    
+1. Select the *Quick start* tile and click *Next*
+1. Accept the license and and click *Create* to deploy a new Queue Manager:     
+   ![Accept License](img/acceptLicense.png)
+1. You will be returned to the Runtime and Instances list, MQ will take a few seconds to deploy and the status will change to *Ready*. You may need to refresh the status by using the table refresh button:     
+   ![MQ Ready](img/mqready.png)
+1. Select the newly created entry and you will be redirected to the MQ Console:      
+   ![MQ Ready](img/MQConsole.png)
+1. Click on the manage button to view the details of the Queue Manager:     
+   ![MQ Ready](img/managetab.png)      
+   
