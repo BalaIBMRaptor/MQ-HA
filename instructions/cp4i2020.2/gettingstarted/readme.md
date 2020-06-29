@@ -101,5 +101,45 @@ I have therefore installed only the components required for CP4I and MQ.
 1. Select the newly created entry and you will be redirected to the MQ Console:      
    ![MQ Ready](img/MQConsole.png)
 1. Click on the manage button to view the details of the Queue Manager:     
-   ![MQ Ready](img/managetab.png)      
+   ![MQ Ready](img/managetab.png) 
+1. We will test MQ by sending a message to a queue, for this a new queue will be created, click on *Create +*:    
+   ![Create Queue](img/createqueue.png)     
+1. Select the *Local* queue type:      
+   ![Select local](img/selectlocal.png)
+1. Fill in *app1* as the Queue Name and click *Create*:     
+   ![Define queue](img/app1queue.png)
+1. A MQ channel needs to be defined for communication into MQ, select the *Communication* tab, *App channel* section and click *Create +*:       
+   ![Create channel](img/createchannel.png)     
+1. Click *Next*     
+1. Enter *QUICKSTART* as the channel name (as this will match the Queue Manager), and click *Create*:     
+   ![Create channel2](img/createchannel2.png)
+1. By default MQ is secure and will block all communication without explicit configuration. 
+We will allow all communication for the newly created channel. Click on *Configuration* in the top right:      
+   ![Configure Security](img/configuresecrurity.png)        
+1. Select the *Security* tab, *Channel authentication* section and click *Create +*:       
+   ![Select Channel Auth](img/channelauthdisplay.png)      
+1. We will create a channel auth record that blocks nobody and allows everyone. Select *Block* from the pull down, and the *Final assigned user ID* tile:      
+   ![Block type](img/blocktype.png)
+1. Enter the following value and click *Create*:     
+   * Channel name: *QUICKSTART*
+   * User list: nobody       
+   ![Define channel auth](img/definechannel.png)
+   ![Channel Auth defined](img/channelauthcreated.png)
    
+# Testing MQ
+MQ has been deployed within the Cloud Pak for Integration to other containers deployed within the same Cluster. This deployment is NOT accessable externally. Depending on your scenario you can connect ACE / API Connect / Event Streams etc to MQ using the deployed service. This acts as an entry point into MQ within the Kubernetes Cluster. Assuming you used the defaults within the deployment the hostname will be *quickstart-cp4i-ibm-mq*. To verify the installation we will use an MQ client sample within the deployment.         
+1. Return to the OpenShift Console, navigate to Workload --> Pods and type *quicks* in the search bar:      
+   ![Search Pods](img/searchpods.png) 
+   And select the *quickstart-cp4i-ibm0mq-0* entry.
+1. Change to the terminal tab which will automatically log you into the Queue Manager container:      
+   ![Open Terminal](img/openterminal.png)     
+1. Run the following commands to send a message to app1queue:     
+   export  MQSERVER='QUICKSTART/TCP/quickstart-cp4i-ibm-mq(1414)' 
+   /opt/mqm/samp/bin/amqsputc app1 QUICKSTART
+   ![Open Terminal](img/messagesent.png)
+1. Return to the MQ Console and navigate back to the queue manager view by clicking on *Back to Queue Manager*:      
+   ![Back to Queue Manager](img/backtoqueuemanager.png)      
+1. Select the app1 queue:      
+   ![Select app1](img/selectapp1.png)      
+1. You will then see the message sent:      
+   ![View message](img/viewmessage.png)
