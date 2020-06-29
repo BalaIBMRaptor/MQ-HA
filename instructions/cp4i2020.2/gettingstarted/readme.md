@@ -49,3 +49,22 @@ The Cloud Pak for Integration is deployed using operators and to make these avai
          interval: 45m
    ```     
    ![Add to OpenShift](img/ibmcatalogimport.png)
+
+
+# Installing the Cloud Pak for Integration 
+I've decided to install the entire Cloud Pak for Integration instead of focusing on a cut-down version for IBM MQ.
+Different approaches exist, but this appears the most likely. I've decided to install in a particular namespace to provide isolation.
+
+1. Within the OpenShift Web Console select Home --> Projects, and click on *Create Project*:      
+   ![Select CP4I](img/createproject.png)     
+1. Fill in *cp4i* as the project name, and click *Create*:       
+   ![Select CP4I](img/createcp4iproject.png)
+1. Navigate to Operators --> Operator Hub, search for *Cloud Pak* and select IBM Cloud Pak for Integration:      
+   ![Select CP4I](img/installcp4i.png)      
+1. Click *Install*
+1. Select the *A specific namespace on the cluster* and change the namespace to *cp4i*:      
+   ![Select CP4I](img/installcp4ioperator.png)    
+1. The installation of the operator will take several minutes and while this is occuring the status may appear to be stuck in *UpgradePending*:      
+   ![Select CP4I](img/upgradepending.png)    
+
+
