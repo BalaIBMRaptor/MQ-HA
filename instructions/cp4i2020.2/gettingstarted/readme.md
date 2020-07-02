@@ -26,8 +26,7 @@ Therefore these need to be added to the Operator catalog.
       updateStrategy:
         registryPoll:
           interval: 45m
-    ```
-    ![Add to OpenShift](img/ibmcatalogimport2.png)      
+    ```   
 
 The Cloud Pak for Integration is deployed using operators and to make these available within your environment you need to install the catalog. 
 1. Click the plus icon, in the top right:    
@@ -62,7 +61,7 @@ I have therefore installed only the components required for CP4I and MQ.
    ![Select CP4I](img/createcp4iproject.png)
 1. The images for CP4I are located From a terminal window where you have configured the OpenShift command line utility *oc*, run the following command:     
    ```
-   oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password=eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1NzkyNzYwNTcsImp0aSI6ImRhM2FhYTI1NTUwNTRkYjQ4NmFlNjI1MzNjZjYzNzdhIn0.ovszX6frMf8J9bUdQ_iorF-vdh0TP5y-SsRWDpXqfg0 --docker-email=callumj@uk.ibm.com -n cp4i
+   oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password=<YOUR ENTITLEMENT_KEY> --docker-email=callumj@uk.ibm.com -n cp4i
    ```
 1. Navigate to Operators --> Operator Hub, search for *Cloud Pak*, select *IBM Cloud Pak for Integration Platform Navigator*, and click subscribe:      
    ![Select CP4I](img/installcp4i.png)      
