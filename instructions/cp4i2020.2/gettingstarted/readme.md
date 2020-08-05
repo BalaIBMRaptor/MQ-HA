@@ -4,7 +4,7 @@ These instructions document how to setup MQ within Cloud Pak for Integration whi
 The instructions have been created using a fresh OpenShift environment deployed on AWS however the process should be similar on other environments.
 
 # Pre-requisites
-You have installed the OpenShift command line utility *oc*. If you have not, following these [instructions](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html).
+You have installed the OpenShift command line utility *oc*. If you have not, follow these [instructions](https://docs.openshift.com/container-platform/4.4/cli_reference/openshift_cli/getting-started-cli.html).
 
 # Installing the IBM Common Services and IBM Operator Catalog
 The Cloud Pak for Integration uses IBM Common Services for capabilities such as single sign on and metering. 
