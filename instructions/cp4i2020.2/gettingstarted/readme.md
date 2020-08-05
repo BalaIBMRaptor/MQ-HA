@@ -59,7 +59,8 @@ I have therefore installed only the components required for CP4I and MQ.
    ![Select CP4I](img/createproject.png)     
 1. Fill in *cp4i* as the project name, and click *Create*:       
    ![Select CP4I](img/createcp4iproject.png)
-1. The images for CP4I are located from a terminal window where you have configured the OpenShift command line utility *oc*, run the following command:     
+   
+1. The images for CP4I are located in the IBM Entitled Registry. To access these, you will need to configure an API Key within the OpenShift Environment. This can be retrieved from the IBM website here: https://myibm.ibm.com/products-services/containerlibrary. In the Entitlement keys section, select Copy key to copy the entitlement key to the clipboard. This key needs to be associated with the OpenShift environment, to do this open a terminal window where you have configured the OpenShift command line utility *oc*, run the following command:     
    ```
    oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password=<YOUR ENTITLEMENT_KEY> --docker-email=callumj@uk.ibm.com -n cp4i
    ```
@@ -119,12 +120,12 @@ We will allow all communication for the newly created channel. Click on *Configu
    ![Select Channel Auth](img/channelauthdisplay.png)      
 1. We will create a channel auth record that blocks nobody and allows everyone. Select *Block* from the pull down, and the *Final assigned user ID* tile:      
    ![Block type](img/blocktype.png)
-1. Enter the following value and click *Create*:     
+1. Enter the following value:     
    * Channel name: *QUICKSTART*
    * User list: nobody       
+1. Click on the *plus (+) sign* next to the User list text field and then click on *Create +*:     
    ![Define channel auth](img/definechannel.png)
    ![Channel Auth defined](img/channelauthcreated.png)
-1. Then click on the *plus (+) sign* next to the User list text field and then click on *Create +*:     
    
 # Testing MQ
 MQ has been deployed within the Cloud Pak for Integration to other containers deployed within the same Cluster. This deployment is NOT accessible externally. Depending on your scenario you can connect ACE / API Connect / Event Streams etc to MQ using the deployed service. This acts as an entry point into MQ within the Kubernetes Cluster. Assuming you used the defaults within the deployment the hostname will be *quickstart-cp4i-ibm-mq*. To verify the installation we will use an MQ client sample within the deployment.         
