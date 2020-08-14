@@ -9,7 +9,7 @@ You have installed the OpenShift command line utility *oc*. If you have not, fol
 # Installing the IBM Common Services and IBM Operator Catalog
 The Cloud Pak for Integration uses IBM Common Services for capabilities such as single sign on and metering. 
 Therefore these need to be added to the Operator catalog. 
-1. Log into the OpenShift environment and click the plus icon, in the top right:    
+1. Log into the OpenShift environment and click on the plus icon, in the top right:    
    ![Add to OpenShift](img/plusopenshift.png)     
 1. Copy the following into the YAML editor and click *Create*:   
     ```
@@ -51,7 +51,7 @@ The Cloud Pak for Integration is deployed using operators and to make these avai
 
 
 # Installing the Cloud Pak for Integration 
-IBM Cloud Pak for Integration can be installed via a umbrella operator called the *Cloud Pak for Integration* however there is a known
+IBM Cloud Pak for Integration can be installed via an umbrella operator called the *Cloud Pak for Integration*, however, there is a known
 issue at the moment documented [here](https://www.ibm.com/support/pages/node/6233896). 
 I have therefore installed only the components required for CP4I and MQ.
 
@@ -59,14 +59,15 @@ I have therefore installed only the components required for CP4I and MQ.
    ![Select CP4I](img/createproject.png)     
 1. Fill in *cp4i* as the project name, and click *Create*:       
    ![Select CP4I](img/createcp4iproject.png)
-1. The images for CP4I are located From a terminal window where you have configured the OpenShift command line utility *oc*, run the following command:     
+   
+1. The images for CP4I are located in the IBM Entitled Registry. To access these, you will need to configure an API Key within the OpenShift Environment. This can be retrieved from the IBM website here: https://myibm.ibm.com/products-services/containerlibrary. In the Entitlement keys section, select Copy key to copy the entitlement key to the clipboard. This key needs to be associated with the OpenShift environment, to do this open a terminal window where you have configured the OpenShift command line utility *oc*, run the following command:     
    ```
    oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password=<YOUR ENTITLEMENT_KEY> --docker-email=callumj@uk.ibm.com -n cp4i
    ```
-1. Navigate to Operators --> Operator Hub, search for *Cloud Pak*, select *IBM Cloud Pak for Integration Platform Navigator*, and click subscribe:      
+1. Navigate to Operators --> Operator Hub, search for *Cloud Pak*, select *IBM Cloud Pak for Integration Platform Navigator*:      
    ![Select CP4I](img/installcp4i.png)      
 1. Click *Install*
-1. Select the *A specific namespace on the cluster* and change the namespace to *cp4i*:      
+1. Select the *A specific namespace on the cluster* and change the namespace to *cp4i* and then click on subscribe:      
    ![Select CP4I](img/installcp4ioperator.png)    
 1. This will install three operators within the cp4i namespace and once these are installed (a couple of minutes) it should look like the following:       
    ![Select CP4I](img/cp4iinstalledoperators.png)    
@@ -75,20 +76,20 @@ I have therefore installed only the components required for CP4I and MQ.
 1. Click *Install*     
 1. Select the *A specific namespace on the cluster*, change the namespace to *cp4i*, and click subscribe:      
    ![Install MQ Operator](img/installmqoperator.png)      
-1. An instance of the Platform Navigator needs to be deployed using the Platform Navigator operator, select *IBM Clould Pak for Integration Platform Navigator*:       
+1. An instance of the Platform Navigator needs to be deployed using the Platform Navigator operator, select *IBM Cloud Pak for Integration Platform Navigator*:       
    ![Select IBM Clould Pak for Integration Platform Navigator](img/selectplatformoperator.png)      
 1. Select the *Platform Navigator* tab and click on *Create PlatformNavigator*:      
    ![Create IBM Clould Pak for Integration Platform Navigator](img/createplatformnavigator.png)     
 1. In the YAML editor change the *accept: false* to *true* and click *Create*:   
    ![Create IBM Clould Pak for Integration Platform Navigator](img/acceptlicensecp4i.png)     
-1. The platform navigator will then we deployed and the status changes to *Condition: Ready* once it is available (this can take 15 minutes or so as IBM Common Services needs to be installed). At this stage you can click into the entry, open the Platform Navigator UI by clicking on the link:       
+1. The platform navigator will then be deployed and the status changes to *Condition: Ready* once it is available (this can take 15 minutes or so as IBM Common Services needs to be installed). At this stage, you can click into the entry, open the Platform Navigator UI by clicking on the entry's hyperlink:       
    ![View the IBM Clould Pak for Integration Platform Navigator](img/viewplatformurl.png)   
 1. This will open the Platform Navigator and request you to enter a username and password, the default admin password can be found by running the following: ```oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 -d```:     
    ![Login to the IBM Clould Pak for Integration Platform Navigator](img/loginincp4i.png)      
 
 
 # Deploying IBM MQ for internal consumers
-1. Within the Cloud Pak for Integration Platform Navigator click on Runtimes and Instances, and select Create Instance:     
+1. Within the Cloud Pak for Integration Platform Navigator click on Runtimes, and select Create Instance:     
    ![Create instance](img/createinstance.png)      
 1. Select the MQ Queue Manager tile:    
    ![Create MQ instance](img/createMQ.png)    
@@ -99,7 +100,7 @@ I have therefore installed only the components required for CP4I and MQ.
    ![MQ Ready](img/mqready.png)
 1. Select the newly created entry and you will be redirected to the MQ Console:      
    ![MQ Ready](img/MQConsole.png)
-1. Click on the manage button to view the details of the Queue Manager:     
+1. Click on the manage button from the left menu to view the details of the Queue Manager:     
    ![MQ Ready](img/managetab.png) 
 1. We will test MQ by sending a message to a queue, for this a new queue will be created, click on *Create +*:    
    ![Create Queue](img/createqueue.png)     
@@ -107,7 +108,7 @@ I have therefore installed only the components required for CP4I and MQ.
    ![Select local](img/selectlocal.png)
 1. Fill in *app1* as the Queue Name and click *Create*:     
    ![Define queue](img/app1queue.png)
-1. A MQ channel needs to be defined for communication into MQ, select the *Communication* tab, *App channel* section and click *Create +*:       
+1. A MQ channel needs to be defined for communication into MQ, select the *Communication* tab, *App channels* section and click *Create +*:       
    ![Create channel](img/createchannel.png)     
 1. Click *Next*     
 1. Enter *QUICKSTART* as the channel name (as this will match the Queue Manager), and click *Create*:     
@@ -119,14 +120,15 @@ We will allow all communication for the newly created channel. Click on *Configu
    ![Select Channel Auth](img/channelauthdisplay.png)      
 1. We will create a channel auth record that blocks nobody and allows everyone. Select *Block* from the pull down, and the *Final assigned user ID* tile:      
    ![Block type](img/blocktype.png)
-1. Enter the following value and click *Create*:     
+1. Enter the following value:     
    * Channel name: *QUICKSTART*
    * User list: nobody       
+1. Click on the *plus (+) sign* next to the User list text field and then click on *Create +*:     
    ![Define channel auth](img/definechannel.png)
    ![Channel Auth defined](img/channelauthcreated.png)
    
 # Testing MQ
-MQ has been deployed within the Cloud Pak for Integration to other containers deployed within the same Cluster. This deployment is NOT accessable externally. Depending on your scenario you can connect ACE / API Connect / Event Streams etc to MQ using the deployed service. This acts as an entry point into MQ within the Kubernetes Cluster. Assuming you used the defaults within the deployment the hostname will be *quickstart-cp4i-ibm-mq*. To verify the installation we will use an MQ client sample within the deployment.         
+MQ has been deployed within the Cloud Pak for Integration to other containers deployed within the same Cluster. This deployment is NOT accessible externally. Depending on your scenario you can connect ACE / API Connect / Event Streams etc to MQ using the deployed service. This acts as an entry point into MQ within the Kubernetes Cluster. Assuming you used the defaults within the deployment the hostname will be *quickstart-cp4i-ibm-mq*. To verify the installation we will use an MQ client sample within the deployment.         
 1. Return to the OpenShift Console, navigate to Workload --> Pods and type *quicks* in the search bar:      
    ![Search Pods](img/searchpods.png) 
    And select the *quickstart-cp4i-ibm0mq-0* entry.
