@@ -1,3 +1,18 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mtlsmqsc
+  namespace: $TARGET_NAMESPACE
+data:
+  example.mqsc: |-
+    DEFINE QLOCAL('APPQ')
+    DEFINE CHANNEL(MTLSQMCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(REQUIRED) SSLCIPH('ECDHE_RSA_AES_128_CBC_SHA256')
+    ALTER AUTHINFO(SYSTEM.DEFAULT.AUTHINFO.IDPWOS) AUTHTYPE(IDPWOS) ADOPTCTX(YES) CHCKCLNT(OPTIONAL) CHCKLOCL(OPTIONAL) AUTHENMD(OS)
+    SET CHLAUTH('MTLSQMCHL') TYPE(SSLPEERMAP) SSLPEER('CN=application1,OU=app team1') USERSRC(MAP) MCAUSER('app1') ACTION(ADD)
+    REFRESH SECURITY TYPE(CONNAUTH)
+    SET AUTHREC PRINCIPAL('app1') OBJTYPE(QMGR) AUTHADD(CONNECT,INQ)
+    SET AUTHREC PROFILE('APPQ') PRINCIPAL('app1') OBJTYPE(QUEUE) AUTHADD(BROWSE,GET,INQ,PUT)
+---
 kind: Secret
 apiVersion: v1
 metadata:
@@ -14,10 +29,10 @@ kind: QueueManager
 metadata:
   name: mtlsqm
 spec:
-  version: 9.1.5.0-r2
+  version: 9.2.0.0-r1
   license:
     accept: true
-    license: L-APIG-BM7GDH
+    license: L-APIG-BMKG5H
     use: Development
   pki:
     keys:
@@ -40,14 +55,22 @@ spec:
          env:
          - name: MQS_PERMIT_UNKNOWN_ID
            value: "true"
-  queueManager:
-    image: hyc-icpcontent-docker-local.artifactory.swg-devops.com/ibm-mq/ibm-mqadvanced-server-dev:9.1.5.0-amd64
-    imagePullPolicy: Always
-    logFormat: Basic
-  imagePullSecrets:
-  - name: mqreg
   web:
     enabled: true
+  queueManager:
+    mqsc:
+      - configMap:
+          name: mtlsmqsc        
+          items: 
+            - example.mqsc
+    storage:
+      persistedData:
+        enabled: false
+      queueManager:
+        enabled: true
+        type: ephemeral
+      recoveryLogs:
+        enabled: false
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
