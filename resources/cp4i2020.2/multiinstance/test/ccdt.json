@@ -1,0 +1,28 @@
+{
+  "channel":
+  [
+    {
+      "general":
+      {
+        "description": "MQ Non Persistent channel details"
+      },
+      "name": "MIQMGRCHL",
+      "clientConnection":
+      {
+        "connection":
+        [
+          {
+            "host": "multiinstancemq-ibm-mq-qm-cp4i.apps.callumocp446.cp.fyre.ibm.com",
+            "port": 443
+          }
+        ],
+        "queueManager": "multiinstancemq"
+      },
+      "transmissionSecurity":
+      {
+        "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+      },
+	  "type": "clientConnection"
+    }
+  ]
+}
