@@ -21,4 +21,4 @@ This repository demonstrates how to get started with IBM MQ on the Cloud Pak for
 * [Learning the basics of IBM MQ using your own laptop](instructions/docker/MQGettingStarted.md)
 
 ## Other resources that you may find useful
-* [Cloud Pak Adoption Team Repository](https://github.ibm.com/cpat/integration-chapter/tree/master/mq/docs)
+* [Cloud Pak Adoption Team Repository](https://github.ibm.com/cpat/integration-chapter/wiki/MQ-Wiki)
