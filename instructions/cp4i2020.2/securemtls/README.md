@@ -33,7 +33,7 @@ Then run the command **./generate-test-cert.sh** to generate new unique TLS cert
 ![Generating new keys](img/5.png)
 
 ## Step 3 - Deploy the MQ Queue Manager with associated resources
-Log into the OpenShift environment, and then click on your username on the top right menu. Then click on **Copy Login Command**. Click on **Display Token**, copy the token and run it in your terminal.
+Log into the OpenShift environment, and then click on your username on the top right menu. Then click on **Copy Login Command**. Click on **Display Token**, copy the token and run on your terminal.
 
 Run the command: **oc project cp4i**.
 
@@ -46,10 +46,10 @@ To check the status of your queue manager, you can run the **oc describe queuema
 ## Step 4 - Test the deployment
 Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
 
-1. In the CCDT.JSON file, you need to update the host next to *host:* with your own host name. To get your host name, run the **oc get routes | grep mtlsqm** command in your terminal. Your host name should start with *ibm-mq-qm* in the second part of it.
+1. In the CCDT.JSON file, you need to update the host next to *host:* with your own host name. To get your host name, run the **oc get routes | grep mtlsqm** command on your terminal. Your host name should start with *ibm-mq-qm* in the second part of it.
 ![Choosing the right host name](img/8.png)
 
-2. In the getMessage.sh and sendMessage.sh files, you need to replace the beginning of the paths in the two export commands in each file. Run **pwd** command in your terminal and copy the first three parts of the path. Should look something similar to the *home/name/2020.2* directory.
+2. In the getMessage.sh and sendMessage.sh files, you need to replace the beginning of the paths in the two export commands in each file. Run **pwd** command on your terminal and copy the first three parts of the path. Should look something similar to the *home/name/2020.2* directory.
 ![Selecting the first three parts of the path](img/10.png)
 
 To initiate the testing, run the **./sendMessage.sh** command. It will then connect to MQ and ask you for a message to send. Then run the **./getMessage.sh** and it should show you the message that you just sent.
