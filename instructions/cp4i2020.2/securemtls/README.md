@@ -13,7 +13,15 @@ To run the following you need to have installed:
 * The IBM Common Services, IBM Operator Catalog and Cloud Pak for Integration. [A tutorial on how to install them](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/instructions/cp4i2020.2/gettingstarted)
 
 ## Step 1 - Download this github repository
-
+- Option 1: clone *base* repository using `git` with HTTPS URL (recommended):
+```sh
+git clone https://github.ibm.com/CALLUMJ/MQonCP4I.git
+```
+or using `git` via SSH if prefer:
+```sh
+git clone git@github.ibm.com:CALLUMJ/MQonCP4I.git
+```
+- Option 2: Download the repository as a .zip file and navigate to it on your terminal.
 
 ## Step 2 - Optionally re-generate the TLS Certificates and Keys
 Once you have cloned/downloaded the github repository, navigate to the */MQonCP4I/resources/cp4i2020.2/securemtls/createcerts* directory.
@@ -39,7 +47,7 @@ To check the status of your queue manager, you can run the **oc describe queuema
 Navigate to **../test** directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
 
 1. In the CCDT.JSON file, you need to update the host next to *host:* with your own host name. To get your host name, run the **oc get routes | grep mtlsqm** command in your terminal. Your host name should start with *ibm-mq-qm* in the second part of it.
-![Choosing the right host name](img/9.png)
+![Choosing the right host name](img/8.png)
 ![Replacing the host name](img/9.png)
 
 2. In the getMessage.sh and sendMessage.sh files, you need to replace the beginning of the paths in the two export commands in each file. Run **pwd** command in your terminal and copy the first three parts of the path. Should look something similar to the *home/name/2020.2* directory.
