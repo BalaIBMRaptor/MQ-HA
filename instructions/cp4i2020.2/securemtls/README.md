@@ -10,10 +10,10 @@ The lab is dependant on a number of resources included within this GitHub reposi
 To run the following you need to have installed:
 * The MQ client or server as it uses GSKit and shipped MQ utilities
 * OpenSSL to generate the raw certificates and keys
-* The IBM Common Services, IBM Operator Catalog and Cloud Pak for Integration. [A tutorial on how to install them](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/instructions/cp4i2020.2/gettingstarted)
+* The IBM Common Services, IBM Operator Catalog and Cloud Pak for Integration. [Instructions on how to install them.](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/instructions/cp4i2020.2/gettingstarted)
 
 ## Step 1 - Download this github repository
-- Option 1: clone *base* repository using `git` with HTTPS URL (recommended):
+- Option 1: clone this repository using `git` with HTTPS URL (recommended):
 ```sh
 git clone https://github.ibm.com/CALLUMJ/MQonCP4I.git
 ```
