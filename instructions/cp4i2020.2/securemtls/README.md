@@ -27,7 +27,7 @@ git clone git@github.ibm.com:CALLUMJ/MQonCP4I.git
 Once you have cloned/downloaded the github repository, navigate to the */MQonCP4I/resources/cp4i2020.2/securemtls/createcerts* directory.
 ![Navigating to createcerts directory](img/4.png)
 
-Run the command **rm appl* serv*** to delete all the existing default TLS certificates and keys.
+Run the command **rm appl\* serv\*** to delete all the existing default TLS certificates and keys.
 
 Then run the command **./generate-test-cert.sh** to generate new unique TLS certificates and keys.
 ![Generating new keys](img/5.png)
