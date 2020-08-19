@@ -44,11 +44,10 @@ To check the status of your queue manager, you can run the **oc describe queuema
 ![Checking that MQ is Running](img/4.png)
 
 ## Step 4 - Test the deployment
-Navigate to **../test** directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
+Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
 
 1. In the CCDT.JSON file, you need to update the host next to *host:* with your own host name. To get your host name, run the **oc get routes | grep mtlsqm** command in your terminal. Your host name should start with *ibm-mq-qm* in the second part of it.
 ![Choosing the right host name](img/8.png)
-![Replacing the host name](img/9.png)
 
 2. In the getMessage.sh and sendMessage.sh files, you need to replace the beginning of the paths in the two export commands in each file. Run **pwd** command in your terminal and copy the first three parts of the path. Should look something similar to the *home/name/2020.2* directory.
 ![Selecting the first three parts of the path](img/10.png)
