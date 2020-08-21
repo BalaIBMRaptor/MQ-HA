@@ -21,7 +21,7 @@ To run the following you need to have installed:
 - Option 2: Download the repository as a .zip file and navigate to it on your terminal.
 
 ## Step 2 - Optionally re-generate the TLS Certificates and Keys
-1. Once you have cloned/downloaded the github repository, navigate to the */MQonCP4I/resources/cp4i2020.2/securemtls/createcerts* directory.
+1. Once you have cloned/downloaded the github repository, navigate to the *MQonCP4I/resources/cp4i2020.2/securemtls/createcerts* directory.
    ![Navigating to createcerts directory](img/4.png)
 
 1. Run the command **rm appl\* serv\*** to delete all the existing default TLS certificates and keys.
@@ -37,13 +37,13 @@ Run the command: **oc project cp4i** to navigate to the cp4i project.
 To start deploying, navigate to *../deploy* directory and run **./install.sh** command. Three new files will be created including *mtlsqm.yaml* - this file includes all of the configuration which you have just installed to your OpenShift environment.
 ![Deployment](img/4.png)
 
-To check the status of your queue manager, you can run the **oc describe queuemanager ***nameOfYourQueueManager***. It should show *Running*. 
+To check the status of your queue manager, you can run the **oc describe queuemanager mtlsqm**. It should show *Running*. 
 ![Checking that MQ is Running](img/4.png)
 
 ## Step 4 - Test the deployment
 Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
 
-1. In the CCDT.JSON file, you need to update the host next to *host:* with your own host name. To get your host name, run the **oc get routes | grep mtlsqm** command on your terminal. Your host name should start with *ibm-mq-qm* in the second part of it.
+1. In the CCDT.JSON file, you need to update the host next to *host:* with your own host name. To get your host name, run the **oc get routes | grep mtlsqm** command on your terminal. Your host name should start with *mtlsqm-ibm-mq-qm*:
    ![Choosing the right host name](img/8.png)
 
 1. In the getMessage.sh and sendMessage.sh files, you need to replace the first three parts of the paths in the two export commands in each file. To get the new path, run the **pwd** command on your terminal and copy the first three parts of the path. It should look something similar to: *home/name/2020.2*.
