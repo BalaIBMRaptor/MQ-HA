@@ -2,7 +2,9 @@
 
 ## Basic configuration
 * [Getting started with MQ in the Cloud Pak for Integration 2020.2](instructions/cp4i2020.2/gettingstarted/readme.md)
-* More coming soon
+* [Secure IBM MQ using mTLS](instructions/cp4i2020.2/securemtls/README.md)
+* Muti-Instance - coming soon
+* LDAP - coming soon 
 
 # IBM MQ on the Cloud Pak for Integration - Helm Deployments
 This repository demonstrates how to get started with IBM MQ on the Cloud Pak for Integration. There are separate sections that highlight how to complete common initial tasks:
