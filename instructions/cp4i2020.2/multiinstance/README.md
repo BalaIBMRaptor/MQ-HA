@@ -12,7 +12,7 @@ To run the following you need to have installed:
    **Warning:** You need to setup ssh access to github.ibm.com prior to running this command, see https://github.ibm.com/settings/tokens or https://github.ibm.com/settings/ssh for details. 
 - Option 2: Download the repository as a .zip file and navigate to it on your terminal.
 
-## Step 3 - Deploy the MQ Queue Manager with associated resources
+## Step 2 - Deploy the MQ Queue Manager with associated resources
 1. Once you have cloned/downloaded the github repository, navigate to the *MQonCP4I/resources/cp4i2020.2/multiinstance* directory.
 
 1. Log into the OpenShift environment, and then click on your username on the top right menu. Then click on **Copy Login Command**. Click on **Display Token**, copy the token and run on your terminal.
@@ -27,7 +27,7 @@ OpenShift environment.
 1. To view your running pods, run the **oc get pod | grep multi** command. The pod that shows 1/1 next to it is the one that is Active while the pod that shows 0/1 next to it is the one that is Passive.
    ![Running pods](img/3.png)
 
-## Step 4 - Test the deployment
+## Step 3 - Test the deployment
 Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
 
 1. In the CCDT.JSON file, you need to update the host next to *host:* with your own host name. To get your host name, run the **oc get route | grep multi** command on your terminal. Your host name should start with *multiinstancemq-ibm-mq-qm*:
