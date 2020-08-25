@@ -45,4 +45,4 @@ Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessag
    ![Deleting a pod](img/7.png)
    
 1. You can clean up after this process by navigating to the *../deploy* directory and running the command **./cleanup.sh**. This will delete everything.
-   ![Cleaning up](img/7.png)
+   ![Cleaning up](img/8.png)
