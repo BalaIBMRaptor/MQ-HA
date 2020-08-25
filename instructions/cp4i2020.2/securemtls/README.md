@@ -50,6 +50,7 @@ Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessag
    ![Selecting the first three parts of the path](img/6.png)
 
 1. To initiate the testing, run the **./sendMessage.sh** command. It will then connect to MQ and ask you for a message to send. Then run the **./getMessage.sh** and it should show you the message that you just sent.
+   ![Cleaning up](img/7.png)
 
 1. You can clean up after this process by navigating to the *../deploy* directory and running the command **./cleanup.sh**. This will delete everything.
-   ![Cleaning up](img/7.png)
+   ![Cleaning up](img/8.png)
