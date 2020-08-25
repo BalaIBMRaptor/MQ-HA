@@ -3,7 +3,7 @@ To run the following you need to have installed:
 * The MQ client or server as it uses GSKit and shipped MQ utilities
 * OpenSSL to generate the raw certificates and keys
 * The IBM Common Services, IBM Operator Catalog and Cloud Pak for Integration. [Instructions on how to install them.](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/instructions/cp4i2020.2/gettingstarted)
-You also need to have set up openLDAP on OpenShift 4.2.  [Instructions on how to set it up.](https://github.ibm.com/CALLUMJ/OpenLDAP)
+* You also need to have set up openLDAP on OpenShift 4.2.  [Instructions on how to set it up.](https://github.ibm.com/CALLUMJ/OpenLDAP)
  
 ## Step 1 - Download OpenLDAP github repository
 - Option 1: clone this repository using `git`:
@@ -42,6 +42,6 @@ Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessag
    ![Selecting the first three parts of the path](img/6.png)
 
 1. To initiate the testing, run the **./sendMessage.sh** command. It will then connect to MQ and ask you for a message to send. Then run the **./getMessage.sh** and it should show you the message that you just sent.
-   ![Sending and receiving messages](img/6.png)
+   ![Sending and receiving messages](img/7.png)
 
 1. You can clean up after this process by navigating to the *../deploy* directory and running the command **./cleanup.sh**. This will delete everything.
