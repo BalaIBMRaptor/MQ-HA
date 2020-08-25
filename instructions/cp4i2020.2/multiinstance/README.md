@@ -43,3 +43,6 @@ Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessag
 
 1. To see how the pods work together in action, run the **oc get route | grep multi** command on your terminal to view the current pods, and then delete the running pod by running the command: **oc delete pod multisintacemq-ibm-mq-0**. Once the active pod is deleted, the connection will then reconnect to the other pod for it to take over.
    ![Deleting a pod](img/7.png)
+   
+1. You can clean up after this process by navigating to the *../deploy* directory and running the command **./cleanup.sh**. This will delete everything.
+   ![Cleaning up](img/7.png)
