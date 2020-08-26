@@ -1,7 +1,9 @@
+# Deploy an MQ Queue Manager with LDAP automatically configured
+This lab will guide you through how to create a MQ container with the configuration for LDAP. 
+
 ## Pre-reqs
 To run the following you need to have installed:
 * The MQ client or server as it uses GSKit and shipped MQ utilities
-* OpenSSL to generate the raw certificates and keys
 * The IBM Common Services, IBM Operator Catalog and Cloud Pak for Integration. [Instructions on how to install them.](https://github.ibm.com/CALLUMJ/MQonCP4I/tree/master/instructions/cp4i2020.2/gettingstarted)
 * You also need to have set up openLDAP on OpenShift 4.2.  [Instructions on how to set it up.](https://github.ibm.com/CALLUMJ/OpenLDAP)
  
