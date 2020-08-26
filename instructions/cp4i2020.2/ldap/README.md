@@ -15,7 +15,7 @@ To run the following you need to have installed:
    **Warning:** You need to setup ssh access to github.ibm.com prior to running this command, see https://github.ibm.com/settings/tokens or https://github.ibm.com/settings/ssh for details. 
 - Option 2: Download the repository as a .zip file and navigate to it on your terminal.
 
-## Step 2 - Deploy the MQ Queue Manager with associated resources
+## Step 2 - Deploy LDAP into OpenShift
 1. Once you have cloned/downloaded the github repository, navigate to the *OpenLDAP/kubernetes* directory.
 
 1. Log into the OpenShift environment, and then click on your username on the top right menu. Then click on **Copy Login Command**. Click on **Display Token**, copy the token and run on your terminal.
@@ -27,13 +27,18 @@ OpenShift environment.
 1. Run the **./installldap.sh** command. This runs an entire build on OpenShift and it creates a brand new image that we will deploy out for MQ. It can take a few minutes to complete this process.
    ![Install LDAP](img/2.png)
    
+## Step 3 - Download this github repository
+
+## Step 4 - Deploy the MQ Queue Manager with associated resources
+1. Run the command: **oc project cp4i** to navigate to the cp4i project.
+
 1. To start deploying, navigate to *../deploy* directory and run **./install.sh** command. Four new files will be created including *mmqmultiinstance.yaml_template* - this file includes all of the configuration which you have just installed to your OpenShift environment.
    ![Deployment](img/3.png)
 
 1. To check that your MQ is running, run the **oc describe queuemanagers** command. It should show "Running" next to Phase.
    ![Running pods](img/4.png)
 
-## Step 3 - Test the deployment
+## Step 5 - Test the deployment
 Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
 
 1. In the CCDT.JSON file, you need to update the host next to *host:* with your own host name. To get your host name, run the **oc get routes | grep mtlsqm** command on your terminal. Your host name should start with *ldapmq-ibm-mq-qm*:
