@@ -24,7 +24,7 @@ OpenShift environment.
 
 1. Run the command: **oc project cp4i** to navigate to the cp4i project.
 
-1. To start deploying, navigate to *../deploy* directory and run **./install.sh** command. Four new files will be created including *mmqmultiinstance.yaml_template* - this file includes all of the configuration which you have just installed to your OpenShift environment.
+1. To start deploying, navigate to *../deploy* directory and run **./install.sh** command. Four new files will be created including *mqmultiinstance.yaml_template* - this file includes all of the configuration which you have just installed to your OpenShift environment.
    ![Deployment](img/2.png)
    
 1. To view your running pods, run the **oc get pod | grep multi** command. The pod that shows 1/1 next to it is the one that is Active while the pod that shows 0/1 next to it is the one that is Passive.
@@ -37,6 +37,7 @@ Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessag
    ![Choosing the right host name](img/4.png)
 
 1. In the getMessage.sh and sendMessage.sh files, you need to replace the first three parts of the paths in the two export commands in each file. To get the new path, run the **pwd** command on your terminal and copy the first three parts of the path. It should look something similar to: *home/name/2020.2*.
+   ![Replacing the first three parts of the path](img/4-2.png)
 
 1. To initiate the testing, run the **./sendMessage.sh** command. It will then connect to MQ and and start sending messages incessantly.
    ![Sending messages](img/5.png)
@@ -44,7 +45,7 @@ Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessag
 1. Open another command window and run the **./getMessage.sh** command. You should get a list of the all the messages that has been previously sent before running the command and the ones that are being sent after.
    ![Receiving messages](img/6.png)
 
-1. To see how the pods work together in action, run the **oc get route | grep multi** command on your terminal to view the current pods, and then delete the running pod by running the command: **oc delete pod multisintacemq-ibm-mq-0**. Once the active pod is deleted, the connection will then reconnect to the other pod for it to take over.
+1. To see how the pods work together in action, run the **oc get pod | grep multi** command on your terminal to view the current pods, and then delete the running pod by running the command: **oc delete pod multisintacemq-ibm-mq-0**. Once the active pod is deleted, the connection will then reconnect to the other pod for it to take over.
    ![Deleting a pod](img/7.png)
    
 1. You can clean up after this process by navigating to the *../deploy* directory and running the command **./cleanup.sh**. This will delete everything.
