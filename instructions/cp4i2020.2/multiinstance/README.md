@@ -1,3 +1,7 @@
+# Deploying a highly available persistent IBM MQ Queue Manager on the Cloud Pak for Integration
+
+These instructions will document the process to deploy a highly available (HA) persistent IBM MQ on the Cloud Pak for Integration (CP4I) 2020.2.1.
+
 ## Pre-reqs
 To run the following you need to have installed:
 * The MQ client or server as it uses GSKit and shipped MQ utilities
