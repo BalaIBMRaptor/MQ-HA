@@ -26,6 +26,12 @@ OpenShift environment.
    ![Install LDAP](img/2.png)
    
 ## Step 3 - Download this github repository
+- Option 1: clone this repository using `git`:
+   ```sh
+   git clone git@github.ibm.com:CALLUMJ/MQonCP4I.git
+   ```
+   **Warning** you need to setup ssh access to github.ibm.com prior to running this command, see https://github.ibm.com/settings/tokens or https://github.ibm.com/settings/ssh for details. 
+- Option 2: Download the repository as a .zip file and navigate to it on your terminal.
 
 ## Step 4 - Deploy the MQ Queue Manager with associated resources
 1. Run the command: **oc project cp4i** to navigate to the cp4i project.
