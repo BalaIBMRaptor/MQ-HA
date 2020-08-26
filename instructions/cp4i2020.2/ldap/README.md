@@ -22,8 +22,6 @@ To run the following you need to have installed:
 OpenShift environment.
    ![Top right menu in the Openshit environment](img/1.png)
 
-1. Run the command: **oc project cp4i** to navigate to the cp4i project.
-
 1. Run the **./installldap.sh** command. This runs an entire build on OpenShift and it creates a brand new image that we will deploy out for MQ. It can take a few minutes to complete this process.
    ![Install LDAP](img/2.png)
    
