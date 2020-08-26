@@ -36,7 +36,7 @@ OpenShift environment.
 ## Step 4 - Deploy the MQ Queue Manager with associated resources
 1. Run the command: **oc project cp4i** to navigate to the cp4i project.
 
-1. To start deploying, navigate to *../deploy* directory and run **./install.sh** command. Four new files will be created including *mmqmultiinstance.yaml_template* - this file includes all of the configuration which you have just installed to your OpenShift environment.
+1. To start deploying, navigate to *../deploy* directory and run **./install.sh** command. Four new files will be created including *mqldap.yaml_template* - this file includes all of the configuration which you have just installed to your OpenShift environment.
    ![Deployment](img/3.png)
 
 1. To check that your MQ is running, run the **oc describe queuemanagers** command. It should show "Running" next to Phase.
