@@ -3,8 +3,7 @@ IBM MQ can be secured in a number of ways, two common approaches include:
 * Username / Password
 * Mutual TLS
 
-This lab will demonstrate how you can use mutual TLS for authentication and authorization. 
-The lab is dependant on a number of resources included within this GitHub repository. 
+This lab will demonstrate how to secure the communication between the application and the queue manager using mutualTLS. This encrypts the data and also provides an identity which the queue manager can validate, authenticate and authorise the access. The lab is dependant on a number of resources included within this GitHub repository.
 
 ## Pre-reqs
 To run the following you need to have installed:

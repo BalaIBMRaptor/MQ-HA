@@ -1,5 +1,5 @@
 # Deploy an MQ Queue Manager with LDAP automatically configured
-This lab will guide you through how to create a MQ container with the configuration for LDAP. 
+This lab will guide you through how to create a MQ container with the configuration for LDAP. The communication is encrypted using TLS and a user/password is supplied by the application which is authenticated by the queue manager.
 
 ## Pre-reqs
 To run the following you need to have installed:
