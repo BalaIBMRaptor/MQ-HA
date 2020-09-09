@@ -147,7 +147,7 @@ I have therefore installed only the components required for CP4I and MQ.
    ![Navigating to Operations Dashboard](img/leftmenuod.png)
    
 1. From the right menu and under *Manage*, click on *Registration requests*:
-   ![Navigating to Registration requests](img/regrequest.png)
+   ![Navigating to Registration requests](img/regrequest.png){:height="60%"}
    
 1. MQ has tried to depoly out and it has then sent a message to the Operations Dashboard to request access. To approve it, click on *Approve* next to the request.
    ![Approving the access](img/accessapproval.png)
