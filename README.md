@@ -1,6 +1,5 @@
 # IBM MQ on the Cloud Pak for Integration - Operators Deployments
 
-## Basic configuration
 * [Getting started with MQ in the Cloud Pak for Integration 2020.2](instructions/cp4i2020.2/gettingstarted/readme.md)
 * [Secure IBM MQ using mTLS](instructions/cp4i2020.2/securemtls/README.md)
 * [Deploy a persistent Queue Manager in a High Availability mode suitable for demonstration](instructions/cp4i2020.2/multiinstance/README.md)
