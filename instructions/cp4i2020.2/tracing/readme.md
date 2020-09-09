@@ -140,7 +140,7 @@ I have therefore installed only the components required for CP4I, Operations Das
 1. From the Tracing section, Enable Tracing by switching it on and then change the Tracing Namespace to *cp4i* and finally click *Next*:
    ![Enable Tracing](img/enabletracing.png)
    
-1. IBM MQ will request access to the operations dashboard and will NOT deploy until this is approved. Click on the hamburger menu on the top left and then click on *Operations Dashboard* and then click on the dashboard that you have deployed out:
+1. IBM MQ will request access to the operations dashboard and will NOT deploy until this is approved. Click on the hamburger menu on the top left and then click on *Operations Dashboard* and then click on the dashboard that you have deployed out:    
    ![Navigating to Operations Dashboard](img/leftmenuod.png)
    
 1. From the right menu and under *Manage*, click on *Registration requests*:
