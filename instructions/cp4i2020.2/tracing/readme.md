@@ -168,8 +168,8 @@ I have therefore installed only the components required for CP4I and MQ.
    ![Managing QUICKSTART](img/manageqs.png)
    
 1. This will show you a list of the queues that are available. Click on *Create* to create a new queue.
-   ![Creating a queue](img/createaqueue.png)
-   
+   ![Creating a queue](img/createqueue.png)
+
 1. Select the *local* tile.
    ![Selecting the local tile](img/localtile.png)
    
