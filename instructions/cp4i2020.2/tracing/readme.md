@@ -102,7 +102,7 @@ I have therefore installed only the components required for CP4I and MQ.
 1. Within the Cloud Pak for Integration Platform Navigator click on *Create capability* under Capabilities.
    ![Create Capability](img/createcapability.png)
    
-1. Select the Operations Dashboard tile and click *Next*:    
+1. Select the *Operations Dashboard* tile and click *Next*:    
    ![Create Operations Dashboard](img/createOD.png)
    
 1. Select the *example-operationsdashboard* tile and click *Next*:
@@ -125,10 +125,10 @@ I have therefore installed only the components required for CP4I and MQ.
    
 1. Now we will deploy an MQ instance to show it. We can do this in a number of different ways, in this lab, we will use the GUI instead of the command line.
 
-1. Click on *Create instance* under Runtimes on the Dashboard.
+1. Click on *Create instance* under *Runtimes* on the Dashboard.
    ![Create Instance](img/createinstance2.png)
    
-1. Select the Queue manager tile and Click *Next*:
+1. Select the *Queue manager* tile and Click *Next*:
    ![Select the QM tile](img/qmtile.png)
    
 1. Select the *Quick start* tile and Click *Next*:
@@ -140,7 +140,7 @@ I have therefore installed only the components required for CP4I and MQ.
 1. From the Tracing section, Enable Tracing by switching it on and then change the Tracing Namespace to *cp4i* and finally click *Next*:
    ![Enable Tracing](img/enabletracing.png)
    
-1. You will be returned to the Runtime and Instances list, MQ will take a few seconds to deploy and the status will change to *Ready*. You may need to refresh the status by using the table refresh button. The capability will take approximately 5 minutes to start running:
+1. You will be returned to the Runtime and Instances list, MQ will take a few seconds to deploy and the status will change to *Ready*. You may need to refresh the status by using the table refresh button. The capability will take approximately 5 minutes to start running.
    ![Instance created](img/instancepending.png)
    
 1. Click on the hamburger menu on the top left and then click on *Operations Dashboard* and then click on the dashboard that you have deployed out:
@@ -158,11 +158,11 @@ I have therefore installed only the components required for CP4I and MQ.
 1. Run the command in your terminal (the same one used in the previous steps):
    ![Run command line](img/runcommand.png)
    
-1. Go back to the Integration Home. Under Runtimes, you will notice after approximatly 30 seconds that the status of the instance that you have created is now *Ready*:
+1. Go back to the Integration Home. Under Runtimes, you will notice after approximatly 30 seconds that the status of the instance that you have created is now *Ready*.
    ![Instance's status is ready](img/instanceready2.png)
 
 # Testing the Operations Dashboard
-1. From the Instances and Runtimes, click on the instance that you have created to access the queue manager.
+1. From *Runtimes* on Integration Home, click on the instance that you have created to access the queue manager.
 
 1. You need to create a queue. Click on the *Manage QUICKSTART* tile.
    ![Managing QUICKSTART](img/manageqs.png)
