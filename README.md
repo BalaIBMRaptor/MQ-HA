@@ -5,6 +5,7 @@
 * [Secure IBM MQ using mTLS](instructions/cp4i2020.2/securemtls/README.md)
 * [Deploy a persistent Queue Manager in a High Availability mode suitable for demonstration](instructions/cp4i2020.2/multiinstance/README.md)
 * [Configuring MQ with LDAP](instructions/cp4i2020.2/ldap/README.md)
+* [Using MQ and the Operations Dashboard](instructions/cp4i2020.2/tracing/readme.md)
 
 ## Learning the basics of IBM MQ using your own laptop
 * [Learning the basics of IBM MQ using your own laptop](instructions/docker/MQGettingStarted.md)
