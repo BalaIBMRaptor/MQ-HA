@@ -1,5 +1,5 @@
 # Installing and setting up the IBM Cloud Pak for Integration Operations Dashboard
-These instructions document how to setup MQ within Cloud Pak for Integration which is accessible from within the OpenShift Cluster, and then setting up the Cloud Pak Operations Dashboard. The instructions have been created using a fresh OpenShift environment deployed on AWS however the process should be similar on other environments.
+These instructions document how to setup MQ within Cloud Pak for Integration, and then setting up the Cloud Pak Operations Dashboard. The instructions have been created using a fresh OpenShift environment deployed on AWS however the process should be similar on other environments.
 
 You will be able after this lab to have an Operations Dashboard on your IBM Cloud Pak to view real-time updates of your queue managers.
 
@@ -28,7 +28,7 @@ Therefore these need to be added to the Operator catalog.
           interval: 45m
     ```   
 
-The Cloud Pak for Integration is deployed using operators and to make these available within your environment you need to install the catalog. 
+The Cloud Pak for Integration is deployed using operators and to make these available within your environment you need to install the ibm operator catalog. 
 1. Click the plus icon, in the top right:    
    ![Add to OpenShift](img/plusopenshift.png)     
 1. Copy the following into the YAML editor and click *Create*:     
@@ -53,7 +53,7 @@ The Cloud Pak for Integration is deployed using operators and to make these avai
 # Installing the Cloud Pak for Integration 
 IBM Cloud Pak for Integration can be installed via an umbrella operator called the *Cloud Pak for Integration*, however, there is a known
 issue at the moment documented [here](https://www.ibm.com/support/pages/node/6233896). 
-I have therefore installed only the components required for CP4I and MQ.
+I have therefore installed only the components required for CP4I, Operations Dashboard and MQ.
 
 1. Within the OpenShift Web Console select Home --> Projects, and click on *Create Project*:      
    ![Select CP4I](img/createproject.png)     
@@ -108,7 +108,7 @@ I have therefore installed only the components required for CP4I and MQ.
 1. Select the *example-operationsdashboard* tile and click *Next*:
    ![Select example-operationsdashboard tile](img/eodtile.png)
    
-1. Change both *Config DB storage class name* and *Store storage class name* to *gp2* and click *Create*:
+1. Change both *Config DB storage class name* and *Store storage class name* to your storage class, in the case of AWS it is *gp2* and click *Create*:
    ![Change class names to gp2](img/gp2.png)
    
 1. This will create the Operations Dashboard. The capability's status will always remain *Pending* and will take approximately 5 minutes to start running.
@@ -140,16 +140,13 @@ I have therefore installed only the components required for CP4I and MQ.
 1. From the Tracing section, Enable Tracing by switching it on and then change the Tracing Namespace to *cp4i* and finally click *Next*:
    ![Enable Tracing](img/enabletracing.png)
    
-1. You will be returned to the Runtime and Instances list, MQ will take a few seconds to deploy and the status will change to *Ready*. You may need to refresh the status by using the table refresh button. The capability will take approximately 5 minutes to start running.
-   ![Instance created](img/instancepending.png)
-   
-1. Click on the hamburger menu on the top left and then click on *Operations Dashboard* and then click on the dashboard that you have deployed out:
+1. IBM MQ will request access to the operations dashboard and will NOT deploy until this is approved. Click on the hamburger menu on the top left and then click on *Operations Dashboard* and then click on the dashboard that you have deployed out:
    ![Navigating to Operations Dashboard](img/leftmenuod.png)
    
 1. From the right menu and under *Manage*, click on *Registration requests*:
    ![Navigating to Registration requests](img/regrequest.png)
    
-1. MQ has tried to depoly out and it has then sent a message to the Operations Dashboard to request access. To approve it, click on *Approve* next to the request.
+1. MQ has tried to deploy out and it has then sent a message to the Operations Dashboard to request access. To approve it, click on *Approve* next to the request.
    ![Approving the access](img/accessapproval.png)
    
 1. Click on the copy icon from the popup to copy the command line to your clipboard:
@@ -158,7 +155,7 @@ I have therefore installed only the components required for CP4I and MQ.
 1. Run the command in your terminal (the same one used in the previous steps):
    ![Run command line](img/runcommand.png)
    
-1. Go back to the Integration Home. Under Runtimes, you will notice after approximatly 30 seconds that the status of the instance that you have created is now *Ready*.
+1. Go back to the Integration Home. Under Runtimes, you will notice after approximatly 30 seconds that the status of the MQ instance that you have created is now *Ready*.
    ![Instance's status is ready](img/instanceready2.png)
 
 # Testing the Operations Dashboard
@@ -176,8 +173,7 @@ I have therefore installed only the components required for CP4I and MQ.
 1. Fill in *APPQ* for the Queue name:
    ![Setting the queue's name](img/appq.png)
    
-1. Once created, click on your queue to access it and then create a new test message by clicking on *Create*:
-   ![Creating a new test message](img/accessqueue.png)
-   
-1. After creating the message, head over to the Operations Dashboard to see the updates. You will be able to see what is happening in real-time.
+1. The IBM MQ Console sends MQ messages to the Queue Manager to create the Queue. These messages will also be tracked my the operations dashboard. To avoid any additional testing we will view these in the operations dashboard.
+
+1. Head over to the Operations Dashboard to see the updates. You will be able to see what is happening in real-time.
    ![Operations Dashboard updated](img/realtimeupdates.png)
