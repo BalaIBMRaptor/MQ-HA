@@ -3,7 +3,7 @@ These steps document how you can connect MQ Explorer to a Queue Manager running 
 
 ## Pre-requisites
 The following instructions assume that you have deployed the Queue Manager using the following instructions:    
-[Deploy a persistent Queue Manager in a High Availability mode suitable for demonstration](./instructions/cp4i2020.2/gettingstarted/readme.md)   
+[Deploy a persistent Queue Manager in a High Availability mode suitable for demonstration](https://github.ibm.com/CALLUMJ/MQonCP4I/blob/master/instructions/cp4i2020.2/gettingstarted/readme.md)   
 If you have used a different set of instructions then they will need to be customized but the below should be useful in understanding the generic approach.     
 
 ## Instructions
