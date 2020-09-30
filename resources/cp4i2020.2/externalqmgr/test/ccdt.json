@@ -4,23 +4,23 @@
     {
       "general":
       {
-        "description": "MQ Non Persistent channel details"
+        "description": "MQ channel details"
       },
-      "name": "QMLDAP_SVRCONN",
+      "name": "MQEXTERNALCHL",
       "clientConnection":
       {
         "connection":
         [
           {
-            "host": "ldapmq-ibm-mq-web-cp4i.apps.callumj.icp4i.com",
+            "host": "externalmq-ibm-mq-qm-cp4i.apps.callumj.icp4i.com",
             "port": 443
           }
         ],
-        "queueManager": "ldapmq"
+        "queueManager": "externalmq"
       },
       "transmissionSecurity":
       {
-        "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+        "cipherSpecification": "ANY_TLS12_OR_HIGHER"
       },
 	  "type": "clientConnection"
     }

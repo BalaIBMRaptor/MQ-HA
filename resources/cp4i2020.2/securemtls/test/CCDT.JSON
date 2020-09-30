@@ -8,7 +8,7 @@
                 "connection": 
                 [
                     {
-                        "host": "mtlsqmdev-ibm-mq-qm-cp4i.apps.callumocp446.cp.fyre.ibm.com",
+                        "host": "mtlsqm-ibm-mq-web-cp4i.apps.callumj.icp4i.com",
                         "port": 443
                     }
                 ],

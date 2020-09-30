@@ -6,17 +6,17 @@
       {
         "description": "MQ Non Persistent channel details"
       },
-      "name": "QMLDAP_SVRCONN",
+      "name": "SMALLQMGRCHL",
       "clientConnection":
       {
         "connection":
         [
           {
-            "host": "ldapmq-ibm-mq-web-cp4i.apps.callumj.icp4i.com",
+            "host": "smallmq-ibm-mq-qm-cp4i.apps.callumj.icp4i.com",
             "port": 443
           }
         ],
-        "queueManager": "ldapmq"
+        "queueManager": "smallmq"
       },
       "transmissionSecurity":
       {
