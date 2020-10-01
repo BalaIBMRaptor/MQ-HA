@@ -20,7 +20,7 @@
       },
       "transmissionSecurity":
       {
-        "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256"
+        "cipherSpecification": "ANY_TLS12_OR_HIGHER"
       },
 	  "type": "clientConnection"
     }

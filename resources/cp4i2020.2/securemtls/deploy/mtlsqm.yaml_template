@@ -6,7 +6,7 @@ metadata:
 data:
   example.mqsc: |-
     DEFINE QLOCAL('APPQ')
-    DEFINE CHANNEL(MTLSQMCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(REQUIRED) SSLCIPH('ECDHE_RSA_AES_128_CBC_SHA256')
+    DEFINE CHANNEL(MTLSQMCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(REQUIRED) SSLCIPH('ANY_TLS12_OR_HIGHER')
     ALTER AUTHINFO(SYSTEM.DEFAULT.AUTHINFO.IDPWOS) AUTHTYPE(IDPWOS) ADOPTCTX(YES) CHCKCLNT(OPTIONAL) CHCKLOCL(OPTIONAL) AUTHENMD(OS)
     SET CHLAUTH('MTLSQMCHL') TYPE(SSLPEERMAP) SSLPEER('CN=application1,OU=app team1') USERSRC(MAP) MCAUSER('app1') ACTION(ADD)
     REFRESH SECURITY TYPE(CONNAUTH)
@@ -34,7 +34,7 @@ kind: QueueManager
 metadata:
   name: mtlsqm
 spec:
-  version: 9.2.0.0-r1
+  version: 9.2.0.0-r2
   license:
     accept: true
     license: L-RJON-BN7PN3
@@ -65,13 +65,13 @@ spec:
   queueManager:
     ini:
       - configMap:
-          name: mtlsmqsc        
-          items: 
+          name: mtlsmqsc
+          items:
             - example.ini
     mqsc:
       - configMap:
-          name: mtlsmqsc        
-          items: 
+          name: mtlsmqsc
+          items:
             - example.mqsc
     storage:
       persistedData:

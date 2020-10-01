@@ -6,7 +6,7 @@ metadata:
 data:
   disablesecurity.mqsc: |-
     define ql(APPQ)
-    DEFINE CHANNEL(MIQMGRCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ECDHE_RSA_AES_128_CBC_SHA256')
+    DEFINE CHANNEL(MIQMGRCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
     set chlauth(MIQMGRCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
 ---
@@ -25,7 +25,7 @@ kind: QueueManager
 metadata:
   name: multiinstancemq
 spec:
-  version: 9.2.0.0-r1
+  version: 9.2.0.0-r2
   license:
     accept: true
     license: L-RJON-BN7PN3
@@ -41,7 +41,7 @@ spec:
   web:
     enabled: true
   queueManager:
-    availability: 
+    availability:
       type: MultiInstance
     storage:
       persistedData:
@@ -52,8 +52,8 @@ spec:
         enabled: true
     mqsc:
       - configMap:
-          name: mqmultiinstancemqsc        
-          items: 
+          name: mqmultiinstancemqsc
+          items:
             - disablesecurity.mqsc
   template:
     pod:

@@ -6,7 +6,7 @@ metadata:
 data:
   disablesecurity.mqsc: |-
     define ql(APPQ)
-    DEFINE CHANNEL(SMALLQMGRCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ECDHE_RSA_AES_128_CBC_SHA256')
+    DEFINE CHANNEL(SMALLQMGRCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
     set chlauth(SMALLQMGRCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
 ---
@@ -25,7 +25,7 @@ kind: QueueManager
 metadata:
   name: smallmq
 spec:
-  version: 9.2.0.0-r1
+  version: 9.2.0.0-r2
   license:
     accept: true
     license: L-RJON-BN7PN3
@@ -51,8 +51,8 @@ spec:
         memory: "256Mi"
     mqsc:
       - configMap:
-          name: mqsmallmqsc        
-          items: 
+          name: mqsmallmqsc
+          items:
             - disablesecurity.mqsc
   template:
     pod:

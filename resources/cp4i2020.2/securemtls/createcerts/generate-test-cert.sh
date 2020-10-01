@@ -54,7 +54,7 @@ echo "#### Add the key and certificate to a kdb key store, for the application t
 runmqckm -keydb -create -db ${KEYDB_APP} -pw ${PASSWORD} -type cms -stash
 echo "#### Adding certs and keys to kdb key store, for the application to use"
 runmqckm -cert -add -db ${KEYDB_APP} -file ${CERT} -stashed
-runmqckm -cert -import -file ${KEYP12_APP} -pw password -target ${KEYDB_APP} -target_stashed
+runmqckm -cert -import -file ${KEYP12_APP} -pw password -target ${KEYDB_APP} -target_stashed -label 1 -new_label aceclient
 
 # Add the certificate to a trust store in JKS format, for Server to use when connecting
 echo "#### Creating JKS format, for Server to use when connecting"
@@ -63,7 +63,7 @@ echo "#### Adding certs and keys to JKS"
 runmqckm -cert -add -db server.jks -file ${CERT_APP} -pw password
 runmqckm -cert -import -file ${KEYP12_APP} -pw password -target server.jks -target_pw password
 
- 
+
 
 # Add the certificate to a trust store in JKS format, for Client to use when connecting
 echo "#### Creating JKS format, for application to use when connecting"

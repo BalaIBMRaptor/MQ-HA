@@ -6,7 +6,7 @@ metadata:
 data:
   disablesecurity.mqsc: |-
     define ql(APPQ)
-    DEFINE CHANNEL(TRACECHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ECDHE_RSA_AES_128_CBC_SHA256')
+    DEFINE CHANNEL(TRACECHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
     set chlauth(TRACECHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
 ---
@@ -51,8 +51,8 @@ spec:
         memory: "512Mi"
     mqsc:
       - configMap:
-          name: tracemqsc        
-          items: 
+          name: tracemqsc
+          items:
             - disablesecurity.mqsc
   template:
     pod:
