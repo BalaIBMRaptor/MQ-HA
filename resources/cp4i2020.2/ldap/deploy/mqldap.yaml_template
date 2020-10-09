@@ -6,7 +6,7 @@ metadata:
 data:
   ldap.mqsc: |-
     DEFINE QLOCAL('Q1')
-    DEFINE CHANNEL(QMLDAP_SVRCONN) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCIPH(ECDHE_RSA_AES_128_CBC_SHA256) SSLCAUTH(OPTIONAL)
+    DEFINE CHANNEL(QMLDAP_SVRCONN) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCIPH(ANY_TLS12_OR_HIGHER) SSLCAUTH(OPTIONAL)
     SET CHLAUTH(QMLDAP_SVRCONN) TYPE(BLOCKUSER) ACTION(REPLACE) USERLIST('nobody')
     DEFINE AUTHINFO(USE.LDAP) AUTHTYPE(IDPWLDAP) CONNAME('ldap-service.ldap(389)') LDAPUSER('cn=admin,dc=ibm,dc=com') LDAPPWD('admin') SECCOMM(NO) USRFIELD('uid') SHORTUSR('uid') BASEDNU('ou=people,dc=ibm,dc=com') AUTHORMD(SEARCHGRP) BASEDNG('ou=groups,dc=ibm,dc=com') GRPFIELD('cn') CLASSGRP('groupOfUniqueNames') FINDGRP('uniqueMember')
     ALTER QMGR CONNAUTH(USE.LDAP)
@@ -30,7 +30,7 @@ kind: QueueManager
 metadata:
   name: ldapmq
 spec:
-  version: 9.2.0.0-r1
+  version: 9.2.0.0-r2
   license:
     accept: true
     license: L-RJON-BN7PN3
@@ -48,8 +48,8 @@ spec:
   queueManager:
     mqsc:
       - configMap:
-          name: mqldapmqsc        
-          items: 
+          name: mqldapmqsc
+          items:
             - ldap.mqsc
     storage:
       queueManager:

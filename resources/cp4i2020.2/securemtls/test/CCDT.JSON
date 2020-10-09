@@ -1,14 +1,14 @@
 {
-    "channel": 
+    "channel":
     [
         {
             "name": "MTLSQMCHL",
-            "clientConnection": 
+            "clientConnection":
             {
-                "connection": 
+                "connection":
                 [
                     {
-                        "host": "mtlsqmdev-ibm-mq-qm-cp4i.apps.callumocp446.cp.fyre.ibm.com",
+                        "host": "mtlsqm-ibm-mq-qm-cp4i.apps.callumj.icp4i.com",
                         "port": 443
                     }
                 ],
@@ -16,8 +16,8 @@
             },
             "transmissionSecurity":
             {
-              "cipherSpecification": "ECDHE_RSA_AES_128_CBC_SHA256",
-              "certificateLabel": "1"
+              "cipherSpecification": "ANY_TLS12_OR_HIGHER",
+              "certificateLabel": "aceclient"
             },
             "type": "clientConnection"
         }
