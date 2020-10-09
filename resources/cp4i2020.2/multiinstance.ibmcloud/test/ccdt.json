@@ -1,0 +1,28 @@
+{
+  "channel":
+  [
+    {
+      "general":
+      {
+        "description": "MQ Non Persistent channel details"
+      },
+      "name": "MIQMGRCHL",
+      "clientConnection":
+      {
+        "connection":
+        [
+          {
+            "host": "multiinstancemq-ibm-mq-qm-icp4i.icp4ioa-f759d6bacb067a9de325a02b179d9665-0000.us-east.containers.appdomain.cloud",
+            "port": 443
+          }
+        ],
+        "queueManager": "multiinstancemq"
+      },
+      "transmissionSecurity":
+      {
+        "cipherSpecification": "ANY_TLS12_OR_HIGHER"
+      },
+	  "type": "clientConnection"
+    }
+  ]
+}
