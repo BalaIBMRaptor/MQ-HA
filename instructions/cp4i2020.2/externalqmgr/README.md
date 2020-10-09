@@ -26,14 +26,14 @@ OpenShift environment.
 1. To start deploying, navigate to *../deploy* directory and run **./install.sh** command. Four new files will be created. 
    <img src="img/2.png" width="600" alt="Deployment">
    
-1. To view your running pod, run the **oc get pod | grep external** command. It might need up to a minute for the pod to start. 
+1. To view your running pod, run the **oc get pod | grep external** command. It might need up to a minute for the pod to start.     
    <img src="img/3.png" width="600" alt="Running pods">
 
 ## Step 3 - Test the deployment
 Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
 
 1. In the CCDT.JSON file, you need to update the host next to *host:* with your host name. To get your host name, run the **oc get route | grep external** command on your terminal. Your host name should start with *externalmq-ibm-mq-qm*:   
-   <img src="img/4.png" width="600" alt="Choosing the right host name">
+   <img src="img/4.png" width="550" alt="Choosing the right host name">
 
 1. In the getMessage.sh and sendMessage.sh files, you need to replace the first three parts of the paths in the two export commands in each file. To get the new path, run the **pwd** command on your terminal and copy the first three parts of the path. It should look something similar to: *home/name/2020.2*.    
    <img src="img/4-2.png" width="400" alt="Replacing the first three parts of the path">
