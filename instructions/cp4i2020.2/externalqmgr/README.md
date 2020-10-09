@@ -36,13 +36,17 @@ Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessag
    <img src="img/4.png" width="600" alt="Choosing the right host name">
 
 1. In the getMessage.sh and sendMessage.sh files, you need to replace the first three parts of the paths in the two export commands in each file. To get the new path, run the **pwd** command on your terminal and copy the first three parts of the path. It should look something similar to: *home/name/2020.2*. 
+
    <img src="img/4-2.png" width="400" alt="Replacing the first three parts of the path">
 
 1. To initiate the testing, run the **./sendMessage.sh** command. It will then connect to MQ and start sending messages incessantly. 
+
    <img src="img/5.png" width="600" alt="Sending messages">
 
 1. Open another command window and run the **./getMessage.sh** command. You should get a list of the all messages that have been previously sent before running the command and the ones that are being sent after. 
+
    <img src="img/6.png" width="600" alt="Receiving messages">
 
 1. You can clean up after this process by navigating to the *../deploy* directory and running the command **./cleanup.sh**. This will delete everything. 
+
    <img src="img/8.png" width="600" alt="Cleaning up">
