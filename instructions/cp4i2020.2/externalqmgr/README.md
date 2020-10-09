@@ -1,5 +1,5 @@
 # Connect an External IBM MQ Queue Manager on the Cloud Pak for Integration
-These instructions will document the process to deploy an external MQ queue manager on the Cloud Pak for Integration (CP4I) 2020.2.1.
+These instructions document the process to deploy an MQ queue manager on the Cloud Pak for Integration (CP4I) 2020.2.1 that can be accessed from outside of the OpenShift environment.
 
 ## Pre-reqs
 To run the following you need to have installed:
