@@ -33,6 +33,7 @@ apiVersion: mq.ibm.com/v1beta1
 kind: QueueManager
 metadata:
   name: mtlsqm
+  namespace: $TARGET_NAMESPACE
 spec:
   version: 9.2.0.0-r2
   license:

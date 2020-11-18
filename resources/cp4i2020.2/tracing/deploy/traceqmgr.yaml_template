@@ -24,6 +24,7 @@ apiVersion: mq.ibm.com/v1beta1
 kind: QueueManager
 metadata:
   name: tracemq
+  namespace: $TARGET_NAMESPACE
 spec:
   version: 9.2.0.0-r1
   license:

@@ -1,0 +1,479 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-advanced-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ Advanced"
+        productID: "208423bb063c43288328b1d788745b0c"
+        productChargedContainers: "All" 
+        productMetric: "PROCESSOR_VALUE_UNIT" 
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-advanced-ha-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ Advanced High Availability Replica"
+        productID: "546cb719714942c18748137ddd8d5659"
+        productChargedContainers: "All" 
+        productMetric: "PROCESSOR_VALUE_UNIT"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-base-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ"
+        productID: "c661609261d5471fb4ff8970a36bccea"
+        productChargedContainers: "All"
+        productMetric: "PROCESSOR_VALUE_UNIT" 
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-base-ha-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ High Availability Replica"
+        productID: "2a2a8e0511c849969d2f286670ea125e"
+        productChargedContainers: "All"
+        productMetric: "PROCESSOR_VALUE_UNIT"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-dev-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ Advanced for Developers"
+        productID: "2f886a3eefbe4ccb89b2adb97c78b9cb"
+        productChargedContainers: "All"
+        productMetric: "FREE"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-advanced-cp4i-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ Advanced with CP4I License"
+        productID: "208423bb063c43288328b1d788745b0c"
+        productChargedContainers: "All" 
+        productMetric: "VIRTUAL_PROCESSOR_CORE"
+        productCloudpakRatio: "2:1"
+        cloudpakName: "IBM Cloud Pak for Integration"
+        cloudpakId: "c8b82d189e7545f0892db9ef2731b90d"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-advanced-cp4i-ha-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ Advanced High Availability Replica with CP4I License"
+        productID: "546cb719714942c18748137ddd8d5659"
+        productChargedContainers: "All"
+        productMetric: "VIRTUAL_PROCESSOR_CORE"
+        productCloudpakRatio: "10:1"
+        cloudpakName: "IBM Cloud Pak for Integration"
+        cloudpakId: "c8b82d189e7545f0892db9ef2731b90d"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-advanced-cp4i-nonprod-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ Advanced for Non-Production with CP4I License"
+        productID: "21dfe9a0f00f444f888756d835334909"
+        productChargedContainers: "All"
+        productMetric: "VIRTUAL_PROCESSOR_CORE"
+        productCloudpakRatio: "4:1"
+        cloudpakName: "IBM Cloud Pak for Integration"
+        cloudpakId: "c8b82d189e7545f0892db9ef2731b90d"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-advanced-cp4i-ha-nonprod-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ Advanced High Availability Replica for Non-Production with CP4I License"
+        productID: "b3f8f984007d47fb981221589cc50081"
+        productChargedContainers: "All"
+        productMetric: "VIRTUAL_PROCESSOR_CORE"
+        productCloudpakRatio: "20:1"
+        cloudpakName: "IBM Cloud Pak for Integration"
+        cloudpakId: "c8b82d189e7545f0892db9ef2731b90d"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-base-cp4i-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ with CP4I License"
+        productID: "c661609261d5471fb4ff8970a36bccea"
+        productChargedContainers: "All"
+        productMetric: "VIRTUAL_PROCESSOR_CORE"
+        productCloudpakRatio: "4:1"
+        cloudpakName: "IBM Cloud Pak for Integration"
+        cloudpakId: "c8b82d189e7545f0892db9ef2731b90d"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-base-ha-cp4i-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ High Availability Replica with CP4I License"
+        productID: "2a2a8e0511c849969d2f286670ea125e"
+        productChargedContainers: "All"
+        productMetric: "VIRTUAL_PROCESSOR_CORE"
+        productCloudpakRatio: "20:1"
+        cloudpakName: "IBM Cloud Pak for Integration"
+        cloudpakId: "c8b82d189e7545f0892db9ef2731b90d"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-base-cp4i-nonprod-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ with CP4I License Non-Production"
+        productID: "151bec68564a4a47a14e6fa99266deff"
+        productChargedContainers: "All"
+        productMetric: "VIRTUAL_PROCESSOR_CORE"
+        productCloudpakRatio: "8:1"
+        cloudpakName: "IBM Cloud Pak for Integration"
+        cloudpakId: "c8b82d189e7545f0892db9ef2731b90d"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mq-advanced-ha-cp4i-nonprod-container
+  labels:
+    app: ibmcommq
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ibmcommq
+  template:
+    metadata:
+      annotations:
+        productName: "IBM MQ High Availability Replica with CP4I License Non-Production"
+        productID: "f5d0e21c013c4d4b8b9b2ce701f31928"
+        productChargedContainers: "All"
+        productMetric: "VIRTUAL_PROCESSOR_CORE"
+        productCloudpakRatio: "40:1"
+        cloudpakName: "IBM Cloud Pak for Integration"
+        cloudpakId: "c8b82d189e7545f0892db9ef2731b90d"
+      labels:
+        app: ibmcommq
+    spec:
+      containers:
+      - name: ibmcommq
+        image: openshift/hello-openshift
+        resources:
+          limits:
+            cpu: "1"
+          requests:
+            cpu: "0.5"
+        env:
+        - name: LICENSE
+          value: "accept"
+        ports:
+        - containerPort: 80
+---
