@@ -64,7 +64,7 @@ I have therefore installed only the components required for CP4I and MQ.
    ```
    oc create secret docker-registry ibm-entitlement-key --docker-server=cp.icr.io --docker-username=cp --docker-password=<YOUR ENTITLEMENT_KEY> --docker-email=callumj@uk.ibm.com -n cp4i
    ```
-1. Navigate to Operators --> Operator Hub, search for *Cloud Pak*, select *IBM Cloud Pak for Integration Platform Navigator*:      
+1. Navigate to Operators --> Operator Hub, search for *Platform Navigator*, select *IBM Cloud Pak for Integration Platform Navigator*:      
    ![Select CP4I](img/installcp4i.png)      
 1. Click *Install*
 1. Select the *A specific namespace on the cluster* and change the namespace to *cp4i* and then click on subscribe:      
