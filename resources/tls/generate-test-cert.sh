@@ -37,6 +37,6 @@ keytool -importkeystore -srckeystore ${PKCS} \
         -srcstoretype PKCS12 \
         -destkeystore client-trust.jks \
         -deststoretype JKS \
-	-srcstorepass ${PASSWORD} 
-	-deststorepass ${PASSWORD}
+	-srcstorepass ${PASSWORD} \
+	-deststorepass ${PASSWORD} \
 	-noprompt
