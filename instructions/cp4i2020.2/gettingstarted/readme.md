@@ -74,7 +74,7 @@ I have therefore installed only the components required for CP4I and MQ.
 1. The IBM MQ operator now needs to be installed, navigator to  Operators --> Operator Hub, search for *IBM MQ*:    
    ![Select CP4I](img/mqoperatorsearch.png)       
 1. Click *Install*     
-1. Select the *A specific namespace on the cluster*, change the namespace to *cp4i*, and click subscribe:      
+1. There are multiple versions (refered to as a *channel*) of the MQ Operator. v1.3-eus corresponds to the Cloud Pak for Integration 2020.4 release, while v1.4 corresponds to the IBM MQ 9.2.1 release. Both can be used in the context of the Cloud Pak for Integration, but only the v1.3-eus provides the enhanced life cycle support (e.g. support for 18 months). Select the *v1.3-eus* channel, *A specific namespace on the cluster*, change the namespace to *cp4i*, and click subscribe:      
    ![Install MQ Operator](img/installmqoperator.png)      
 1. An instance of the Platform Navigator needs to be deployed using the Platform Navigator operator, select *IBM Cloud Pak for Integration Platform Navigator*:       
    ![Select IBM Clould Pak for Integration Platform Navigator](img/selectplatformoperator.png)      
