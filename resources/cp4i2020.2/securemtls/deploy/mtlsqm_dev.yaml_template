@@ -29,10 +29,10 @@ kind: QueueManager
 metadata:
   name: mtlsqm
 spec:
-  version: 9.2.0.0-r2
+  version: 9.2.0.1-r1-eus
   license:
     accept: true
-    license: L-APIG-BMKG5H
+    license: L-RJON-BUVMQX
     use: Development
   pki:
     keys:
