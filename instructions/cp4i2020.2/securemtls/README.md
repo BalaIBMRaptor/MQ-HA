@@ -28,7 +28,7 @@ To run the following you need to have installed:
    ![Generating new keys](img/1.png)
 
 ## Step 3 - Deploy the MQ Queue Manager with associated resources
-1. Log into the OpenShift environment, and then click on your username on the top right menu. Then click on **Copy Login Command**. Click on **Display Token**, copy the token and run on your terminal.
+1. Log into the OpenShift environment, and then click on your username on the top right menu. Then click on **Copy Login Command**. Click on **Display Token**, copy the token and run on your terminal.    
    ![Top right menu in the Openshit environment](img/2.png)
 
 1. Run the command: **oc project cp4i** to navigate to the cp4i project.
