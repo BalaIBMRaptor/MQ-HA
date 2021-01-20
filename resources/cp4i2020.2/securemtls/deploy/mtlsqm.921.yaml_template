@@ -1,0 +1,84 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: mtlsmqsc
+  namespace: $TARGET_NAMESPACE
+data:
+  example.mqsc: |-
+    DEFINE QLOCAL('APPQ')
+    DEFINE CHANNEL(MTLSQMCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(REQUIRED) SSLCIPH('ANY_TLS12_OR_HIGHER')
+    ALTER AUTHINFO(SYSTEM.DEFAULT.AUTHINFO.IDPWOS) AUTHTYPE(IDPWOS) ADOPTCTX(YES) CHCKCLNT(OPTIONAL) CHCKLOCL(OPTIONAL) AUTHENMD(OS)
+    SET CHLAUTH('MTLSQMCHL') TYPE(SSLPEERMAP) SSLPEER('CN=application1,OU=app team1') USERSRC(MAP) MCAUSER('app1') ACTION(ADD)
+    REFRESH SECURITY TYPE(CONNAUTH)
+    SET AUTHREC PRINCIPAL('app1') OBJTYPE(QMGR) AUTHADD(CONNECT,INQ)
+    SET AUTHREC PROFILE('APPQ') PRINCIPAL('app1') OBJTYPE(QUEUE) AUTHADD(BROWSE,GET,INQ,PUT)
+  example.ini: |-
+    Service:
+      Name=AuthorizationService
+      EntryPoints=14
+      SecurityPolicy=UserExternal
+---
+kind: Secret
+apiVersion: v1
+metadata:
+  name: mqcert
+  namespace: $TARGET_NAMESPACE
+data:
+  tls.key: $QM_KEY
+  tls.crt: $QM_CERT
+  app.crt: $APP_CERT
+type: Opaque
+---
+apiVersion: mq.ibm.com/v1beta1
+kind: QueueManager
+metadata:
+  name: mtlsqm
+  namespace: $TARGET_NAMESPACE
+spec:
+  version: 9.2.1.0-r1
+  license:
+    accept: true
+    license: L-APIG-BMJJBM
+    use: "Production"
+  pki:
+    keys:
+    - name: default
+      secret:
+        secretName: mqcert
+        items:
+          - tls.key
+          - tls.crt
+    trust:
+    - name: app
+      secret:
+        secretName: mqcert
+        items:
+          - app.crt
+  web:
+    enabled: true
+  queueManager:
+    ini:
+      - configMap:
+          name: mtlsmqsc
+          items:
+            - example.ini
+    mqsc:
+      - configMap:
+          name: mtlsmqsc
+          items:
+            - example.mqsc
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: mq-mtls-traffic-operator-test
+  namespace: $TARGET_NAMESPACE
+spec:
+  host: mtlsqmchl.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: mtlsqm-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
