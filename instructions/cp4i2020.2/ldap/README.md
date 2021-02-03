@@ -45,7 +45,7 @@ OpenShift environment.
 ## Step 5 - Test the deployment
 Navigate to *../test* directory. You will find three files: CCDT.JSON, getMessage.sh, and sendMessage.sh. Open them in any text editor.
 
-1. In the CCDT.JSON file, you need to update the host next to *host:* with your host name. To get your host name, run the **oc get routes | grep mtlsqm** command on your terminal. Your host name should start with *ldapmq-ibm-mq-qm*:
+1. In the CCDT.JSON file, you need to update the host next to *host:* with your host name. To get your host name, run the **oc get routes | grep ldapmq** command on your terminal. Your host name should start with *ldapmq-ibm-mq-qm*:
    ![Choosing the right host name](img/5.png)
 
 1. In the getMessage.sh and sendMessage.sh files, you need to replace the first three parts of the paths in the two export commands in each file. To get the new path, run the **pwd** command on your terminal and copy the first three parts of the path. It should look something similar to: *home/name/2020.2*.
