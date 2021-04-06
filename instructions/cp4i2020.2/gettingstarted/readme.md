@@ -1,4 +1,4 @@
-# Getting Started with MQ on Cloud Pak for Integration 2020.2
+# Getting Started with MQ on Cloud Pak for Integration 2021.1
 
 These instructions document how to setup MQ within Cloud Pak for Integration which is accessible from within the OpenShift Cluster. 
 The instructions have been created using a fresh OpenShift environment deployed on AWS however the process should be similar on other environments.
@@ -69,20 +69,23 @@ I have therefore installed only the components required for CP4I and MQ.
 1. Click *Install*
 1. Select the *A specific namespace on the cluster* and change the namespace to *cp4i* and then click on subscribe:      
    ![Select CP4I](img/installcp4ioperator.png)    
+1. Click on the *View installed Operators in Namespace cp4i*
 1. This will install three operators within the cp4i namespace and once these are installed (a couple of minutes) it should look like the following:       
    ![Select CP4I](img/cp4iinstalledoperators.png)    
 1. The IBM MQ operator now needs to be installed, navigator to  Operators --> Operator Hub, search for *IBM MQ*:    
    ![Select CP4I](img/mqoperatorsearch.png)       
 1. Click *Install*     
-1. There are multiple versions (refered to as a *channel*) of the MQ Operator. v1.3-eus corresponds to the Cloud Pak for Integration 2020.4 release, while v1.4 corresponds to the IBM MQ 9.2.1 release. Both can be used in the context of the Cloud Pak for Integration, but only the v1.3-eus provides the enhanced life cycle support (e.g. support for 18 months). Select the *v1.3-eus* channel, *A specific namespace on the cluster*, change the namespace to *cp4i*, and click subscribe:      
+1. There are multiple versions (refered to as a *channel*) of the MQ Operator. v1.3-eus corresponds to the Cloud Pak for Integration 2020.4 release, v1.4 corresponds to IBM MQ 9.2.1, and v1.5 to the CP4I 2021.1 release. All can be used in the context of the Cloud Pak for Integration, but only the v1.3-eus provides the enhanced life cycle support (e.g. support for 18 months). Select the *v1.5* channel (as we are completing a 2021.1 deployment), *A specific namespace on the cluster*, change the namespace to *cp4i*, and click subscribe:      
    ![Install MQ Operator](img/installmqoperator.png)      
+1. Click on the *View installed Operators in Namespace cp4i*
 1. An instance of the Platform Navigator needs to be deployed using the Platform Navigator operator, select *IBM Cloud Pak for Integration Platform Navigator*:       
    ![Select IBM Clould Pak for Integration Platform Navigator](img/selectplatformoperator.png)      
 1. Select the *Platform Navigator* tab and click on *Create PlatformNavigator*:      
    ![Create IBM Clould Pak for Integration Platform Navigator](img/createplatformnavigator.png)     
-1. In the YAML editor change the *accept: false* to *true* and click *Create*:   
+   > :warning: **The Cloud Pak for Integration 2021.1 depends on the ZenUI from the Automation Foundation team. This requires Read Write Many storage. On AWS this will be EFS, on IBM Cloud Gold File. Without this storage you will be unable to deploy the Platform Navigator**
+1. In the form editor, expand the license section and accept the license. In the storage section, select a read-write-many storage class from the pull down (e.g. aws-efs) and click *Create*:   
    ![Create IBM Clould Pak for Integration Platform Navigator](img/acceptlicensecp4i.png)     
-1. The platform navigator will then be deployed and the status changes to *Condition: Ready* once it is available (this can take 15 minutes or so as IBM Common Services needs to be installed). At this stage, you can click into the entry, open the Platform Navigator UI by clicking on the entry's hyperlink:       
+1. The platform navigator will then be deployed and the status changes to *Condition: Ready* once it is available (this can take 45 minutes or so as IBM Common Services needs to be installed). At this stage, you can click into the entry, open the Platform Navigator UI by clicking on the entry's hyperlink:       
    ![View the IBM Clould Pak for Integration Platform Navigator](img/viewplatformurl.png)   
 1. This will open the Platform Navigator and request you to enter a username and password, the default admin password can be found by running the following: ```oc -n ibm-common-services get secret platform-auth-idp-credentials -o jsonpath='{.data.admin_password}' | base64 -d```:     
    ![Login to the IBM Clould Pak for Integration Platform Navigator](img/loginincp4i.png)      
