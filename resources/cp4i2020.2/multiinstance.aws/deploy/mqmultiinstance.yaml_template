@@ -1,20 +1,29 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: nativehamqsc
+  name: mqmultiinstancemqsc
   namespace: $TARGET_NAMESPACE
 data:
-  nativehamqsc.mqsc: |-
-    define ql(APPQ) DEFPSIST(YES)
-    define ql(APPQ1) DEFPSIST(YES)
-    DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
-    set chlauth(MQEXTERNALCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
+  disablesecurity.mqsc: |-
+    define ql(APPQ)
+    define ql(APPQ1)
+    define ql(APPQ2)
+    define ql(APPQ3)
+    define ql(APPQ4)
+    define ql(APPQ5)
+    define ql(APPQ6)
+    define ql(APPQ7)
+    define ql(APPQ8)
+    define ql(APPQ9)
+    define ql(APPQ10)
+    DEFINE CHANNEL(MIQMGRCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
+    set chlauth(MIQMGRCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
 ---
 kind: Secret
 apiVersion: v1
 metadata:
-  name: nativehacert
+  name: mqmultiinstancecert
   namespace: $TARGET_NAMESPACE
 data:
   tls.crt: LS0tLS1CRUdJTiBDRVJUSUZJQ0FURS0tLS0tCk1JSURDVENDQWZHZ0F3SUJBZ0lVR0tiaE5ZWXJMZVdqUFBVTlp5RldJTjJQWExRd0RRWUpLb1pJaHZjTkFRRUwKQlFBd0ZERVNNQkFHQTFVRUF3d0piRzlqWVd4b2IzTjBNQjRYRFRJd01ERXdOakV3TURjeU4xb1hEVE13TURFdwpNekV3TURjeU4xb3dGREVTTUJBR0ExVUVBd3dKYkc5allXeG9iM04wTUlJQklqQU5CZ2txaGtpRzl3MEJBUUVGCkFBT0NBUThBTUlJQkNnS0NBUUVBem5EbkpGaHhFMGRMTFdhOUZZQlBvakZNdWVSL1pESXJZTEE0OGFWYVNNYU8KRjhNT0o0RGpHQWJ1L0UwbjlIR3JxSXI5bnRSc29SZkhjMFdhcExDcFdwdXdnWlBFSXVXR25MS2xjdVJtYnRVVApUUlkvQkhITEtrVUFncnlCUXVqZFh2RFRobnltYXZCUGpLM1QxZlZFMGNFT1lHQTlHanJYU0IzT2hQR1pHQmxOCmM5NXppZEZSOVZyWHQwRFJDVkFrNjRmYlRoa3V2SDh1TkV1VGFodlVFOVJIZmRzajJzZU81S0k3bmdYMG1IUUIKcUlMdVAzcGEreU1WNUc4TlBaalN4U0IwQjNlS3YraUNjV2hSdTZSRmIyZmNmZXpnbm1TcFJYVTUwS1lxV1piZApvc0czaFFxU1JRUTJZUmR5NzZaMGJKb3FGM3N0aGJJaTZ5TmYvTVQ5ZndJREFRQUJvMU13VVRBZEJnTlZIUTRFCkZnUVVIQlBGY0FyTy9ZUmxiZ0tobmkxSVdnS0Z5VEF3SHdZRFZSMGpCQmd3Rm9BVUhCUEZjQXJPL1lSbGJnS2gKbmkxSVdnS0Z5VEF3RHdZRFZSMFRBUUgvQkFVd0F3RUIvekFOQmdrcWhraUc5dzBCQVFzRkFBT0NBUUVBWkZ6SQpaLzZOay9TQmY0WXJHdVdNSzVjTTRLdldjWUdXQWlndTZ1TzZvV2VUVmdYamtGbE9GZ2RHRVhpSjFZNi9mRFBCCitaMVE0SERMYm1hbGE1aXRqeVhXbWFsRTFFOHR2bThGMDA5ZEFPL0oxUmNyS1VZcUFKbGJQNTZtbmt1QmtqZE0KYzAyMkhXOTd0RUpkYXViTlF2ZWJraDhZK1loUGVkV242ZmFtMVM1S2cwYUlVUWRKd0FuZDlCb2hLVkk3SHFFZgpoUktDYmJFZzNySXlSS0FLdk5DRXlvMjY4b3VIcll3Mi9WMEhMU0VnWEU3UTFxWTVKaXF6Y3Iyb0EvU2xZdGZwCnZYZFhKajA3OGJ1N3hrS2FxZkxpN3FTSzdjSVRjWjNWcldGOWZCbEh5MVV1K2V1NVNhN29udFR2MktON2Joc1QKNGczVTlMdWR2L01xTE5EWDVnPT0KLS0tLS1FTkQgQ0VSVElGSUNBVEUtLS0tLQo=
@@ -24,32 +33,44 @@ type: Opaque
 apiVersion: mq.ibm.com/v1beta1
 kind: QueueManager
 metadata:
-  name: nativeha
-  namespace: $TARGET_NAMESPACE
+  name: multiinstancemq
 spec:
-  version: 9.2.2.0-r1
+  version: 9.2.0.1-r1-eus
   license:
     accept: true
-    license: L-RJON-BYRMYW
+    license: L-RJON-BUVMQX
     use: "NonProduction"
   pki:
     keys:
     - name: default
       secret:
-        secretName: nativehacert
+        secretName: mqmultiinstancecert
         items:
           - tls.key
           - tls.crt
   web:
     enabled: true
   queueManager:
+    availability:
+      type: MultiInstance
+    storage:
+      defaultClass: aws-efs
+      persistedData:
+        enabled: true
+      queueManager:
+        enabled: true
+      recoveryLogs:
+        enabled: true
     mqsc:
       - configMap:
-          name: nativehamqsc
+          name: mqmultiinstancemqsc
           items:
-            - nativehamqsc.mqsc
-    availability:
-      type: NativeHA
+            - disablesecurity.mqsc
+    resources:
+      limits:
+        cpu: 250m
+      requests:
+        cpu: 250m
   template:
     pod:
       containers:
@@ -57,3 +78,19 @@ spec:
             - name: MQSNOAUT
               value: 'yes'
           name: qmgr
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: mq-traffic-mq-multiinstance-ibm-mq-qm
+  namespace: $TARGET_NAMESPACE
+spec:
+  host: miqmgrchl.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: multiinstancemq-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
+  wildcardPolicy: None

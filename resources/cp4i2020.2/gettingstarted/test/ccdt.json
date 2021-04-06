@@ -12,7 +12,7 @@
         "connection":
         [
           {
-            "host": "gsmq-ibm-mq-qm-cp4i.apps.callumj.icp4i.com",
+            "host": "gsmq-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com",
             "port": 443
           }
         ],

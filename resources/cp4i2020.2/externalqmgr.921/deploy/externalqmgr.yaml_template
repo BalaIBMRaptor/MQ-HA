@@ -6,6 +6,16 @@ metadata:
 data:
   mqexternal.mqsc: |-
     define ql(APPQ)
+    define ql(APPQ0)
+    define ql(APPQ1)
+    define ql(APPQ2)
+    define ql(APPQ3)
+    define ql(APPQ4)
+    define ql(APPQ5)
+    define ql(APPQ6)
+    define ql(APPQ7)
+    define ql(APPQ8)
+    define ql(APPQ9)
     DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
     set chlauth(MQEXTERNALCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
@@ -42,7 +52,11 @@ spec:
   web:
     enabled: true
   queueManager:
-    type: ephemeral
+    resources:
+      limits:
+        cpu: 250m
+      requests:
+        cpu: 250m
     mqsc:
       - configMap:
           name: externalmqwithoutcustomroutemqsc
