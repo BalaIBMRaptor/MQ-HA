@@ -6,10 +6,10 @@ metadata:
 data:
   uniformcluster.mqsc: |-
     ALTER QMGR REPOS(UNICLUSTER)
-    define channel('UNICLUSTER_UCQM1') chltype(CLUSRCVR) trptype(tcp) conname('ucqm1-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') replace
-    define channel('UNICLUSTER_UCQM2') chltype(CLUSSDR) trptype(tcp) conname('ucqm2-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCIPH('ANY_TLS12_OR_HIGHER') replace
+    define channel('UNICLUSTER_UCQM1') chltype(CLUSRCVR) trptype(tcp) HBINT(30) conname('ucqm1-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') replace
+    define channel('UNICLUSTER_UCQM2') chltype(CLUSSDR) trptype(tcp) HBINT(30) conname('ucqm2-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCIPH('ANY_TLS12_OR_HIGHER') replace
     define ql(APPQ) DEFPSIST(YES)
-    DEFINE CHANNEL(UNICLUSTER_CHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
+    DEFINE CHANNEL(UNICLUSTER_CHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) HBINT(30) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
     set chlauth(UNICLUSTER_*) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
   qm.ini: |-
@@ -27,10 +27,10 @@ metadata:
 data:
   uniformcluster.mqsc: |-
     ALTER QMGR REPOS(UNICLUSTER)
-    define channel('UNICLUSTER_UCQM2') chltype(CLUSRCVR) trptype(tcp) conname('ucqm2-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') replace
-    define channel('UNICLUSTER_UCQM1') chltype(CLUSSDR) trptype(tcp) conname('ucqm1-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCIPH('ANY_TLS12_OR_HIGHER') replace
+    define channel('UNICLUSTER_UCQM2') chltype(CLUSRCVR) trptype(tcp) HBINT(30) conname('ucqm2-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') replace
+    define channel('UNICLUSTER_UCQM1') chltype(CLUSSDR) trptype(tcp) HBINT(30) conname('ucqm1-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCIPH('ANY_TLS12_OR_HIGHER') replace
     define ql(APPQ) DEFPSIST(YES)
-    DEFINE CHANNEL(UNICLUSTER_CHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
+    DEFINE CHANNEL(UNICLUSTER_CHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) HBINT(30) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
     set chlauth(UNICLUSTER_*) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
   qm.ini: |-

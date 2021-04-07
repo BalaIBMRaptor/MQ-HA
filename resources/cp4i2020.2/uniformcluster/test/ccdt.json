@@ -3,6 +3,10 @@
     [
         {
             "name": "UNICLUSTER_CHL",
+            "connectionManagement":
+            {
+              "heartbeatInterval": 30
+            },
             "clientConnection":
             {
                 "connection":
@@ -22,6 +26,10 @@
         },
         {
             "name": "UNICLUSTER_CHL",
+            "connectionManagement":
+            {
+              "heartbeatInterval": 30
+            },
             "clientConnection":
             {
                 "connection":
@@ -41,6 +49,33 @@
         },
         {
             "name": "UNICLUSTER_CHL",
+            "connectionManagement":
+            {
+              "heartbeatInterval": 30
+            },
+            "clientConnection":
+            {
+                "connection":
+                [
+                    {
+                        "host": "ucqm3-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com",
+                        "port": 443
+                    }
+                ],
+                "queueManager": "ANY_QM"
+            },
+            "transmissionSecurity":
+            {
+              "cipherSpecification": "ANY_TLS12_OR_HIGHER"
+            },
+            "type": "clientConnection"
+        },
+        {
+            "name": "UNICLUSTER_CHL",
+            "connectionManagement":
+            {
+              "heartbeatInterval": 30
+            },
             "clientConnection":
             {
                 "connection":
@@ -60,6 +95,10 @@
         },
         {
             "name": "UNICLUSTER_CHL",
+            "connectionManagement":
+            {
+              "heartbeatInterval": 30
+            },
             "clientConnection":
             {
                 "connection":
@@ -70,6 +109,29 @@
                     }
                 ],
                 "queueManager": "ucqm2"
+            },
+            "transmissionSecurity":
+            {
+              "cipherSpecification": "ANY_TLS12_OR_HIGHER"
+            },
+            "type": "clientConnection"
+        },
+        {
+            "name": "UNICLUSTER_CHL",
+            "connectionManagement":
+            {
+              "heartbeatInterval": 30
+            },
+            "clientConnection":
+            {
+                "connection":
+                [
+                    {
+                        "host": "ucqm3-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com",
+                        "port": 443
+                    }
+                ],
+                "queueManager": "ucqm3"
             },
             "transmissionSecurity":
             {
