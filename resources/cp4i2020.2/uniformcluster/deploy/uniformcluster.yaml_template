@@ -5,16 +5,16 @@ metadata:
   namespace: $TARGET_NAMESPACE
 data:
   uniformcluster.mqsc: |-
-    define channel('+AUTOCL+_+QMNAME+') chltype(clusrcvr) trptype(tcp) conname('+INICONNAME+') cluster('+AUTOCL+') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') replace
+    define channel('+AUTOCL+_+QMNAME+') chltype(clusrcvr) trptype(tcp) conname('+INICONNAME+') cluster('+AUTOCL+') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') HBINT(30) replace
     define ql(APPQ) DEFPSIST(YES)
     DEFINE CHANNEL(UNICLUSTER_CHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) HBINT(30) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
     set chlauth(UNICLUSTER_*) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
   allqms.ini: |-
     AutoCluster:
-      Repository2Conname=ucqm2-ibm-mq-qm-cp4i.$ROOTURL(443)
+      Repository2Conname=ucqm2-ibm-mq.$TARGET_NAMESPACE(1414)
       Repository2Name=ucqm2
-      Repository1Conname=ucqm1-ibm-mq-qm-cp4i.$ROOTURL(443)
+      Repository1Conname=ucqm1-ibm-mq.$TARGET_NAMESPACE(1414)
       Repository1Name=ucqm1
       ClusterName=UNICLUSTER
       Type=Uniform
@@ -29,7 +29,7 @@ metadata:
 data:
   qm.ini: |-
     Variables:
-      INICONNAME=ucqm1-ibm-mq-qm-cp4i.$ROOTURL(443)
+      INICONNAME=ucqm1-ibm-mq.$TARGET_NAMESPACE(1414)
 ---
 kind: ConfigMap
 apiVersion: v1
@@ -39,7 +39,7 @@ metadata:
 data:
   qm.ini: |-
     Variables:
-      INICONNAME=ucqm2-ibm-mq-qm-cp4i.$ROOTURL(443)
+      INICONNAME=ucqm2-ibm-mq.$TARGET_NAMESPACE(1414)
 ---
 kind: Secret
 apiVersion: v1

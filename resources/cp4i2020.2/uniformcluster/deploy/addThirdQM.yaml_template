@@ -6,7 +6,7 @@ metadata:
 data:
   qm.ini: |-
     Variables:
-      INICONNAME=ucqm3-ibm-mq-qm-cp4i.$ROOTURL(443)
+      INICONNAME=ucqm3-ibm-mq.$TARGET_NAMESPACE(1414)
 ---
 apiVersion: mq.ibm.com/v1beta1
 kind: QueueManager
