@@ -4,19 +4,9 @@ metadata:
   name: uniformclusterqm3
   namespace: $TARGET_NAMESPACE
 data:
-  uniformcluster.mqsc: |-
-    define channel('UNICLUSTER_UCQM3') chltype(CLUSRCVR) trptype(tcp) HBINT(5) conname('ucqm3-ibm-mq-qm-cp4i.$ROOTURL(443)') cluster('UNICLUSTER') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') replace
-    define channel('UNICLUSTER_UCQM1') chltype(CLUSSDR) trptype(tcp) HBINT(5) conname('ucqm1-ibm-mq-qm-cp4i.$ROOTURL(443)') cluster('UNICLUSTER') SSLCIPH('ANY_TLS12_OR_HIGHER') replace
-    define ql(APPQ) DEFPSIST(YES)
-    DEFINE CHANNEL(UNICLUSTER_CHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) HBINT(5) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
-    set chlauth(UNICLUSTER_*) TYPE(BLOCKUSER) USERLIST(NOBODY)
-    REFRESH SECURITY TYPE(CONNAUTH)
   qm.ini: |-
-    AutoCluster:
-      ClusterName=UNICLUSTER
-      Type=Uniform
-    SSL:
-      OutboundSNI=HOSTNAME
+    Variables:
+      INICONNAME=ucqm3-ibm-mq-qm-cp4i.$ROOTURL(443)
 ---
 apiVersion: mq.ibm.com/v1beta1
 kind: QueueManager
@@ -47,12 +37,16 @@ spec:
         cpu: 500m
     ini:
       - configMap:
+          name: uniformcluster
+          items:
+            - allqms.ini
+      - configMap:
           name: uniformclusterqm3
           items:
             - qm.ini
     mqsc:
       - configMap:
-          name: uniformclusterqm3
+          name: uniformcluster
           items:
             - uniformcluster.mqsc
     availability:
