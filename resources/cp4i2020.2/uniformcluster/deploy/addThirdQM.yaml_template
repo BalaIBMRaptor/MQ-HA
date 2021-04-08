@@ -5,8 +5,8 @@ metadata:
   namespace: $TARGET_NAMESPACE
 data:
   uniformcluster.mqsc: |-
-    define channel('UNICLUSTER_UCQM3') chltype(CLUSRCVR) trptype(tcp) HBINT(5) conname('ucqm3-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') replace
-    define channel('UNICLUSTER_UCQM1') chltype(CLUSSDR) trptype(tcp) HBINT(5) conname('ucqm1-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com(443)') cluster('UNICLUSTER') SSLCIPH('ANY_TLS12_OR_HIGHER') replace
+    define channel('UNICLUSTER_UCQM3') chltype(CLUSRCVR) trptype(tcp) HBINT(5) conname('ucqm3-ibm-mq-qm-cp4i.$ROOTURL(443)') cluster('UNICLUSTER') SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER') replace
+    define channel('UNICLUSTER_UCQM1') chltype(CLUSSDR) trptype(tcp) HBINT(5) conname('ucqm1-ibm-mq-qm-cp4i.$ROOTURL(443)') cluster('UNICLUSTER') SSLCIPH('ANY_TLS12_OR_HIGHER') replace
     define ql(APPQ) DEFPSIST(YES)
     DEFINE CHANNEL(UNICLUSTER_CHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) HBINT(5) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
     set chlauth(UNICLUSTER_*) TYPE(BLOCKUSER) USERLIST(NOBODY)
@@ -40,6 +40,11 @@ spec:
   web:
     enabled: true
   queueManager:
+    resources:
+      requests:
+        cpu: 100m
+      limits:
+        cpu: 500m
     ini:
       - configMap:
           name: uniformclusterqm3

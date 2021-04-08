@@ -5,8 +5,12 @@ green='\033[0;32m'
 lgreen='\033[1;32m'
 nc='\033[0m'
 
-export MQCCDTURL='/home/callum/git/MQonCP4I/resources/cp4i2020.2/uniformcluster/test/ccdt.json'
-export MQSSLKEYR='/home/callum/git/MQonCP4I/resources/cp4i2020.2/uniformcluster/test/key'
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )"
+export MQCCDTURL="${DIR}/ccdt_generated.json"
+export MQSSLKEYR="${DIR}/key"
+
+export ROOTURL="$(oc get routes ucqm1-ibm-mq-qm -n cp4i -o jsonpath='{.status.ingress[].routerCanonicalHostname}')"
+( echo "cat <<EOF" ; cat ccdt_template.json ; echo EOF ) | sh > ccdt_generated.json
 
 APPNAME=${2:-amqsghac}
 DELAY=${3:-1s}

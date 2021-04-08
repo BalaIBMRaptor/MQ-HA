@@ -1,6 +1,6 @@
 #! /bin/bash
 
-export TARGET_NAMESPACE=cp4i
+export TARGET_NAMESPACE=${1:-"cp4i"}
 
 oc delete queuemanager ucqm3 -n $TARGET_NAMESPACE
 oc delete configmap uniformclusterqm3 -n $TARGET_NAMESPACE
