@@ -2,7 +2,8 @@
 
 * [Getting started with MQ in the Cloud Pak for Integration 2021.1](instructions/cp4i2020.2/gettingstarted/readme.md)
 * [Secure IBM MQ using mTLS](instructions/cp4i2020.2/securemtls/README.md)
-* [Deploy a persistent Queue Manager in a High Availability mode suitable for demonstration](instructions/cp4i2020.2/multiinstance/README.md)
+* [NativeHA: Deploy a persistent Queue Manager in a High Availability mode suitable for demonstration](instructions/cp4i2020.2/nativeha/README.md)
+* [Multi-Instance: Deploy a persistent Queue Manager in a High Availability mode suitable for demonstration](instructions/cp4i2020.2/multiinstance/README.md)
 * [Configuring MQ with LDAP](instructions/cp4i2020.2/ldap/README.md)
 * [Using MQ and the Operations Dashboard](instructions/cp4i2020.2/tracing/readme.md)
 * [Connecting the MQ Explorer](instructions/cp4i2020.2/mqexplorer/readme.md)
@@ -27,4 +28,3 @@ This repository demonstrates how to get started with IBM MQ on the Cloud Pak for
 * [ADVANCED - Building a OpenShift Pipeline that automatically configures MQ LDAP configuration](instructions/MQBuildWithLDAPEnabled.md)
 * [ADVANCED - Loading MQSC configuration using a configMap](instructions/configMap.md)
 * [ADVANCED - Building a Uniform Cluster](instructions/uniformCluster/instructions.md)
-
