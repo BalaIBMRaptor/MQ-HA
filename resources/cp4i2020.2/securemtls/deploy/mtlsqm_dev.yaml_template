@@ -12,6 +12,11 @@ data:
     REFRESH SECURITY TYPE(CONNAUTH)
     SET AUTHREC PRINCIPAL('app1') OBJTYPE(QMGR) AUTHADD(CONNECT,INQ)
     SET AUTHREC PROFILE('APPQ') PRINCIPAL('app1') OBJTYPE(QUEUE) AUTHADD(BROWSE,GET,INQ,PUT)
+  example.ini: |-
+    Service:
+      Name=AuthorizationService
+      EntryPoints=14
+      SecurityPolicy=UserExternal
 ---
 kind: Secret
 apiVersion: v1
@@ -30,10 +35,10 @@ metadata:
   name: mtlsqm
   namespace: $TARGET_NAMESPACE
 spec:
-  version: 9.2.0.1-r1-eus
+  version: 9.2.1.0-r1
   license:
     accept: true
-    license: L-RJON-BUVMQX
+    license: L-APIG-BMJJBM
     use: Development
   pki:
     keys:
@@ -49,16 +54,14 @@ spec:
         secretName: mqcert
         items:
           - app.crt
-  template:
-    pod:
-      containers:
-       - name: qmgr
-         env:
-         - name: MQS_PERMIT_UNKNOWN_ID
-           value: "true"
   web:
     enabled: true
   queueManager:
+    resources:
+      requests:
+        cpu: 100m
+      limits:
+        cpu: 250m
     mqsc:
       - configMap:
           name: mtlsmqsc

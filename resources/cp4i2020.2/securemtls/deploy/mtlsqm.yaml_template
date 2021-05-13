@@ -16,7 +16,7 @@ data:
     Service:
       Name=AuthorizationService
       EntryPoints=14
-      SecurityPolicy=User
+      SecurityPolicy=UserExternal
 ---
 kind: Secret
 apiVersion: v1
@@ -35,11 +35,11 @@ metadata:
   name: mtlsqm
   namespace: $TARGET_NAMESPACE
 spec:
-  version: 9.2.0.1-r1-eus
+  version: 9.2.1.0-r1
   license:
     accept: true
-    license: L-RJON-BUVMQX
-    use: "NonProduction"
+    license: L-APIG-BMJJBM
+    use: "Production"
   pki:
     keys:
     - name: default
@@ -54,16 +54,14 @@ spec:
         secretName: mqcert
         items:
           - app.crt
-  template:
-    pod:
-      containers:
-       - name: qmgr
-         env:
-         - name: MQS_PERMIT_UNKNOWN_ID
-           value: "true"
   web:
     enabled: true
   queueManager:
+    resources:
+      requests:
+        cpu: 100m
+      limits:
+        cpu: 250m
     ini:
       - configMap:
           name: mtlsmqsc

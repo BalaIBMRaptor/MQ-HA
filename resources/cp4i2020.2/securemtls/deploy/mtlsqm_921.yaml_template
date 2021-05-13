@@ -57,6 +57,11 @@ spec:
   web:
     enabled: true
   queueManager:
+    resources:
+      requests:
+        cpu: 100m
+      limits:
+        cpu: 250m
     ini:
       - configMap:
           name: mtlsmqsc
@@ -67,18 +72,3 @@ spec:
           name: mtlsmqsc
           items:
             - example.mqsc
----
-apiVersion: route.openshift.io/v1
-kind: Route
-metadata:
-  name: mq-mtls-traffic-operator-test
-  namespace: $TARGET_NAMESPACE
-spec:
-  host: mtlsqmchl.chl.mq.ibm.com
-  to:
-    kind: Service
-    name: mtlsqm-ibm-mq
-  port:
-    targetPort: 1414
-  tls:
-    termination: passthrough
