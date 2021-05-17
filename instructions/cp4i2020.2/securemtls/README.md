@@ -1,9 +1,11 @@
 # Securing IBM MQ using mutual TLS
-IBM MQ can be secured in a number of ways, two common approaches include:
+IBM MQ can be secured in a number of ways. Two common approaches which can optionally be used together are:
 * Username / Password
 * Mutual TLS
 
-This lab will demonstrate how to secure the communication between the application and the queue manager using mutualTLS. This encrypts the data and also provides an identity which the queue manager can validate, authenticate and authorise the access. The lab is dependant on a number of resources included within this GitHub repository.
+This lab will demonstrate how to secure the communication between the application and the queue manager using mutualTLS to encrypt the data. The configuration also demonstrates how to derive an identity from the TLS certificate which allows the queue manager to authenticate and authorise the access.
+
+The lab is dependant on a number of resources included within this GitHub repository.
 
 ## Pre-reqs
 To run the following you need to have installed:
@@ -16,7 +18,7 @@ To run the following you need to have installed:
    ```sh
    git clone git@github.ibm.com:CALLUMJ/MQonCP4I.git
    ```
-   **Warning** you need to setup ssh access to github.ibm.com prior to running this command, see https://github.ibm.com/settings/tokens or https://github.ibm.com/settings/ssh for details. 
+   **Warning** you need to setup ssh access to github.ibm.com prior to running this command, see https://github.ibm.com/settings/tokens or https://github.ibm.com/settings/ssh for details.
 - Option 2: Download the repository as a .zip file and navigate to it on your terminal.
 
 ## Step 2 - Optionally re-generate the TLS Certificates and Keys
@@ -28,7 +30,7 @@ To run the following you need to have installed:
    ![Generating new keys](img/1.png)
 
 ## Step 3 - Deploy the MQ Queue Manager with associated resources
-1. Log into the OpenShift environment, and then click on your username on the top right menu. Then click on **Copy Login Command**. Click on **Display Token**, copy the token and run on your terminal.    
+1. Log into the OpenShift environment, and then click on your username on the top right menu. Then click on **Copy Login Command**. Click on **Display Token**, copy the token and run on your terminal.
    ![Top right menu in the Openshit environment](img/2.png)
 
 1. Run the command: **oc project cp4i** to navigate to the cp4i project.
@@ -36,7 +38,7 @@ To run the following you need to have installed:
 1. To start deploying, navigate to *../deploy* directory and run **./install.sh** command. Three new files will be created including *mtlsqm.yaml* - this file includes all of the configurations which you have just installed to your OpenShift environment.
    ![Deployment](img/3.png)
 
-1. To check the status of your queue manager, you can run the **oc describe queuemanager mtlsqm**. It should show *Running*. 
+1. To check the status of your queue manager, you can run the **oc describe queuemanager mtlsqm**. It should show *Running*.
    ![Checking that MQ is Running](img/4.png)
 
 ## Step 4 - Test the deployment
