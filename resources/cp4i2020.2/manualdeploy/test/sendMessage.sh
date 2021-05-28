@@ -7,5 +7,5 @@ export MQSSLKEYR="${DIR}/key"
 export ROOTURL="$(oc get IngressController default -n openshift-ingress-operator -o jsonpath='{.status.domain}')"
 ( echo "cat <<EOF" ; cat ccdt_template.json ; echo EOF ) | sh > ccdt_generated.json
 
-echo "Starting amqsphac" externalmq
-/opt/mqm/samp/bin/amqsphac APPQ externalmq
+echo "Starting amqsphac" CUSTOM
+/opt/mqm/samp/bin/amqsphac APPQ CUSTOM

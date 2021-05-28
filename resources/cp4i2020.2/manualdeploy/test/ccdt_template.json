@@ -12,11 +12,11 @@
         "connection":
         [
           {
-            "host": "externalmq-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com",
+            "host": "custom-cp4i-ibm-mq-qm-cp4i.$ROOTURL",
             "port": 443
           }
         ],
-        "queueManager": "externalmq"
+        "queueManager": "CUSTOM"
       },
       "transmissionSecurity":
       {

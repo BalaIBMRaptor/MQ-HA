@@ -12,7 +12,7 @@
         "connection":
         [
           {
-            "host": "externalmqwithoutcustomroute-ibm-mq-qm-cp4i.apps.mq-callum.icp4i.com",
+            "host": "externalmqwithoutcustomroute-ibm-mq-qm-cp4i.$ROOTURL",
             "port": 443
           }
         ],
