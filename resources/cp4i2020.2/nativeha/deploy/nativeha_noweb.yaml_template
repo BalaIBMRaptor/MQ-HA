@@ -41,7 +41,7 @@ spec:
           - tls.key
           - tls.crt
   web:
-    enabled: true
+    enabled: false
   queueManager:
     resources:
       requests:
