@@ -18,7 +18,8 @@ spec:
         - name: LICENSE
           value: accept
         - name: MQ_QMGR_HOSTNAME
-          value: mqperf-ibm-mq.cp4i
+#          value: mqperf-ibm-mq.cp4i
+          value: mqperf2core-ibm-mq.cp4i
         - name: MQ_QMGR_PORT
           value: "1414"
         - name: MQ_USERID
@@ -46,10 +47,10 @@ spec:
         resources:
           requests:
             memory: "2Gi"
-            cpu: "1"
+            cpu: "2"
           limits:
             memory: "2Gi"
-            cpu: "1"
+            cpu: "2"
         terminationMessagePath: /dev/termination-log
 #        volumeMounts:
 #          - name: cphdata

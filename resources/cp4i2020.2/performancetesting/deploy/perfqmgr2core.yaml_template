@@ -31,6 +31,13 @@ data:
     DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP)
     set chlauth(MQEXTERNALCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
+  qm.ini: |-
+    Channels:
+      MaxChannels=999999
+      MaxActiveChannels=999999
+    Log:
+      LogPrimaryFiles=40
+      LogSecondaryFiles=40
 ---
 kind: Secret
 apiVersion: v1
@@ -72,6 +79,11 @@ spec:
       limits:
         cpu: 2
         memory: 2Gi
+    ini:
+      - configMap:
+          name: mqperfmqsc
+          items:
+            - qm.ini
     mqsc:
       - configMap:
           name: mqperfmqsc

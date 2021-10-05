@@ -28,9 +28,16 @@ data:
     define ql(REPLY8)
     define ql(REPLY9)
     define ql(REPLY10)
-    DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP)
+    DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP) MAXINST(999999) MAXINSTC(999999)
     set chlauth(MQEXTERNALCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
+  qm.ini: |-
+    Channels:
+      MaxChannels=999999
+      MaxActiveChannels=999999
+    Log:
+      LogPrimaryFiles=40
+      LogSecondaryFiles=40
 ---
 kind: Secret
 apiVersion: v1
@@ -70,6 +77,11 @@ spec:
 #        cpu: 100m
 #      limits:
 #        cpu: 500m
+    ini:
+      - configMap:
+          name: mqperfmqsc
+          items:
+            - qm.ini
     mqsc:
       - configMap:
           name: mqperfmqsc
