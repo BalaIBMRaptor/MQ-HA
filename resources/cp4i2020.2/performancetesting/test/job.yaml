@@ -29,7 +29,7 @@ spec:
         - name: MQ_QMGR_CHANNEL
           value: MQEXTERNALCHL
         - name: MQ_RESPONDER_THREADS
-          value: "500"
+          value: "250"
         - name: MQ_NON_PERSISTENT
           value: "0"
         - name: MQ_QMGR_NAME
@@ -50,7 +50,7 @@ spec:
             cpu: "2"
           limits:
             memory: "2Gi"
-            cpu: "2"
+            cpu: "4"
         terminationMessagePath: /dev/termination-log
 #        volumeMounts:
 #          - name: cphdata
