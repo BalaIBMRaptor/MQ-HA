@@ -28,16 +28,20 @@ data:
     define ql(REPLY8)
     define ql(REPLY9)
     define ql(REPLY10)
-    DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) TRPTYPE(TCP)
+    DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) SHARECNV(1) TRPTYPE(TCP)
     set chlauth(MQEXTERNALCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
   qm.ini: |-
     Channels:
       MaxChannels=999999
       MaxActiveChannels=999999
+      MQIBindType=FASTPATH
     Log:
-      LogPrimaryFiles=40
-      LogSecondaryFiles=40
+      LogPrimaryFiles=64
+      LogSecondaryFiles=2
+    TuningParameters:
+      DefaultPQBufferSize=10485760
+      DefaultQBufferSize=10485760
 ---
 kind: Secret
 apiVersion: v1
