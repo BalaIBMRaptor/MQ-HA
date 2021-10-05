@@ -18,7 +18,7 @@ spec:
         - name: LICENSE
           value: accept
         - name: MQ_QMGR_HOSTNAME
-          value: mqperf2core-ibm-mq.cp4i
+          value: mqperf4core-ibm-mq.cp4i
         - name: MQ_QMGR_PORT
           value: "1414"
         - name: MQ_USERID
