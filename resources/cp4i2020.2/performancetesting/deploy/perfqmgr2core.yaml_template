@@ -1,7 +1,23 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: data-mqperf2core-ibm-mq-0
+  namespace: $TARGET_NAMESPACE
+  labels:
+    billingType: "hourly"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+      iops: "6000"
+  storageClassName: ibmc-block-custom
+---
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: mqperfmqsc
+  name: mqperf2mqsc
   namespace: $TARGET_NAMESPACE
 data:
   mq.mqsc: |-
@@ -28,8 +44,10 @@ data:
     define ql(REPLY8)
     define ql(REPLY9)
     define ql(REPLY10)
-    DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) SHARECNV(1) TRPTYPE(TCP)
+    DEFINE CHANNEL(MQEXTERNALCHL) CHLTYPE(SVRCONN) SHARECNV(1) TRPTYPE(TCP) SSLCAUTH(OPTIONAL) SSLCIPH('ANY_TLS12_OR_HIGHER')
+    DEFINE CHANNEL(NOTLSCHL) CHLTYPE(SVRCONN) SHARECNV(1) TRPTYPE(TCP)
     set chlauth(MQEXTERNALCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
+    set chlauth(NOTLSCHL) TYPE(BLOCKUSER) USERLIST(NOBODY)
     REFRESH SECURITY TYPE(CONNAUTH)
   qm.ini: |-
     Channels:
@@ -79,18 +97,18 @@ spec:
     resources:
       requests:
         cpu: 2
-        memory: 2Gi
+        memory: 4Gi
       limits:
         cpu: 2
-        memory: 2Gi
+        memory: 4Gi
     ini:
       - configMap:
-          name: mqperfmqsc
+          name: mqperf2mqsc
           items:
             - qm.ini
     mqsc:
       - configMap:
-          name: mqperfmqsc
+          name: mqperf2mqsc
           items:
             - mq.mqsc
   template:
@@ -100,3 +118,19 @@ spec:
             - name: MQSNOAUT
               value: 'yes'
           name: qmgr
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: mq-traffic-mq-externalqmgr-ibm-mq-qm
+  namespace: $TARGET_NAMESPACE
+spec:
+  host: mqexternalchl.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: mqperf2core-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough
+  wildcardPolicy: None

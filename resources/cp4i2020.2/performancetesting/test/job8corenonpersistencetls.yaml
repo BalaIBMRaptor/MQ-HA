@@ -2,8 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   labels:
-    run: cphtest8corepersistenttls
-  name: cphtest8corepersistenttls
+    run: cphtest8corenonpersistenttls
+  name: cphtest8corenonpersistenttls
 spec:
   template:
     metadata:
@@ -39,7 +39,7 @@ spec:
         - name: MQ_RESPONDER_THREADS
           value: "250"
         - name: MQ_NON_PERSISTENT
-          value: "0"
+          value: "1"
         - name: MQ_QMGR_NAME
           value: PERF0
         - name: MQ_TLS_CIPHER

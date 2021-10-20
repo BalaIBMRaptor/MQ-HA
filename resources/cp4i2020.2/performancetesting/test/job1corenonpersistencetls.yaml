@@ -2,8 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   labels:
-    run: cphtest8corepersistenttls
-  name: cphtest8corepersistenttls
+    run: cphtest1corenonpersistenttls
+  name: cphtest1corenonpersistenttls
 spec:
   template:
     metadata:
@@ -20,7 +20,7 @@ spec:
                   - key: statefulSetName
                     operator: In
                     values:
-                      - mqperf8core-ibm-mq
+                      - mqperf1core-ibm-mq
               topologyKey: kubernetes.io/hostname
       containers:
       - env:
@@ -37,9 +37,9 @@ spec:
         - name: MQ_QMGR_CHANNEL
           value: MQEXTERNALCHL
         - name: MQ_RESPONDER_THREADS
-          value: "250"
+          value: "32"
         - name: MQ_NON_PERSISTENT
-          value: "0"
+          value: "1"
         - name: MQ_QMGR_NAME
           value: PERF0
         - name: MQ_TLS_CIPHER
@@ -56,11 +56,11 @@ spec:
         name: cphtestp
         resources:
           requests:
-            memory: "12Gi"
-            cpu: "12"
+            memory: "2Gi"
+            cpu: "2"
           limits:
-            memory: "12Gi"
-            cpu: "12"
+            memory: "2Gi"
+            cpu: "2"
         terminationMessagePath: /dev/termination-log
 #        volumeMounts:
 #          - name: cphdata

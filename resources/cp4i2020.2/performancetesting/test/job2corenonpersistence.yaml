@@ -2,8 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   labels:
-    run: cphtest8corepersistenttls
-  name: cphtest8corepersistenttls
+    run: cphtest2corenonpersistent
+  name: cphtest2corenonpersistent
 spec:
   template:
     metadata:
@@ -20,47 +20,45 @@ spec:
                   - key: statefulSetName
                     operator: In
                     values:
-                      - mqperf8core-ibm-mq
+                      - mqperf2core-ibm-mq
               topologyKey: kubernetes.io/hostname
       containers:
       - env:
         - name: LICENSE
           value: accept
         - name: MQ_QMGR_HOSTNAME
-          value: $IPADDRESS
+          value: mqperf2core-ibm-mq.cp4i
         - name: MQ_QMGR_PORT
-          value: "443"
+          value: "1414"
         - name: MQ_USERID
           value:
         - name: MQ_PASSWORD
           value:
         - name: MQ_QMGR_CHANNEL
-          value: MQEXTERNALCHL
+          value: NOTLSCHL
         - name: MQ_RESPONDER_THREADS
-          value: "250"
+          value: "100"
         - name: MQ_NON_PERSISTENT
-          value: "0"
+          value: "1"
         - name: MQ_QMGR_NAME
           value: PERF0
-        - name: MQ_TLS_CIPHER
-          value: "ANY_TLS12"
         - name: MQ_DATA
           value:
         - name: MQ_RESULTS_CSV
           value: "true"
         - name: MQ_RESULTS
           value: "false"
-        image: uk.icr.io/mqperf/cphtesttls
+        image: uk.icr.io/mqperf/cphtestp
 #        imagePullPolicy: IfNotPresent
         imagePullPolicy: Always
         name: cphtestp
         resources:
           requests:
-            memory: "12Gi"
-            cpu: "12"
+            memory: "4Gi"
+            cpu: "4"
           limits:
-            memory: "12Gi"
-            cpu: "12"
+            memory: "4Gi"
+            cpu: "4"
         terminationMessagePath: /dev/termination-log
 #        volumeMounts:
 #          - name: cphdata

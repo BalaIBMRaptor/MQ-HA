@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: data-mqperf4core-ibm-mq-0
+  name: data-mqperf2core-ibm-mq-0
   namespace: $TARGET_NAMESPACE
   labels:
     billingType: "hourly"
@@ -17,7 +17,7 @@ spec:
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: mqperf4mqsc
+  name: mqperf2mqsc
   namespace: $TARGET_NAMESPACE
 data:
   mq.mqsc: |-
@@ -74,7 +74,7 @@ type: Opaque
 apiVersion: mq.ibm.com/v1beta1
 kind: QueueManager
 metadata:
-  name: mqperf4core
+  name: mqperf2core
   namespace: $TARGET_NAMESPACE
 spec:
   version: 9.2.3.0-r1
@@ -94,21 +94,23 @@ spec:
     enabled: false
   queueManager:
     name: PERF0
+    availability:
+      type: NativeHA
     resources:
       requests:
-        cpu: 4
-        memory: 8Gi
+        cpu: 2
+        memory: 4Gi
       limits:
-        cpu: 4
-        memory: 8Gi
+        cpu: 2
+        memory: 4Gi
     ini:
       - configMap:
-          name: mqperf4mqsc
+          name: mqperf2mqsc
           items:
             - qm.ini
     mqsc:
       - configMap:
-          name: mqperf4mqsc
+          name: mqperf2mqsc
           items:
             - mq.mqsc
   template:
@@ -128,7 +130,7 @@ spec:
   host: mqexternalchl.chl.mq.ibm.com
   to:
     kind: Service
-    name: mqperf4core-ibm-mq
+    name: mqperf2core-ibm-mq
   port:
     targetPort: 1414
   tls:

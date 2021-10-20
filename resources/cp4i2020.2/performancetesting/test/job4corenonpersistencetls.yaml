@@ -2,9 +2,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   labels:
-    run: cphtestnonpersistencetls
-  name: cphtestnonpersistencetls
-  namespace: mqns
+    run: cphtest4corenonpersistenttls
+  name: cphtest4corenonpersistenttls
 spec:
   template:
     metadata:
@@ -13,14 +12,24 @@ spec:
 #      annotations:
 #        k8s.v1.cni.cncf.io/networks: mqns/tengig
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                  - key: statefulSetName
+                    operator: In
+                    values:
+                      - mqperf4core-ibm-mq
+              topologyKey: kubernetes.io/hostname
       containers:
       - env:
         - name: LICENSE
           value: accept
         - name: MQ_QMGR_HOSTNAME
-          value: mqperf4core-ibm-mq.cp4i
+          value: $IPADDRESS
         - name: MQ_QMGR_PORT
-          value: "1414"
+          value: "443"
         - name: MQ_USERID
           value:
         - name: MQ_PASSWORD
@@ -28,15 +37,15 @@ spec:
         - name: MQ_QMGR_CHANNEL
           value: MQEXTERNALCHL
         - name: MQ_RESPONDER_THREADS
-          value: "150"
+          value: "250"
         - name: MQ_NON_PERSISTENT
           value: "1"
         - name: MQ_QMGR_NAME
           value: PERF0
+        - name: MQ_TLS_CIPHER
+          value: "ANY_TLS12"
         - name: MQ_DATA
           value:
-        - name: MQ_TLS_CIPHER
-          value: ANY_TLS12_OR_HIGHER
         - name: MQ_RESULTS_CSV
           value: "true"
         - name: MQ_RESULTS
@@ -44,13 +53,13 @@ spec:
         image: uk.icr.io/mqperf/cphtesttls
 #        imagePullPolicy: IfNotPresent
         imagePullPolicy: Always
-        name: cphtesttls
+        name: cphtestp
         resources:
           requests:
-            memory: "4Gi"
-            cpu: "2"
+            memory: "8Gi"
+            cpu: "8"
           limits:
-            memory: "4Gi"
+            memory: "8Gi"
             cpu: "8"
         terminationMessagePath: /dev/termination-log
 #        volumeMounts:

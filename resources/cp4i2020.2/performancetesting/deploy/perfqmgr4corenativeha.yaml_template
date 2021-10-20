@@ -94,6 +94,8 @@ spec:
     enabled: false
   queueManager:
     name: PERF0
+    availability:
+      type: NativeHA
     resources:
       requests:
         cpu: 4
