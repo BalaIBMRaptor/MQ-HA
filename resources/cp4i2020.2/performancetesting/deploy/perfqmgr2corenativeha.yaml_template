@@ -84,6 +84,9 @@ spec:
         size: 2000Gi
     availability:
       type: NativeHA
+      tls:
+        secretName: mqperfcert
+        cipherSpec: ANY_TLS12
     resources:
       requests:
         cpu: 2
