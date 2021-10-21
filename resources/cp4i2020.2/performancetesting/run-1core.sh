@@ -1,6 +1,10 @@
 #! /bin/bash
+
+export TARGET_NAMESPACE=${1:-"cp4i"}
+export ENV_NAME=${2:-"ibmcloudclassic"}
+
 cd deploy
-./install_1core.sh
+./install_1core.sh $TARGET_NAMESPACE $ENV_NAME
 echo "********************Single instance ****************************"
 echo "****************************************************************"
 cd ../test
@@ -15,7 +19,7 @@ cd ../test
 cd ..
 
 cd deploy
-./install_1corenativeha.sh
+./install_1corenativeha.sh $TARGET_NAMESPACE $ENV_NAME
 
 echo "********************NativeHA************************************"
 echo "****************************************************************"
