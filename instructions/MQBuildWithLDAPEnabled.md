@@ -50,25 +50,6 @@ For reference my entitlement key secret took the following format:
    ```
    The most important aspect is that the secret is created in the correct namespace (in this case *mq*) and is called *entitled-registry*.      
 
-2. When deploying image behind the scenes a ClusterImagePolicy is checking if this image can be used. This is a capability of the 
-IBM Common Services layer. As we will be building a new container image and storing within the built-in OpenShift container 
-registry then we need to register a new ClusterImagePolicy. This can be found in *CustomImagePolicy.yaml*:     
-   ```
-   apiVersion: securityenforcement.admission.cloud.ibm.com/v1beta1
-   kind: ClusterImagePolicy
-   metadata:
-     name: mqldap
-   spec:
-      repositories:
-       - name: image-registry.openshift-image-registry.svc:5000/mq/mqldap
-         policy:
-           va: 
-             enabled: false
-   ```    
-   Create the new image policy by running the following command:      
-   ```
-   oc create -f CustomImagePolicy.yaml -n mq
-   ```
 2. To create a new container image that includes the MQ LDAP configuration we will use the OpenShift BuildConfig. 
 This adds in a MQSC into the container image that will be automatically loaded on startup. 
 This is a relatively straightforward piece of configuration:       
